@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
+  <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-polygon@3"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+    body {
+      background: #dbdbdb;
+      font-family: roboto;
+      color: steelblue
+    }
+
+    span {
+      font-family: roboto;
+      color: steelblue
+    }
+
+    h2 {
+      background: linear-gradient(to right, steelblue 20%, #FFF 20%) bottom .5em left .8em no-repeat, linear-gradient(steelblue, #dbdbdb);
+      background-size: 100% 1px, 100% 100%;
+      padding: .8em;
+      color: #FDFFFE;
+      font-size: 30px;
+      font-weight: lighter;
+      margin-bottom: 10px;
+    }
+
+    div.tooltip {
+      position: absolute;
+      text-align: center;
+      width: 310px;
+      padding: 2px;
+      font: 11px sans-serif;
+      font-weight: bold;
+      background: #e3e3e3;
+      color: steelblue;
+      border-radius: 8px;
+      border: thin solid steelblue;
+      pointer-events: none;
+    }
+
+    table {
+      border: thin solid steelblue;
+      border-radius: 5px;
+      height: 300px;
+      width: 300px;
+    }
+
+    th,
+    td {
+      padding: 3px;
+      border: thin solid steelblue;
+      border-radius: 5px;
+    }
+
+    th {
+      text-align: center;
+    }
+
+    .top {
+      border: thin solid steelblue;
+      border-radius: 5px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    input[type=radio] {
+      position: absolute;
+      visibility: hidden;
+      display: none;
+    }
+
+    label {
+      font-size: 10px;
+      border: solid 1px #699bc4;
+      border-radius: 10px;
+      color: steelblue;
+      /*color: #8eb4d3;*/
+      background: #e3e3e3;
+      display: inline-block;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 7px 7px;
+      margin: 2px;
+    }
+
+    input[type=radio]:checked+label {
+      color: #dbdbdb;
+      background: #699bc4;
+    }
+
+    .radio-group {
+      display: inline-block;
+      overflow: hidden;
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-top: 5px;
+    }
+
+    .map-container {
+      margin-left: 10px;
+      float: left;
+      height: 100%;
+      width: 100%;
+      border-radius: 5px;
+      border: thin solid steelblue;
+      overflow: visible;
+    }
+
+    .map {
+      float: left;
+      margin-left: 20px;
+      margin-top: 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .stats {
+      position: absolute;
+      left: 750px;
+      top: 270px;
+      width: 310px;
+      font-family: roboto;
+      font-size: 10px;
+      background: #e3e3e3;
+      font-weight: bold;
+      float: left;
+      border: thin solid steelblue;
+      padding: 3px;
+      border-radius: 5px;
+    }
+
+    .legendThreshold {
+      font-size: 10px;
+      font-family: sans-serif;
+    }
+
+    .active {
+      fill: #B97D4B;
+      opacity: .2;
+      /*fill:#dbdbdb*/
+    }
+  </style>
+</head>
+
+<body>
+  <h2>ILEARN Proficiency by School and School Corporation</h2>
+  <div class="top">
+    <form>
+      <div class="radio-group">
+        <span>Scoring:</span>
+        <input type="radio" id="option-1a" name="scoring" value="Standard"><label for="option-1a">Standard</label>
+        <input type="radio" id="option-1b" name="scoring" value="Scaled" checked><label for="option-1b">Scaled</label>
+      </div>
+      <div class="radio-group">
+        <span>Year:</span>
+        <input type="radio" id="option-2a" name="year" value="2023" checked><label for="option-2a">2023</label>
+        <input type="radio" id="option-2b" name="year" value="2022" checked><label for="option-2b">2022</label>
+        <input type="radio" id="option-2c" name="year" value="2021" checked><label for="option-2c">2021</label>
+        <!-- <input type="radio" id="option-2b" name="year" value="2020"><label for="option-2b">2020</label> -->
+        <input type="radio" id="option-2d" name="year" value="2019"><label for="option-2d">2019</label>
+        <!-- <input type="radio" id="option-2d" name="year" value="2018"><label for="option-2d">2018</label> -->
+      </div>
+      <div class="radio-group">
+        <span>Grades:</span>
+        <input type="radio" id="option-5a" name="grade" value="3-8" checked><label for="option-5a">3 - 8</label>
+        <input type="radio" id="option-5b" name="grade" value="9-12"><label for="option-5b">9 - 12</label>
+      </div>
+      <div class="radio-group">
+        <span>Subject:</span>
+        <input type="radio" id="option-3a" name="subject" value="Math"><label for="option-3a">Math</label>
+        <input type="radio" id="option-3b" name="subject" value="ELA"><label for="option-3b">ELA</label>
+        <input type="radio" id="option-3c" name="subject" value="ELA & Math" checked><label for="option-3c">ELA &
+          Math</label>
+      </div>
+    </form>
+    <form>
+      <div class="radio-group">
+        <span>Group:</span>
+        <input type="radio" id="option-4a" name="group" value="American Indian"><label for="option-4a">American
+          Indian</label>
+        <input type="radio" id="option-4b" name="group" value="Asian"><label for="option-4b">Asian</label>
+        <input type="radio" id="option-4c" name="group" value="Black"><label for="option-4c">Black</label>
+        <input type="radio" id="option-4d" name="group" value="Hispanic"><label for="option-4d">Hispanic</label>
+        <input type="radio" id="option-4e" name="group" value="Multiracial"><label for="option-4e">Multiracial</label>
+        <input type="radio" id="option-4f" name="group" value="Native Hawaiian or Other Pacific Islander"><label
+          for="option-4f">Pacific Islander</label>
+        <input type="radio" id="option-4g" name="group" value="White"><label for="option-4g">White</label>
+        <input type="radio" id="option-4h" name="group" value="Special Education"><label for="option-4h">Special
+          Education</label>
+        <input type="radio" id="option-4i" name="group" value="General Education" checked><label for="option-4i">General
+          Education</label>
+        <input type="radio" id="option-4j" name="group" value="Paid Meals"><label for="option-4j">Paid Meals</label>
+        <input type="radio" id="option-4k" name="group" value="Free or Reduced Price Meals"><label for="option-4k">Free
+          or Reduced Price Meals</label>
+        <input type="radio" id="option-4l" name="group" value="English Language Learners"><label for="option-4l">English
+          Learners</label>
+        <input type="radio" id="option-4m" name="group" value="Non-English Language Learners"><label
+          for="option-4m">Non-English Learners</label>
+      </div>
+    </form>
+  </div>
+  <div class="map-container">
+    <div class="map"></div>
+    <div class="stats"></div>
+  </div>
+
+  <script>
+
+    function per(d) {
+      if (d === "***") {
+        return "***"
+      } else if (d === "" || isNaN(d)) {
+        return "No Data"
+      } else {
+        return d3.format(",.2%")(d)
+      }
+    }
+
+    function isNumeric(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    function zoomed() {
+      svg.style("stroke-width", 1 / d3.event.transform.k + "px");
+      svg.attr("transform", d3.event.transform);
+    }
+
+    function reset() {
+      active.classed("active", false);
+      active = d3.select(null);
+
+      svg.selectAll(".points")
+        .transition()
+        .duration(500)
+        .remove();
+
+      svg.transition()
+        .duration(750)
+        .call(zoom.transform, d3.zoomIdentity);
+    }
+
+    function stopped() {
+      if (d3.event.defaultPrevented) d3.event.stopPropagation();
+    }
+
+    // takes as input an array of schools in a district- x, y and r values
+    // determines if the circles overlap and if so, shifts them
+    function shifty(s) { // shifty circles
+      for (let q = 0; q < s.length - 1; q++) {
+        for (let p = q + 1; p < s.length; p++) {
+          if (Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y) < 2 * s[q].r) {
+            dx = s[p].x - s[q].x;
+            dy = s[p].y - s[q].y;
+            shift = (s[q].r * 2) - Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y)
+            if (dx > 0) { s[q].x = s[q].x - shift / 1.5 } else { s[q].x = s[q].x + shift / 1.5 } // if dx > 0 -> shift x0 left, else shift x0 right
+            if (dy > 0) { s[q].y = s[q].y - shift / 1.5 } else { s[q].y = s[q].y + shift / 1.5 } // if dy > 0 -> shift y0 up, else shift y0 down
+          }
+        }
+      }
+      return s
+    }
+
+    var width = 700,
+      height = 900,
+      points,
+      colors,
+      legend,
+      active = d3.select(null);
+
+    var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    var svg = d3.select(".map")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g");
+
+    var g = svg.append("g")
+      .attr("class", "legendThreshold")
+      .attr("transform", "translate(20,20)");
+    g.append("text")
+      .attr("fill", "steelblue")
+      .attr("font-weight", "bold")
+      .attr("class", "caption")
+      .attr("x", 0)
+      .attr("y", -6)
+      .text("Proficiency");
+
+    var zoom = d3.zoom()
+      .scaleExtent([1, 8])
+      .on("zoom", zoomed);
+
+    // Enable Free Zoom
+    //svg
+    //  .call(zoom); 
+
+    d3.queue()
+      // .defer(d3.csv, "ilearn2021-corporations.csv")
+      // .defer(d3.csv, "ilearn2021-schools.csv")
+      .defer(d3.csv, "corporation_data_k8.csv")
+      .defer(d3.csv, "academic_data_k8.csv")
+      .defer(d3.json, "INschool-corporations.geo.v2.json")
+      .defer(d3.json, "geocodes_schools.json")
+      .await(function (error, scdata, schdata, INdistricts, INschools) {
+
+        if (error) {
+          console.error(error);
+        }
+        else {
+
+          /* Hack to download info from JSON for comparison purposes 
+          
+            var tmp = []
+            var allSchools = schools.features.filter(function(z) {
+              tmp.push([z.properties.SCH_NAME, z.properties.LEA_NAME, z.properties.SCHOOL_LEV])
+            })
+            let csvContent = "data:text/csv;charset=utf-8," 
+              + tmp.map(e => e.join(",")).join("\n");
+            var encodedUri = encodeURI(csvContent);
+            window.open(encodedUri);
+          */
+
+          /* NEST ON SCHOOL YEAR? 
+          
+            var nestData = d3.nest()
+                  .key(function(d){
+                      return d.metric;
+                  })
+                  .rollup(function(leaves){
+                      var ymax = d3.max(leaves, d => d.year)
+                      var ymin = d3.min(leaves, d => d.year)
+          //            var vmax = d3.max(leaves, d => d.mval)
+          //            var vmin = d3.min(leaves, d => d.mval)
+                      var school = d3.nest().key(d => d.school)
+                    .entries(leaves);
+                      return {ymax:ymax, ymin:ymin, school:school};
+          //          return {ymax:ymax, ymin:ymin, vmax:vmax, vmin:vmin, school:school};
+                    })
+                  .entries(data)
+          */
+
+          const districts = topojson.feature(INdistricts, INdistricts.objects.districts);
+          const schools = topojson.feature(INschools, INschools.objects.publicschools);
+          const mesh = topojson.mesh(INdistricts, INdistricts.objects.districts);
+          const projection = d3.geoMercator().fitSize([width, height], mesh);
+
+          var updateMap = function (a, b, c, d, e) {
+            // a - scoring; b - year; c - grades; d - group; e - subject
+
+            if (a == 'Scaled') {
+              selectedDomain = [.05, .10, .15, .25, .35, .45, .55, .65];
+              labels = ['0-5%', '6-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '> 66%'];
+            }
+            else {
+              selectedDomain = [.20, .30, .40, .50, .60, .70, .80, .90];
+              labels = ['0-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '> 91%'];
+            }
+
+            // if (b == '2018') { } else if (b == '2019') { } else if (b == 2021) { };
+            if (c == '3-8') { } else if (c == '9-12') { };
+
+            color = d3.scaleThreshold()
+              .domain(selectedDomain)
+              .range(["#e5eff9", "#cee1f2", "#b0d1e7", "#87bddc", "#5da4d0", "#3a89c1", "#1d6bb0", "#0e559d", "#08306b"]);
+
+            legend = d3.legendColor()
+              .labels(function (d) { return labels[d.i]; })
+              .shapePadding(4)
+              .scale(color);
+            svg.select(".legendThreshold")
+              .call(legend);
+
+            // Calculate the top 10 schools for each Subject/Group (with n-size > 10)
+
+            const v = d + "|" + e + " Proficiency %",
+              w = d + "|" + e + " Total Tested";
+
+            console.log(v)
+            console.log(w)
+            let y = 0,
+              txt = [];
+
+            // Filter data by selected year for both schools and corporations
+            var year_data_school = schdata.filter(obj => {
+              return obj.Year === b
+            })
+
+            var year_data_corp = scdata.filter(obj => {
+              return obj.Year === b
+            })
+
+            // const nSize = scdata.filter(d => +d[w] > 10);
+            const nSize = year_data_school.filter(d => +d[w] > 10);
+            const proficiencyGroup = nSize.filter(d => isNumeric(d[v]));
+
+            // Sort array by proficiency of selected group/subject
+            proficiencyGroup.sort(function (a, b) {
+              if (+a[v] === +b[v]) { return 0 } else { return (+a[v] < +b[v]) ? -1 : 1 };
+            });
+
+            // get top ten school corporations for display
+            topTen = proficiencyGroup.slice(proficiencyGroup.length - 10);
+
+            for (z = topTen.length - 1; z >= 0; z--) {
+              txt[y] = y + 1 + ") " + topTen[z]['Corporation Name'] + ": " + per(topTen[z][v]) + " (Total Tested: " + topTen[z][w] + ")"
+              y++
+            }
+
+            d3.selectAll('.stats')
+              .html(txt.join('<br/>'))
+
+            // Draw Map
+            var path = d3.geoPath().projection(projection);
+
+            svg.append("g")
+              .attr("class", "districts")
+              .selectAll("path")
+              .data(districts.features)
+              .enter().append("path")
+              .attr('data-fips', function (d) {
+                return d.properties.NAME
+              })
+              .attr("d", path)
+              .attr("fill", function (d, i) {
+
+                //// TODO: Change to Corp ID //////// ADD CORP ID TO DISTRICT FILE ////
+                /// TODO: Choking here. Prob need to figure out what I meant above
+                console.log(year_data_corp)
+                const milla = year_data_corp.find(f => f['GEO ID'] === d.properties.GEOID)
+                console.log(milla)
+                if (milla[v] === "" || milla[v] === "***" || isNaN(milla[v])) {
+                  return "grey"
+                } else
+                  return color(milla[v])
+              })
+              .attr("stroke", "white")
+              .on("click", clicked);
+
+            // Zoom - Add schools
+            function clicked(d) {
+
+              if (active.node() === this) return reset();
+
+              active.classed("active", false);
+              active = d3.select(this).classed("active", true);
+
+              var bounds = path.bounds(d),
+                dx = bounds[1][0] - bounds[0][0],
+                dy = bounds[1][1] - bounds[0][1],
+                x = (bounds[0][0] + bounds[1][0]) / 2,
+                y = (bounds[0][1] + bounds[1][1]) / 2,
+                scale = Math.max(1, Math.min(10.5, 1 / Math.max(dx / width, dy / height))), // Size of zoomed district
+                translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+              svg.transition()
+                .duration(750)
+                .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+
+              var schoolsInPOLY = schools.features.filter(function (s) {
+
+                if (d3.polygonContains(active.datum().geometry.coordinates[0], [s.geometry.coordinates[0], s.geometry.coordinates[1]])) {
+
+                  const max = 9; // Grade levels -> TODO: set according to checkbox tag (3-8 or 9-12)
+                  const min = 2;
+                  var low;
+
+                  if (s.properties.GSLO == 'PK' || s.properties.GSLO == 'KG') { low = 0 } else { low = parseInt(s.properties.GSLO) }
+
+                  if ((low < max && s.properties.GSHI > min) && (s.properties.SCHOOL_LEV != "CLOSED"
+                    && s.properties.SCHOOL_LEV != "Cooperative" && s.properties.SCHOOL_LEV != "Other"
+                    && s.properties.SCHOOL_LEV != "Special Education" && s.properties.SCHOOL_LEV != "Adult High School")) {
+
+                    return s.properties.LEAID
+                  }
+                }
+              })
+              var schoolsInDist = { type: "FeatureCollection", "features": schoolsInPOLY };
+
+              // Remove existing points each click (otherwise points keep propagating until reset event)
+              svg.selectAll(".points")
+                .transition()
+                .duration(500)
+                .remove();
+
+              // Explode circles where there is overlap (shifty())
+
+              if (schoolsInDist.features.length > 50) { rad = 1.5 } else { rad = 2 } // reduce radius if there are > 50 points
+
+              // Is it faster to map to matrix first? Or run schoolsInDist.features through shifty()?
+              // the latter hits projection() far more times (each time it loops)
+              group = schoolsInDist.features.map(o => ({
+                x: projection(o.geometry.coordinates)[0],
+                y: projection(o.geometry.coordinates)[1],
+                r: rad,
+                school_id: o.properties.SCHOOL_ID
+              }))
+
+              shifty(group); // more than two times and points get pushed outside of district boundaries
+              shifty(group); // TODO: max push coordinates limited by district boundaries
+
+              points = svg.append("g")
+                .attr('class', 'points')
+                .selectAll("circle")
+                .data(group)
+                .enter()
+                .append("circle")
+                .attr("cx", function (d) { return d.x })
+                .attr("cy", function (d) { return d.y })
+                .attr("r", function (d) { return d.r })
+                .style("stroke", "white")
+                .style("fill", function (d, i) {
+                  //// Deal with case where ID begins with alpha - accredited non-pubs ////
+                  //if (!isNumeric(s.properties.SCHOOL_ID)) {console.log(s.properties.SCHOOL_ID)} ;
+                  const nico = year_data_school.find(f => +f['School ID'] === +d.school_id)
+
+                  console.log(nico)
+
+                  if (nico == null) { return "grey" }
+
+                  if (nico[v] === "" || nico[v] === "***" || isNaN(nico[v]) || nico[v] == null) {
+                    return "grey"
+                  }
+                  else {
+                    return color(nico[v])
+                  }
+                })
+                .style("opacity", 0)
+                .on('mouseover', function (d, i) {
+
+                  d3.select(this).classed("selected", true);
+
+                  //// Deal with case where ID begins with alpha - accredited non-pubs ////
+                  const ber = year_data_school.find(f => +f['School ID'] === +d.school_id)
+
+                  // console.log(active.datum().properties)
+
+                  if (ber != null) {
+                    tooltip.html(
+                      ber['Corporation Name'] + "<br>" + ber['School Name'] + "<br>" + v.slice(0, -2) + ": " + per(ber[v]) + "<br>Total Tested: " + ber[w]
+                    )
+                      .style("left", 750 + "px")
+                      .style("top", 420 + "px")
+                      .style("opacity", 1);
+                  }
+                })
+                .on('mouseout', function (d) {
+
+                  d3.select(this).classed("selected", false);
+                  tooltip.style("opacity", 0)
+                });
+
+              points.transition().duration(1000).style("opacity", .7);
+            }
+          }
+
+          d3.selectAll("input").on("change", function () {
+            var selectedScoring = d3.select("input[name='scoring']:checked").attr('value');
+            var selectedYear = d3.select("input[name='year']:checked").attr('value');
+            var selectedGrade = d3.select("input[name='grade']:checked").attr('value');
+            var selectedSubject = d3.select("input[name='subject']:checked").attr('value');
+            var selectedGroup = d3.select("input[name='group']:checked").attr('value');
+
+            updateMap(selectedScoring, selectedYear, selectedGrade, selectedGroup, selectedSubject)
+          })
+
+          updateMap('Scaled', '2021', '3-8', 'General Education', 'ELA & Math')
+
+        }
+      });
+
+  </script>
+</body>
+
+</html>
