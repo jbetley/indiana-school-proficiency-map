@@ -15362,7 +15362,8 @@
                         "NAME": "Portage Township Schools",
                         "INTPTLAT": "+41.5767150",
                         "INTPTLON": "-087.1738368",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6550"
                     }
                 },
                 {
@@ -15385,7 +15386,8 @@
                         "NAME": "School City of Hammond",
                         "INTPTLAT": "+41.6187358",
                         "INTPTLON": "-087.4949488",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4710"
                     }
                 },
                 {
@@ -15409,7 +15411,8 @@
                         "NAME": "White River Valley School District",
                         "INTPTLAT": "+39.0262822",
                         "INTPTLON": "-087.0648079",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2980"
                     }
                 },
                 {
@@ -15430,7 +15433,8 @@
                         "NAME": "MSD Southwest Allen County",
                         "INTPTLAT": "+41.0063449",
                         "INTPTLON": "-085.2718804",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "125"
                     }
                 },
                 {
@@ -15451,7 +15455,8 @@
                         "NAME": "Adams Central Community Schools",
                         "INTPTLAT": "+40.7528282",
                         "INTPTLON": "-084.9291727",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "15"
                     }
                 },
                 {
@@ -15471,7 +15476,8 @@
                         "NAME": "Tri-Township Consolidated School Corporation",
                         "INTPTLAT": "+41.3427740",
                         "INTPTLON": "-086.8423155",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4915"
                     }
                 },
                 {
@@ -15494,7 +15500,8 @@
                         "NAME": "North Central Parke Community School Corporation",
                         "INTPTLAT": "+39.8256080",
                         "INTPTLON": "-087.1808141",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6375"
                     }
                 },
                 {
@@ -15514,7 +15521,8 @@
                         "NAME": "Alexandria Community School Corporation",
                         "INTPTLAT": "+40.2667016",
                         "INTPTLON": "-085.6584295",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5265"
                     }
                 },
                 {
@@ -15536,7 +15544,8 @@
                         "NAME": "Anderson Community School Corporation",
                         "INTPTLAT": "+40.1276816",
                         "INTPTLON": "-085.6488683",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5275"
                     }
                 },
                 {
@@ -15557,7 +15566,8 @@
                         "NAME": "Argos Community Schools",
                         "INTPTLAT": "+41.2216451",
                         "INTPTLON": "-086.2458034",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5470"
                     }
                 },
                 {
@@ -15577,7 +15587,8 @@
                         "NAME": "Attica Consolidated School Corporation",
                         "INTPTLAT": "+40.2702136",
                         "INTPTLON": "-087.2194815",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2435"
                     }
                 },
                 {
@@ -15598,7 +15609,8 @@
                         "NAME": "Borden-Henryville School Corporation",
                         "INTPTLAT": "+38.4981357",
                         "INTPTLON": "-085.8495204",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "935"
                     }
                 },
                 {
@@ -15617,7 +15629,8 @@
                         "NAME": "Silver Creek School Corporation",
                         "INTPTLAT": "+38.3995053",
                         "INTPTLON": "-085.7742660",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "945"
                     }
                 },
                 {
@@ -15639,7 +15652,8 @@
                         "NAME": "South Dearborn Community School Corporation",
                         "INTPTLAT": "+39.0842285",
                         "INTPTLON": "-085.0288855",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1600"
                     }
                 },
                 {
@@ -15662,7 +15676,8 @@
                         "NAME": "Avon Community School Corporation",
                         "INTPTLAT": "+39.7607134",
                         "INTPTLON": "-086.3941455",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3315"
                     }
                 },
                 {
@@ -15683,7 +15698,8 @@
                         "NAME": "Barr-Reeve Community School Corporation",
                         "INTPTLAT": "+38.6351071",
                         "INTPTLON": "-086.9899801",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1315"
                     }
                 },
                 {
@@ -15708,7 +15724,8 @@
                         "NAME": "Bartholomew County School Corporation",
                         "INTPTLAT": "+39.1657361",
                         "INTPTLON": "-085.9027552",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "365"
                     }
                 },
                 {
@@ -15728,7 +15745,8 @@
                         "NAME": "Batesville Community School Corporation",
                         "INTPTLAT": "+39.3185711",
                         "INTPTLON": "-085.2277693",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6895"
                     }
                 },
                 {
@@ -15748,7 +15766,8 @@
                         "NAME": "Baugo Community Schools",
                         "INTPTLAT": "+41.6415429",
                         "INTPTLON": "-086.0286195",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2260"
                     }
                 },
                 {
@@ -15768,7 +15787,8 @@
                         "NAME": "Beech Grove City Schools",
                         "INTPTLAT": "+39.7158093",
                         "INTPTLON": "-086.0866468",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5380"
                     }
                 },
                 {
@@ -15789,7 +15809,8 @@
                         "NAME": "Benton Community School Corporation",
                         "INTPTLAT": "+40.5554972",
                         "INTPTLON": "-087.2940728",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "395"
                     }
                 },
                 {
@@ -15810,7 +15831,8 @@
                         "NAME": "Blackford County Schools",
                         "INTPTLAT": "+40.4726717",
                         "INTPTLON": "-085.3237297",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "515"
                     }
                 },
                 {
@@ -15831,7 +15853,8 @@
                         "NAME": "Bloomfield School District",
                         "INTPTLAT": "+39.0269816",
                         "INTPTLON": "-086.8930089",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2920"
                     }
                 },
                 {
@@ -15853,7 +15876,8 @@
                         "NAME": "Monroe County Community School Corporation",
                         "INTPTLAT": "+39.1403228",
                         "INTPTLON": "-086.5003502",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5740"
                     }
                 },
                 {
@@ -15875,7 +15899,8 @@
                         "NAME": "Blue River Valley Schools",
                         "INTPTLAT": "+40.0072369",
                         "INTPTLON": "-085.3181733",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3405"
                     }
                 },
                 {
@@ -15897,7 +15922,8 @@
                         "NAME": "North Harrison Community School Corporation",
                         "INTPTLAT": "+38.3367471",
                         "INTPTLON": "-086.1494407",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3180"
                     }
                 },
                 {
@@ -15917,7 +15943,8 @@
                         "NAME": "MSD Bluffton-Harrison",
                         "INTPTLAT": "+40.6950849",
                         "INTPTLON": "-085.1468568",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8445"
                     }
                 },
                 {
@@ -15938,7 +15965,8 @@
                         "NAME": "MSD Boone Township",
                         "INTPTLAT": "+41.3107150",
                         "INTPTLON": "-087.1515421",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6460"
                     }
                 },
                 {
@@ -15963,7 +15991,8 @@
                         "NAME": "Clay Community Schools",
                         "INTPTLAT": "+39.4381596",
                         "INTPTLON": "-087.0993787",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1125"
                     }
                 },
                 {
@@ -15984,7 +16013,8 @@
                         "NAME": "Bremen Public Schools",
                         "INTPTLAT": "+41.4282968",
                         "INTPTLON": "-086.1301833",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5480"
                     }
                 },
                 {
@@ -16006,7 +16036,8 @@
                         "NAME": "Brown County School Corporation",
                         "INTPTLAT": "+39.1951131",
                         "INTPTLON": "-086.2301209",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "670"
                     }
                 },
                 {
@@ -16028,7 +16059,8 @@
                         "NAME": "Brownsburg Community School Corporation",
                         "INTPTLAT": "+39.8613838",
                         "INTPTLON": "-086.3813030",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3305"
                     }
                 },
                 {
@@ -16052,7 +16084,8 @@
                         "NAME": "Brownstown Central Community School Corporation",
                         "INTPTLAT": "+38.9019798",
                         "INTPTLON": "-086.1176747",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3695"
                     }
                 },
                 {
@@ -16074,7 +16107,8 @@
                         "NAME": "C. A. Beard Memorial School Corporation",
                         "INTPTLAT": "+39.8135495",
                         "INTPTLON": "-085.5441384",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3455"
                     }
                 },
                 {
@@ -16092,7 +16126,8 @@
                         "NAME": "Cannelton City Schools",
                         "INTPTLAT": "+37.9081523",
                         "INTPTLON": "-086.7332430",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6340"
                     }
                 },
                 {
@@ -16114,7 +16149,8 @@
                         "NAME": "Carmel Clay Schools",
                         "INTPTLAT": "+39.9654794",
                         "INTPTLON": "-086.1483688",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3060"
                     }
                 },
                 {
@@ -16134,7 +16170,8 @@
                         "NAME": "Medora Community School Corporation",
                         "INTPTLAT": "+38.8196916",
                         "INTPTLON": "-086.2262454",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3640"
                     }
                 },
                 {
@@ -16157,7 +16194,8 @@
                         "NAME": "Carroll Consolidated School Corporation",
                         "INTPTLAT": "+40.5396816",
                         "INTPTLON": "-086.4632234",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "750"
                     }
                 },
                 {
@@ -16179,7 +16217,8 @@
                         "NAME": "Caston School Corporation",
                         "INTPTLAT": "+40.9204453",
                         "INTPTLON": "-086.2897364",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2650"
                     }
                 },
                 {
@@ -16201,7 +16240,8 @@
                         "NAME": "Center Grove Community School Corporation",
                         "INTPTLAT": "+39.5762986",
                         "INTPTLON": "-086.1944332",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4205"
                     }
                 },
                 {
@@ -16223,7 +16263,8 @@
                         "NAME": "Centerville-Abington Community Schools",
                         "INTPTLAT": "+39.7979152",
                         "INTPTLON": "-084.9987996",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8360"
                     }
                 },
                 {
@@ -16246,7 +16287,8 @@
                         "NAME": "DeKalb County Central United School District",
                         "INTPTLAT": "+41.4178603",
                         "INTPTLON": "-085.0709854",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1835"
                     }
                 },
                 {
@@ -16266,7 +16308,8 @@
                         "NAME": "Central Noble Community School Corporation",
                         "INTPTLAT": "+41.3578995",
                         "INTPTLON": "-085.4498806",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6055"
                     }
                 },
                 {
@@ -16287,7 +16330,8 @@
                         "NAME": "Perry Central Community School Corporation",
                         "INTPTLAT": "+38.1037973",
                         "INTPTLON": "-086.6277202",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6325"
                     }
                 },
                 {
@@ -16308,7 +16352,8 @@
                         "NAME": "Randolph Central School Corporation",
                         "INTPTLAT": "+40.2145899",
                         "INTPTLON": "-085.0085554",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6825"
                     }
                 },
                 {
@@ -16329,7 +16374,8 @@
                         "NAME": "Clark-Pleasant Community School Corporation",
                         "INTPTLAT": "+39.5874763",
                         "INTPTLON": "-086.0294680",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4145"
                     }
                 },
                 {
@@ -16347,7 +16393,8 @@
                         "NAME": "Clarksville Community School Corporation",
                         "INTPTLAT": "+38.2989494",
                         "INTPTLON": "-085.7623620",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1000"
                     }
                 },
                 {
@@ -16370,7 +16417,8 @@
                         "NAME": "Northwestern School Corporation",
                         "INTPTLAT": "+40.5207329",
                         "INTPTLON": "-086.2056789",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3470"
                     }
                 },
                 {
@@ -16395,7 +16443,8 @@
                         "NAME": "Clinton Central School Corporation",
                         "INTPTLAT": "+40.3052307",
                         "INTPTLON": "-086.3537093",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1150"
                     }
                 },
                 {
@@ -16417,7 +16466,8 @@
                         "NAME": "Clinton Prairie School Corporation",
                         "INTPTLAT": "+40.2635565",
                         "INTPTLON": "-086.6048899",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1160"
                     }
                 },
                 {
@@ -16438,7 +16488,8 @@
                         "NAME": "South Central Community School Corporation",
                         "INTPTLAT": "+41.4559662",
                         "INTPTLON": "-086.8008144",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4940"
                     }
                 },
                 {
@@ -16458,7 +16509,8 @@
                         "NAME": "Cloverdale Community Schools",
                         "INTPTLAT": "+39.4657293",
                         "INTPTLON": "-086.8037590",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6750"
                     }
                 },
                 {
@@ -16482,7 +16534,8 @@
                         "NAME": "Whitley County Consolidated Schools",
                         "INTPTLAT": "+41.1379319",
                         "INTPTLON": "-085.4716472",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8665"
                     }
                 },
                 {
@@ -16503,7 +16556,8 @@
                         "NAME": "Concord Community Schools",
                         "INTPTLAT": "+41.6432653",
                         "INTPTLON": "-085.9340818",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2270"
                     }
                 },
                 {
@@ -16525,7 +16579,8 @@
                         "NAME": "Covington Community School Corporation",
                         "INTPTLAT": "+40.0903542",
                         "INTPTLON": "-087.3826180",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2440"
                     }
                 },
                 {
@@ -16550,7 +16605,8 @@
                         "NAME": "Crawford County Community School Corporation",
                         "INTPTLAT": "+38.2894327",
                         "INTPTLON": "-086.4408711",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1300"
                     }
                 },
                 {
@@ -16568,7 +16624,8 @@
                         "NAME": "Crawfordsville Community Schools",
                         "INTPTLAT": "+40.0317057",
                         "INTPTLON": "-086.9154788",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5855"
                     }
                 },
                 {
@@ -16590,7 +16647,8 @@
                         "NAME": "Crown Point Community School Corporation",
                         "INTPTLAT": "+41.3921185",
                         "INTPTLON": "-087.3235672",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4660"
                     }
                 },
                 {
@@ -16611,7 +16669,8 @@
                         "NAME": "Culver Community Schools Corporation",
                         "INTPTLAT": "+41.1750575",
                         "INTPTLON": "-086.4597959",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5455"
                     }
                 },
                 {
@@ -16631,7 +16690,8 @@
                         "NAME": "Danville Community School Corporation",
                         "INTPTLAT": "+39.7751626",
                         "INTPTLON": "-086.5688769",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3325"
                     }
                 },
                 {
@@ -16658,7 +16718,8 @@
                         "NAME": "Decatur County Community Schools",
                         "INTPTLAT": "+39.2057127",
                         "INTPTLON": "-085.5893656",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1655"
                     }
                 },
                 {
@@ -16681,7 +16742,8 @@
                         "NAME": "MSD Decatur Township",
                         "INTPTLAT": "+39.6786555",
                         "INTPTLON": "-086.2754512",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5300"
                     }
                 },
                 {
@@ -16703,7 +16765,8 @@
                         "NAME": "Delaware Community School Corporation",
                         "INTPTLAT": "+40.3119754",
                         "INTPTLON": "-085.3251318",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1875"
                     }
                 },
                 {
@@ -16725,7 +16788,8 @@
                         "NAME": "Delphi Community School Corporation",
                         "INTPTLAT": "+40.6016627",
                         "INTPTLON": "-086.6059660",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "755"
                     }
                 },
                 {
@@ -16747,7 +16811,8 @@
                         "NAME": "Duneland School Corporation",
                         "INTPTLAT": "+41.5877393",
                         "INTPTLON": "-087.0391475",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6470"
                     }
                 },
                 {
@@ -16769,7 +16834,8 @@
                         "NAME": "Zionsville Community Schools",
                         "INTPTLAT": "+39.9966334",
                         "INTPTLON": "-086.2912292",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "630"
                     }
                 },
                 {
@@ -16792,7 +16858,8 @@
                         "NAME": "East Allen County Schools",
                         "INTPTLAT": "+41.0849182",
                         "INTPTLON": "-084.9397987",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "255"
                     }
                 },
                 {
@@ -16812,7 +16879,8 @@
                         "NAME": "School City of East Chicago",
                         "INTPTLAT": "+41.6481303",
                         "INTPTLON": "-087.4528847",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4670"
                     }
                 },
                 {
@@ -16831,7 +16899,8 @@
                         "NAME": "Lake Station Community Schools",
                         "INTPTLAT": "+41.5767347",
                         "INTPTLON": "-087.2528784",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4680"
                     }
                 },
                 {
@@ -16851,7 +16920,8 @@
                         "NAME": "East Gibson School Corporation",
                         "INTPTLAT": "+38.2958442",
                         "INTPTLON": "-087.4046285",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2725"
                     }
                 },
                 {
@@ -16875,7 +16945,8 @@
                         "NAME": "East Noble School Corporation",
                         "INTPTLAT": "+41.4177077",
                         "INTPTLON": "-085.2762479",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6060"
                     }
                 },
                 {
@@ -16897,7 +16968,8 @@
                         "NAME": "East Washington School Corporation",
                         "INTPTLAT": "+38.5387606",
                         "INTPTLON": "-085.9943433",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8215"
                     }
                 },
                 {
@@ -16922,7 +16994,8 @@
                         "NAME": "Eastbrook Community School Corporation",
                         "INTPTLAT": "+40.5319517",
                         "INTPTLON": "-085.5178144",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2815"
                     }
                 },
                 {
@@ -16942,7 +17015,8 @@
                         "NAME": "DeKalb County Eastern Community School District",
                         "INTPTLAT": "+41.3783768",
                         "INTPTLON": "-084.8791895",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1805"
                     }
                 },
                 {
@@ -16964,7 +17038,8 @@
                         "NAME": "Eastern Greene Schools",
                         "INTPTLAT": "+39.0371908",
                         "INTPTLON": "-086.7528498",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2940"
                     }
                 },
                 {
@@ -16986,7 +17061,8 @@
                         "NAME": "Eastern Hancock County Community School Corporation",
                         "INTPTLAT": "+39.8268972",
                         "INTPTLON": "-085.6594316",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3145"
                     }
                 },
                 {
@@ -17008,7 +17084,8 @@
                         "NAME": "Eastern Howard School Corporation",
                         "INTPTLAT": "+40.4907766",
                         "INTPTLON": "-085.9324932",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3480"
                     }
                 },
                 {
@@ -17028,7 +17105,8 @@
                         "NAME": "Randolph Eastern School Corporation",
                         "INTPTLAT": "+40.2133203",
                         "INTPTLON": "-084.8554602",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6835"
                     }
                 },
                 {
@@ -17053,7 +17131,8 @@
                         "NAME": "Shelby Eastern Schools",
                         "INTPTLAT": "+39.5415308",
                         "INTPTLON": "-085.6973116",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7285"
                     }
                 },
                 {
@@ -17074,7 +17153,8 @@
                         "NAME": "Edinburgh Community School Corporation",
                         "INTPTLAT": "+39.3924220",
                         "INTPTLON": "-085.9770386",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4215"
                     }
                 },
                 {
@@ -17095,7 +17175,8 @@
                         "NAME": "Elkhart Community Schools",
                         "INTPTLAT": "+41.7221000",
                         "INTPTLON": "-085.9304069",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2305"
                     }
                 },
                 {
@@ -17114,7 +17195,8 @@
                         "NAME": "Elwood Community School Corporation",
                         "INTPTLAT": "+40.2756022",
                         "INTPTLON": "-085.8318119",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5280"
                     }
                 },
                 {
@@ -17136,7 +17218,8 @@
                         "NAME": "Eminence Community School Corporation",
                         "INTPTLAT": "+39.5178210",
                         "INTPTLON": "-086.6086111",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5910"
                     }
                 },
                 {
@@ -17157,7 +17240,8 @@
                         "NAME": "Evansville Vanderburgh School Corporation",
                         "INTPTLAT": "+38.0200703",
                         "INTPTLON": "-087.5861659",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7995"
                     }
                 },
                 {
@@ -17179,7 +17263,8 @@
                         "NAME": "Fairfield Community Schools",
                         "INTPTLAT": "+41.5013794",
                         "INTPTLON": "-085.7291207",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2155"
                     }
                 },
                 {
@@ -17201,7 +17286,8 @@
                         "NAME": "Fayette County School Corporation",
                         "INTPTLAT": "+39.6396552",
                         "INTPTLON": "-085.1850315",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2395"
                     }
                 },
                 {
@@ -17221,7 +17307,8 @@
                         "NAME": "Flat Rock-Hawcreek School Corporation",
                         "INTPTLAT": "+39.3004477",
                         "INTPTLON": "-085.7897818",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "370"
                     }
                 },
                 {
@@ -17241,7 +17328,8 @@
                         "NAME": "Fort Wayne Community Schools",
                         "INTPTLAT": "+41.0678911",
                         "INTPTLON": "-085.1418582",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "235"
                     }
                 },
                 {
@@ -17260,7 +17348,8 @@
                         "NAME": "Community Schools of Frankfort",
                         "INTPTLAT": "+40.3044060",
                         "INTPTLON": "-086.5105238",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1170"
                     }
                 },
                 {
@@ -17284,7 +17373,8 @@
                         "NAME": "Franklin Community School Corporation",
                         "INTPTLAT": "+39.4818333",
                         "INTPTLON": "-086.0998833",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4225"
                     }
                 },
                 {
@@ -17307,7 +17397,8 @@
                         "NAME": "Franklin County Community School Corporation",
                         "INTPTLAT": "+39.4289698",
                         "INTPTLON": "-085.0314470",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2475"
                     }
                 },
                 {
@@ -17326,7 +17417,8 @@
                         "NAME": "Lanesville Community School Corporation",
                         "INTPTLAT": "+38.2337253",
                         "INTPTLON": "-086.0075419",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3160"
                     }
                 },
                 {
@@ -17348,7 +17440,8 @@
                         "NAME": "Franklin Township Community School Corporation",
                         "INTPTLAT": "+39.6773296",
                         "INTPTLON": "-086.0107899",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5310"
                     }
                 },
                 {
@@ -17367,7 +17460,8 @@
                         "NAME": "Fremont Community Schools",
                         "INTPTLAT": "+41.7327222",
                         "INTPTLON": "-084.9464881",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7605"
                     }
                 },
                 {
@@ -17388,7 +17482,8 @@
                         "NAME": "Frontier School Corporation",
                         "INTPTLAT": "+40.6348308",
                         "INTPTLON": "-086.8857148",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8525"
                     }
                 },
                 {
@@ -17407,7 +17502,8 @@
                         "NAME": "Garrett-Keyser-Butler Community School Corporation",
                         "INTPTLAT": "+41.3254261",
                         "INTPTLON": "-085.1357279",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1820"
                     }
                 },
                 {
@@ -17432,7 +17528,8 @@
                         "NAME": "Gary Community School Corporation",
                         "INTPTLAT": "+41.5958919",
                         "INTPTLON": "-087.3417025",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4690"
                     }
                 },
                 {
@@ -17452,7 +17549,8 @@
                         "NAME": "Goshen Community Schools",
                         "INTPTLAT": "+41.5658645",
                         "INTPTLON": "-085.8319585",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2315"
                     }
                 },
                 {
@@ -17476,7 +17574,8 @@
                         "NAME": "Greater Clark County Schools",
                         "INTPTLAT": "+38.4770720",
                         "INTPTLON": "-085.6201028",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1010"
                     }
                 },
                 {
@@ -17498,7 +17597,8 @@
                         "NAME": "Greater Jasper Consolidated Schools",
                         "INTPTLAT": "+38.4164657",
                         "INTPTLON": "-086.9878027",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2120"
                     }
                 },
                 {
@@ -17517,7 +17617,8 @@
                         "NAME": "Greencastle Community School Corporation",
                         "INTPTLAT": "+39.6574711",
                         "INTPTLON": "-086.9194703",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6755"
                     }
                 },
                 {
@@ -17537,7 +17638,8 @@
                         "NAME": "Greenfield-Central Community Schools",
                         "INTPTLAT": "+39.8503259",
                         "INTPTLON": "-085.7615142",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3125"
                     }
                 },
                 {
@@ -17554,7 +17656,8 @@
                         "NAME": "Greensburg Community Schools",
                         "INTPTLAT": "+39.3176697",
                         "INTPTLON": "-085.4670067",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1730"
                     }
                 },
                 {
@@ -17573,7 +17676,8 @@
                         "NAME": "Greenwood Community School Corporation",
                         "INTPTLAT": "+39.6167707",
                         "INTPTLON": "-086.1139317",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4245"
                     }
                 },
                 {
@@ -17594,7 +17698,8 @@
                         "NAME": "Monroe-Gregg School District",
                         "INTPTLAT": "+39.5643480",
                         "INTPTLON": "-086.4941281",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5900"
                     }
                 },
                 {
@@ -17613,7 +17718,8 @@
                         "NAME": "Griffith Public Schools",
                         "INTPTLAT": "+41.5321272",
                         "INTPTLON": "-087.4292668",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4700"
                     }
                 },
                 {
@@ -17633,7 +17739,8 @@
                         "NAME": "Hamilton Community Schools",
                         "INTPTLAT": "+41.5376227",
                         "INTPTLON": "-084.8908272",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7610"
                     }
                 },
                 {
@@ -17655,7 +17762,8 @@
                         "NAME": "Hamilton Heights School Corporation",
                         "INTPTLAT": "+40.1542826",
                         "INTPTLON": "-085.9911277",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3025"
                     }
                 },
                 {
@@ -17675,7 +17783,8 @@
                         "NAME": "Hanover Community School Corporation",
                         "INTPTLAT": "+41.3911040",
                         "INTPTLON": "-087.4787303",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4580"
                     }
                 },
                 {
@@ -17697,7 +17806,8 @@
                         "NAME": "Western School Corporation",
                         "INTPTLAT": "+40.4354804",
                         "INTPTLON": "-086.2531105",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3490"
                     }
                 },
                 {
@@ -17720,7 +17830,8 @@
                         "NAME": "Wes-Del Community Schools",
                         "INTPTLAT": "+40.2966004",
                         "INTPTLON": "-085.5088058",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1885"
                     }
                 },
                 {
@@ -17740,7 +17851,8 @@
                         "NAME": "School Town of Highland",
                         "INTPTLAT": "+41.5466221",
                         "INTPTLON": "-087.4576162",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4720"
                     }
                 },
                 {
@@ -17761,7 +17873,8 @@
                         "NAME": "School City of Hobart",
                         "INTPTLAT": "+41.5288988",
                         "INTPTLON": "-087.2687662",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4730"
                     }
                 },
                 {
@@ -17781,7 +17894,8 @@
                         "NAME": "River Forest Community School Corporation",
                         "INTPTLAT": "+41.5610433",
                         "INTPTLON": "-087.2767486",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4590"
                     }
                 },
                 {
@@ -17805,7 +17919,8 @@
                         "NAME": "Huntington County Community School Corporation",
                         "INTPTLAT": "+40.8263938",
                         "INTPTLON": "-085.4785975",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3625"
                     }
                 },
                 {
@@ -17831,7 +17946,8 @@
                         "NAME": "Indianapolis Public Schools",
                         "INTPTLAT": "+39.7930964",
                         "INTPTLON": "-086.1360915",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5385"
                     }
                 },
                 {
@@ -17853,7 +17969,8 @@
                         "NAME": "Jac-Cen-Del Community School Corporation",
                         "INTPTLAT": "+39.1700736",
                         "INTPTLON": "-085.3040620",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6900"
                     }
                 },
                 {
@@ -17877,7 +17994,8 @@
                         "NAME": "Jay School Corporation",
                         "INTPTLAT": "+40.4349560",
                         "INTPTLON": "-085.0023313",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3945"
                     }
                 },
                 {
@@ -17902,7 +18020,8 @@
                         "NAME": "Jennings County School Corporation",
                         "INTPTLAT": "+38.9962289",
                         "INTPTLON": "-085.6281030",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4015"
                     }
                 },
                 {
@@ -17925,7 +18044,8 @@
                         "NAME": "Kankakee Valley School Corporation",
                         "INTPTLAT": "+41.1663188",
                         "INTPTLON": "-087.1133452",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3785"
                     }
                 },
                 {
@@ -17946,7 +18066,8 @@
                         "NAME": "Knox Community School Corporation",
                         "INTPTLAT": "+41.2775323",
                         "INTPTLON": "-086.5956990",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7525"
                     }
                 },
                 {
@@ -17965,7 +18086,8 @@
                         "NAME": "Kokomo School Corporation",
                         "INTPTLAT": "+40.4833517",
                         "INTPTLON": "-086.1363902",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3500"
                     }
                 },
                 {
@@ -17982,7 +18104,8 @@
                         "NAME": "Lafayette School Corporation",
                         "INTPTLAT": "+40.4108906",
                         "INTPTLON": "-086.8633508",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7855"
                     }
                 },
                 {
@@ -18006,7 +18129,8 @@
                         "NAME": "Lake Central School Corporation",
                         "INTPTLAT": "+41.4781248",
                         "INTPTLON": "-087.4616638",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4615"
                     }
                 },
                 {
@@ -18027,7 +18151,8 @@
                         "NAME": "Lake Ridge New Tech Schools",
                         "INTPTLAT": "+41.5510712",
                         "INTPTLON": "-087.3854897",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4650"
                     }
                 },
                 {
@@ -18047,7 +18172,8 @@
                         "NAME": "Lakeland School Corporation",
                         "INTPTLAT": "+41.6710316",
                         "INTPTLON": "-085.3749799",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4535"
                     }
                 },
                 {
@@ -18069,7 +18195,8 @@
                         "NAME": "Wawasee Community School Corporation",
                         "INTPTLAT": "+41.3691485",
                         "INTPTLON": "-085.7709116",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4345"
                     }
                 },
                 {
@@ -18092,7 +18219,8 @@
                         "NAME": "LaPorte Community School Corporation",
                         "INTPTLAT": "+41.5533603",
                         "INTPTLON": "-086.6722619",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4945"
                     }
                 },
                 {
@@ -18113,7 +18241,8 @@
                         "NAME": "MSD Lawrence Township",
                         "INTPTLAT": "+39.8803558",
                         "INTPTLON": "-086.0104666",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5330"
                     }
                 },
                 {
@@ -18132,7 +18261,8 @@
                         "NAME": "Lawrenceburg Community School Corporation",
                         "INTPTLAT": "+39.1260014",
                         "INTPTLON": "-084.8769927",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1620"
                     }
                 },
                 {
@@ -18153,7 +18283,8 @@
                         "NAME": "Lebanon Community School Corporation",
                         "INTPTLAT": "+40.0209021",
                         "INTPTLON": "-086.4328689",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "665"
                     }
                 },
                 {
@@ -18175,7 +18306,8 @@
                         "NAME": "Liberty-Perry Community School Corporation",
                         "INTPTLAT": "+40.1561119",
                         "INTPTLON": "-085.2670793",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1895"
                     }
                 },
                 {
@@ -18194,7 +18326,8 @@
                         "NAME": "Linton-Stockton School Corporation",
                         "INTPTLAT": "+39.0390859",
                         "INTPTLON": "-087.1889746",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2950"
                     }
                 },
                 {
@@ -18215,7 +18348,8 @@
                         "NAME": "Logansport Community School Corporation",
                         "INTPTLAT": "+40.7537328",
                         "INTPTLON": "-086.3777566",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "875"
                     }
                 },
                 {
@@ -18237,7 +18371,8 @@
                         "NAME": "Loogootee Community School Corporation",
                         "INTPTLAT": "+38.7220343",
                         "INTPTLON": "-086.8729400",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5525"
                     }
                 },
                 {
@@ -18257,7 +18392,8 @@
                         "NAME": "MSD Warren County",
                         "INTPTLAT": "+40.3342990",
                         "INTPTLON": "-087.3491772",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8115"
                     }
                 },
                 {
@@ -18279,7 +18415,8 @@
                         "NAME": "Maconaquah School Corporation",
                         "INTPTLAT": "+40.6589088",
                         "INTPTLON": "-086.0521524",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5615"
                     }
                 },
                 {
@@ -18301,7 +18438,8 @@
                         "NAME": "Madison Consolidated Schools",
                         "INTPTLAT": "+38.8223292",
                         "INTPTLON": "-085.3941911",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3995"
                     }
                 },
                 {
@@ -18328,7 +18466,8 @@
                         "NAME": "Madison-Grant United School Corporation",
                         "INTPTLAT": "+40.3866817",
                         "INTPTLON": "-085.7145696",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2825"
                     }
                 },
                 {
@@ -18350,7 +18489,8 @@
                         "NAME": "Manchester Community Schools",
                         "INTPTLAT": "+40.9794042",
                         "INTPTLON": "-085.7889259",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8045"
                     }
                 },
                 {
@@ -18370,7 +18510,8 @@
                         "NAME": "Marion Community Schools",
                         "INTPTLAT": "+40.5467502",
                         "INTPTLON": "-085.6533726",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2865"
                     }
                 },
                 {
@@ -18393,7 +18534,8 @@
                         "NAME": "Sheridan Community Schools",
                         "INTPTLAT": "+40.1406145",
                         "INTPTLON": "-086.2376873",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3055"
                     }
                 },
                 {
@@ -18418,7 +18560,8 @@
                         "NAME": "MSD Martinsville Schools",
                         "INTPTLAT": "+39.4385590",
                         "INTPTLON": "-086.4396783",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5925"
                     }
                 },
                 {
@@ -18439,7 +18582,8 @@
                         "NAME": "Michigan City Area Schools",
                         "INTPTLAT": "+41.6899266",
                         "INTPTLON": "-086.8588150",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4925"
                     }
                 },
                 {
@@ -18461,7 +18605,8 @@
                         "NAME": "Middlebury Community Schools",
                         "INTPTLAT": "+41.6772003",
                         "INTPTLON": "-085.7601741",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2275"
                     }
                 },
                 {
@@ -18481,7 +18626,8 @@
                         "NAME": "Milan Community Schools",
                         "INTPTLAT": "+39.1305167",
                         "INTPTLON": "-085.1484421",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6910"
                     }
                 },
                 {
@@ -18504,7 +18650,8 @@
                         "NAME": "Mill Creek Community School Corporation",
                         "INTPTLAT": "+39.6628360",
                         "INTPTLON": "-086.5726982",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3335"
                     }
                 },
                 {
@@ -18522,7 +18669,8 @@
                         "NAME": "School City of Mishawaka",
                         "INTPTLAT": "+41.6632698",
                         "INTPTLON": "-086.1608178",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7200"
                     }
                 },
                 {
@@ -18541,7 +18689,8 @@
                         "NAME": "Mississinewa Community School Corporation",
                         "INTPTLAT": "+40.4834793",
                         "INTPTLON": "-085.6171751",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2855"
                     }
                 },
                 {
@@ -18562,7 +18711,8 @@
                         "NAME": "Mitchell Community Schools",
                         "INTPTLAT": "+38.7472021",
                         "INTPTLON": "-086.5181349",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5085"
                     }
                 },
                 {
@@ -18583,7 +18733,8 @@
                         "NAME": "Cowan Community School Corporation",
                         "INTPTLAT": "+40.1129991",
                         "INTPTLON": "-085.3877672",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1900"
                     }
                 },
                 {
@@ -18604,7 +18755,8 @@
                         "NAME": "Monroe Central School Corporation",
                         "INTPTLAT": "+40.2141256",
                         "INTPTLON": "-085.1555126",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6820"
                     }
                 },
                 {
@@ -18628,7 +18780,8 @@
                         "NAME": "Eastern Pulaski Community School Corporation",
                         "INTPTLAT": "+41.0244661",
                         "INTPTLON": "-086.5988063",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6620"
                     }
                 },
                 {
@@ -18650,7 +18803,8 @@
                         "NAME": "Mooresville Consolidated School Corporation",
                         "INTPTLAT": "+39.5833441",
                         "INTPTLON": "-086.3278337",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5930"
                     }
                 },
                 {
@@ -18670,7 +18824,8 @@
                         "NAME": "Yorktown Community Schools",
                         "INTPTLAT": "+40.1818915",
                         "INTPTLON": "-085.5081553",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1910"
                     }
                 },
                 {
@@ -18692,7 +18847,8 @@
                         "NAME": "Mount Vernon Community School Corporation",
                         "INTPTLAT": "+39.8614172",
                         "INTPTLON": "-085.8825467",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3135"
                     }
                 },
                 {
@@ -18711,7 +18867,8 @@
                         "NAME": "MSD Mount Vernon",
                         "INTPTLAT": "+37.9417654",
                         "INTPTLON": "-087.9036257",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6590"
                     }
                 },
                 {
@@ -18732,7 +18889,8 @@
                         "NAME": "Muncie Community Schools",
                         "INTPTLAT": "+40.1915305",
                         "INTPTLON": "-085.3860070",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1970"
                     }
                 },
                 {
@@ -18752,7 +18910,8 @@
                         "NAME": "School Town of Munster",
                         "INTPTLAT": "+41.5469100",
                         "INTPTLON": "-087.5045891",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4740"
                     }
                 },
                 {
@@ -18775,7 +18934,8 @@
                         "NAME": "Nettle Creek School Corporation",
                         "INTPTLAT": "+39.9254270",
                         "INTPTLON": "-085.1266400",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8305"
                     }
                 },
                 {
@@ -18799,7 +18959,8 @@
                         "NAME": "New Albany-Floyd County Consolidated Schools",
                         "INTPTLAT": "+38.3180811",
                         "INTPTLON": "-085.9118469",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2400"
                     }
                 },
                 {
@@ -18820,7 +18981,8 @@
                         "NAME": "New Castle Community School Corporation",
                         "INTPTLAT": "+39.9171246",
                         "INTPTLON": "-085.3524713",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3445"
                     }
                 },
                 {
@@ -18840,7 +19002,8 @@
                         "NAME": "MSD New Durham Township",
                         "INTPTLAT": "+41.5592453",
                         "INTPTLON": "-086.8723126",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4860"
                     }
                 },
                 {
@@ -18860,7 +19023,8 @@
                         "NAME": "New Prairie United School Corporation",
                         "INTPTLAT": "+41.6832109",
                         "INTPTLON": "-086.5547513",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4805"
                     }
                 },
                 {
@@ -18881,7 +19045,8 @@
                         "NAME": "Nineveh-Hensley-Jackson United School Corporation",
                         "INTPTLAT": "+39.3849055",
                         "INTPTLON": "-086.2127111",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4255"
                     }
                 },
                 {
@@ -18901,7 +19066,8 @@
                         "NAME": "Noblesville Schools",
                         "INTPTLAT": "+40.0535128",
                         "INTPTLON": "-086.0217090",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3070"
                     }
                 },
                 {
@@ -18921,7 +19087,8 @@
                         "NAME": "North Adams Community Schools",
                         "INTPTLAT": "+40.8715725",
                         "INTPTLON": "-084.9262594",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "25"
                     }
                 },
                 {
@@ -18943,7 +19110,8 @@
                         "NAME": "North Daviess Community Schools",
                         "INTPTLAT": "+38.8100800",
                         "INTPTLON": "-087.0613809",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1375"
                     }
                 },
                 {
@@ -18964,7 +19132,8 @@
                         "NAME": "North Gibson School Corporation",
                         "INTPTLAT": "+38.4005437",
                         "INTPTLON": "-087.5722537",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2735"
                     }
                 },
                 {
@@ -18986,7 +19155,8 @@
                         "NAME": "North Judson-San Pierre School Corporation",
                         "INTPTLAT": "+41.2059814",
                         "INTPTLON": "-086.7828612",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7515"
                     }
                 },
                 {
@@ -19010,7 +19180,8 @@
                         "NAME": "North Knox School Corporation",
                         "INTPTLAT": "+38.8279534",
                         "INTPTLON": "-087.3570915",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4315"
                     }
                 },
                 {
@@ -19033,7 +19204,8 @@
                         "NAME": "North Lawrence Community Schools",
                         "INTPTLAT": "+38.8866221",
                         "INTPTLON": "-086.4748133",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5075"
                     }
                 },
                 {
@@ -19056,7 +19228,8 @@
                         "NAME": "North Miami Community Schools",
                         "INTPTLAT": "+40.9026614",
                         "INTPTLON": "-086.0651600",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5620"
                     }
                 },
                 {
@@ -19079,7 +19252,8 @@
                         "NAME": "North Montgomery Community School Corporation",
                         "INTPTLAT": "+40.1361005",
                         "INTPTLON": "-086.8938161",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5835"
                     }
                 },
                 {
@@ -19100,7 +19274,8 @@
                         "NAME": "North Newton School Corporation",
                         "INTPTLAT": "+41.0425613",
                         "INTPTLON": "-087.4018179",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5945"
                     }
                 },
                 {
@@ -19120,7 +19295,8 @@
                         "NAME": "MSD North Posey County",
                         "INTPTLAT": "+38.1354487",
                         "INTPTLON": "-087.8309079",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6600"
                     }
                 },
                 {
@@ -19143,7 +19319,8 @@
                         "NAME": "North Putnam Community Schools",
                         "INTPTLAT": "+39.7798445",
                         "INTPTLON": "-086.8494378",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6715"
                     }
                 },
                 {
@@ -19166,7 +19343,8 @@
                         "NAME": "North Spencer County School Corporation",
                         "INTPTLAT": "+38.0702441",
                         "INTPTLON": "-086.9555829",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7385"
                     }
                 },
                 {
@@ -19188,7 +19366,8 @@
                         "NAME": "Tri-Central Community Schools",
                         "INTPTLAT": "+40.3693007",
                         "INTPTLON": "-086.0642036",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7935"
                     }
                 },
                 {
@@ -19209,7 +19388,8 @@
                         "NAME": "North Vermillion Community School Corporation",
                         "INTPTLAT": "+39.9611526",
                         "INTPTLON": "-087.4695708",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8010"
                     }
                 },
                 {
@@ -19232,7 +19412,8 @@
                         "NAME": "North West Hendricks Schools",
                         "INTPTLAT": "+39.8753539",
                         "INTPTLON": "-086.5550946",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3295"
                     }
                 },
                 {
@@ -19255,7 +19436,8 @@
                         "NAME": "Northeast Dubois County School Corporation",
                         "INTPTLAT": "+38.4380444",
                         "INTPTLON": "-086.7958103",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2040"
                     }
                 },
                 {
@@ -19278,7 +19460,8 @@
                         "NAME": "North White School Corporation",
                         "INTPTLAT": "+40.8364773",
                         "INTPTLON": "-086.8453331",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8515"
                     }
                 },
                 {
@@ -19301,7 +19484,8 @@
                         "NAME": "Northeast School Corporation",
                         "INTPTLAT": "+39.2210895",
                         "INTPTLON": "-087.2909975",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7645"
                     }
                 },
                 {
@@ -19323,7 +19507,8 @@
                         "NAME": "Northeastern Wayne Schools",
                         "INTPTLAT": "+39.9491233",
                         "INTPTLON": "-084.9320719",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8375"
                     }
                 },
                 {
@@ -19347,7 +19532,8 @@
                         "NAME": "Northern Wells Community Schools",
                         "INTPTLAT": "+40.8186133",
                         "INTPTLON": "-085.1974498",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8435"
                     }
                 },
                 {
@@ -19370,7 +19556,8 @@
                         "NAME": "Northwest Allen County Schools",
                         "INTPTLAT": "+41.1982062",
                         "INTPTLON": "-085.2206761",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "225"
                     }
                 },
                 {
@@ -19394,7 +19581,8 @@
                         "NAME": "Shenandoah School Corporation",
                         "INTPTLAT": "+39.9970961",
                         "INTPTLON": "-085.4882744",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3435"
                     }
                 },
                 {
@@ -19417,7 +19605,8 @@
                         "NAME": "Northwestern Consolidated School Corporation",
                         "INTPTLAT": "+39.6056243",
                         "INTPTLON": "-085.8844504",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7350"
                     }
                 },
                 {
@@ -19439,7 +19628,8 @@
                         "NAME": "Oak Hill United School Corporation",
                         "INTPTLAT": "+40.5791243",
                         "INTPTLON": "-085.8094908",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5625"
                     }
                 },
                 {
@@ -19462,7 +19652,8 @@
                         "NAME": "Oregon-Davis School Corporation",
                         "INTPTLAT": "+41.3863866",
                         "INTPTLON": "-086.5831002",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7495"
                     }
                 },
                 {
@@ -19482,7 +19673,8 @@
                         "NAME": "Orleans Community Schools",
                         "INTPTLAT": "+38.6421106",
                         "INTPTLON": "-086.4485719",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6145"
                     }
                 },
                 {
@@ -19502,7 +19694,8 @@
                         "NAME": "Paoli Community School Corporation",
                         "INTPTLAT": "+38.4814041",
                         "INTPTLON": "-086.4042424",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6155"
                     }
                 },
                 {
@@ -19527,7 +19720,8 @@
                         "NAME": "Penn-Harris-Madison School Corporation",
                         "INTPTLAT": "+41.6151650",
                         "INTPTLON": "-086.1282664",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7175"
                     }
                 },
                 {
@@ -19549,7 +19743,8 @@
                         "NAME": "MSD Perry Township",
                         "INTPTLAT": "+39.6742165",
                         "INTPTLON": "-086.1526461",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5340"
                     }
                 },
                 {
@@ -19569,7 +19764,8 @@
                         "NAME": "Peru Community Schools",
                         "INTPTLAT": "+40.7847904",
                         "INTPTLON": "-086.0443954",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5635"
                     }
                 },
                 {
@@ -19592,7 +19788,8 @@
                         "NAME": "Pike County School Corporation",
                         "INTPTLAT": "+38.3979613",
                         "INTPTLON": "-087.2325472",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6445"
                     }
                 },
                 {
@@ -19614,7 +19811,8 @@
                         "NAME": "MSD Pike Township",
                         "INTPTLAT": "+39.8782716",
                         "INTPTLON": "-086.2669563",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5350"
                     }
                 },
                 {
@@ -19635,7 +19833,8 @@
                         "NAME": "Pioneer Regional School Corporation",
                         "INTPTLAT": "+40.8303071",
                         "INTPTLON": "-086.4921691",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "775"
                     }
                 },
                 {
@@ -19656,7 +19855,8 @@
                         "NAME": "Plainfield Community School Corporation",
                         "INTPTLAT": "+39.6758341",
                         "INTPTLON": "-086.3831843",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3330"
                     }
                 },
                 {
@@ -19679,7 +19879,8 @@
                         "NAME": "East Porter County School Corporation",
                         "INTPTLAT": "+41.3684856",
                         "INTPTLON": "-086.9962174",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6510"
                     }
                 },
                 {
@@ -19703,7 +19904,8 @@
                         "NAME": "Plymouth Community School Corporation",
                         "INTPTLAT": "+41.3240703",
                         "INTPTLON": "-086.3253162",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5485"
                     }
                 },
                 {
@@ -19724,7 +19926,8 @@
                         "NAME": "John Glenn School Corporation",
                         "INTPTLAT": "+41.4820353",
                         "INTPTLON": "-086.4403114",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7150"
                     }
                 },
                 {
@@ -19745,7 +19948,8 @@
                         "NAME": "Porter Township School Corporation",
                         "INTPTLAT": "+41.3866114",
                         "INTPTLON": "-087.1394811",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6520"
                     }
                 },
                 {
@@ -19767,7 +19971,8 @@
                         "NAME": "Prairie Heights Community School Corporation",
                         "INTPTLAT": "+41.6352968",
                         "INTPTLON": "-085.1867632",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4515"
                     }
                 },
                 {
@@ -19788,7 +19993,8 @@
                         "NAME": "West Central School Corporation",
                         "INTPTLAT": "+41.0221294",
                         "INTPTLON": "-086.8641976",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6630"
                     }
                 },
                 {
@@ -19810,7 +20016,8 @@
                         "NAME": "Rensselaer Central School Corporation",
                         "INTPTLAT": "+40.9502740",
                         "INTPTLON": "-087.1309452",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3815"
                     }
                 },
                 {
@@ -19829,7 +20036,8 @@
                         "NAME": "Richland-Bean Blossom Community School Corporation",
                         "INTPTLAT": "+39.2592202",
                         "INTPTLON": "-086.6298670",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5705"
                     }
                 },
                 {
@@ -19849,7 +20057,8 @@
                         "NAME": "Richmond Community Schools",
                         "INTPTLAT": "+39.8106500",
                         "INTPTLON": "-084.8758147",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8385"
                     }
                 },
                 {
@@ -19869,7 +20078,8 @@
                         "NAME": "Rising Sun-Ohio County Community Schools",
                         "INTPTLAT": "+38.9405270",
                         "INTPTLON": "-084.9642994",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6080"
                     }
                 },
                 {
@@ -19891,7 +20101,8 @@
                         "NAME": "Rochester Community School Corporation",
                         "INTPTLAT": "+41.0777746",
                         "INTPTLON": "-086.2713462",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2645"
                     }
                 },
                 {
@@ -19913,7 +20124,8 @@
                         "NAME": "Merrillville Community School Corporation",
                         "INTPTLAT": "+41.4789410",
                         "INTPTLON": "-087.3066829",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4600"
                     }
                 },
                 {
@@ -19935,7 +20147,8 @@
                         "NAME": "Rossville Consolidated School District",
                         "INTPTLAT": "+40.4128322",
                         "INTPTLON": "-086.5764257",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1180"
                     }
                 },
                 {
@@ -19957,7 +20170,8 @@
                         "NAME": "Rush County Schools",
                         "INTPTLAT": "+39.6075909",
                         "INTPTLON": "-085.4539518",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6995"
                     }
                 },
                 {
@@ -19979,7 +20193,8 @@
                         "NAME": "Salem Community Schools",
                         "INTPTLAT": "+38.6839726",
                         "INTPTLON": "-086.0848954",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8205"
                     }
                 },
                 {
@@ -19999,7 +20214,8 @@
                         "NAME": "Daleville Community Schools",
                         "INTPTLAT": "+40.1050151",
                         "INTPTLON": "-085.5098610",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1940"
                     }
                 },
                 {
@@ -20018,7 +20234,8 @@
                         "NAME": "Scott County School District 1",
                         "INTPTLAT": "+38.7623081",
                         "INTPTLON": "-085.7811539",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7230"
                     }
                 },
                 {
@@ -20043,7 +20260,8 @@
                         "NAME": "Scott County School District 2",
                         "INTPTLAT": "+38.6592216",
                         "INTPTLON": "-085.7371891",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7255"
                     }
                 },
                 {
@@ -20063,7 +20281,8 @@
                         "NAME": "Seymour Community Schools",
                         "INTPTLAT": "+38.9557447",
                         "INTPTLON": "-085.9230325",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3675"
                     }
                 },
                 {
@@ -20084,7 +20303,8 @@
                         "NAME": "MSD Shakamak Schools",
                         "INTPTLAT": "+39.1826410",
                         "INTPTLON": "-087.1872042",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2960"
                     }
                 },
                 {
@@ -20103,7 +20323,8 @@
                         "NAME": "Shelbyville Central Schools",
                         "INTPTLAT": "+39.5385925",
                         "INTPTLON": "-085.7704135",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7365"
                     }
                 },
                 {
@@ -20125,7 +20346,8 @@
                         "NAME": "Shoals Community School Corporation",
                         "INTPTLAT": "+38.6971465",
                         "INTPTLON": "-086.7654688",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5520"
                     }
                 },
                 {
@@ -20145,7 +20367,8 @@
                         "NAME": "Smith-Green Community Schools",
                         "INTPTLAT": "+41.2687618",
                         "INTPTLON": "-085.3705600",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8625"
                     }
                 },
                 {
@@ -20166,7 +20389,8 @@
                         "NAME": "South Adams Schools",
                         "INTPTLAT": "+40.6291842",
                         "INTPTLON": "-084.9409201",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "35"
                     }
                 },
                 {
@@ -20190,7 +20414,8 @@
                         "NAME": "South Bend Community School Corporation",
                         "INTPTLAT": "+41.6631416",
                         "INTPTLON": "-086.3130754",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7205"
                     }
                 },
                 {
@@ -20212,7 +20437,8 @@
                         "NAME": "South Gibson School Corporation",
                         "INTPTLAT": "+38.2602610",
                         "INTPTLON": "-087.6861182",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2765"
                     }
                 },
                 {
@@ -20233,7 +20459,8 @@
                         "NAME": "South Harrison Community Schools",
                         "INTPTLAT": "+38.1223011",
                         "INTPTLON": "-086.1011329",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3190"
                     }
                 },
                 {
@@ -20255,7 +20482,8 @@
                         "NAME": "South Henry School Corporation",
                         "INTPTLAT": "+39.8198297",
                         "INTPTLON": "-085.3479151",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3415"
                     }
                 },
                 {
@@ -20277,7 +20505,8 @@
                         "NAME": "South Knox School Corporation",
                         "INTPTLAT": "+38.5904180",
                         "INTPTLON": "-087.4624132",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4325"
                     }
                 },
                 {
@@ -20300,7 +20529,8 @@
                         "NAME": "South Madison Community School Corporation",
                         "INTPTLAT": "+39.9942647",
                         "INTPTLON": "-085.7108230",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5255"
                     }
                 },
                 {
@@ -20324,7 +20554,8 @@
                         "NAME": "South Montgomery Community School Corporation",
                         "INTPTLAT": "+39.9452179",
                         "INTPTLON": "-086.8931402",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5845"
                     }
                 },
                 {
@@ -20345,7 +20576,8 @@
                         "NAME": "South Newton School Corporation",
                         "INTPTLAT": "+40.8065653",
                         "INTPTLON": "-087.4107782",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5995"
                     }
                 },
                 {
@@ -20367,7 +20599,8 @@
                         "NAME": "South Putnam Community Schools",
                         "INTPTLAT": "+39.5756618",
                         "INTPTLON": "-086.8326655",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6705"
                     }
                 },
                 {
@@ -20390,7 +20623,8 @@
                         "NAME": "South Ripley Community School Corporation",
                         "INTPTLAT": "+39.0195090",
                         "INTPTLON": "-085.2914857",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6865"
                     }
                 },
                 {
@@ -20409,7 +20643,8 @@
                         "NAME": "South Spencer County School Corporation",
                         "INTPTLAT": "+37.9032159",
                         "INTPTLON": "-087.1180085",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7445"
                     }
                 },
                 {
@@ -20429,7 +20664,8 @@
                         "NAME": "South Vermillion Community School Corporation",
                         "INTPTLAT": "+39.7202597",
                         "INTPTLON": "-087.4512400",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8020"
                     }
                 },
                 {
@@ -20451,7 +20687,8 @@
                         "NAME": "Southeast Fountain School Corporation",
                         "INTPTLAT": "+40.0914877",
                         "INTPTLON": "-087.1937125",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2455"
                     }
                 },
                 {
@@ -20473,7 +20710,8 @@
                         "NAME": "Southeast Dubois County School Corporation",
                         "INTPTLAT": "+38.2840456",
                         "INTPTLON": "-086.8069779",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2100"
                     }
                 },
                 {
@@ -20497,7 +20735,8 @@
                         "NAME": "Hamilton Southeastern Schools",
                         "INTPTLAT": "+39.9983501",
                         "INTPTLON": "-085.9394182",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3005"
                     }
                 },
                 {
@@ -20520,7 +20759,8 @@
                         "NAME": "Lewis Cass Schools",
                         "INTPTLAT": "+40.6706771",
                         "INTPTLON": "-086.2691953",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "815"
                     }
                 },
                 {
@@ -20543,7 +20783,8 @@
                         "NAME": "Southern Hancock County Community School Corporation",
                         "INTPTLAT": "+39.7349065",
                         "INTPTLON": "-085.8515314",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3115"
                     }
                 },
                 {
@@ -20564,7 +20805,8 @@
                         "NAME": "Randolph Southern School Corporation",
                         "INTPTLAT": "+40.0576102",
                         "INTPTLON": "-084.9209718",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6805"
                     }
                 },
                 {
@@ -20587,7 +20829,8 @@
                         "NAME": "Southern Wells Community Schools",
                         "INTPTLAT": "+40.6323799",
                         "INTPTLON": "-085.2688901",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8425"
                     }
                 },
                 {
@@ -20607,7 +20850,8 @@
                         "NAME": "Southwestern Jefferson County Consolidated Schools",
                         "INTPTLAT": "+38.7039090",
                         "INTPTLON": "-085.5130536",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4000"
                     }
                 },
                 {
@@ -20630,7 +20874,8 @@
                         "NAME": "Southwestern Shelby County Consolidated Schools",
                         "INTPTLAT": "+39.4294744",
                         "INTPTLON": "-085.8652664",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7360"
                     }
                 },
                 {
@@ -20649,7 +20894,8 @@
                         "NAME": "Southwest School Corporation",
                         "INTPTLAT": "+39.0478988",
                         "INTPTLON": "-087.4545691",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7715"
                     }
                 },
                 {
@@ -20670,7 +20916,8 @@
                         "NAME": "Southwest Dubois County School Corporation",
                         "INTPTLAT": "+38.2742580",
                         "INTPTLON": "-086.9869612",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2110"
                     }
                 },
                 {
@@ -20691,7 +20938,8 @@
                         "NAME": "Southwest Parke Community School Corporation",
                         "INTPTLAT": "+39.6786242",
                         "INTPTLON": "-087.3293468",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6260"
                     }
                 },
                 {
@@ -20709,7 +20957,8 @@
                         "NAME": "School Town of Speedway",
                         "INTPTLAT": "+39.7936983",
                         "INTPTLON": "-086.2475418",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5400"
                     }
                 },
                 {
@@ -20733,7 +20982,8 @@
                         "NAME": "Spencer-Owen Community Schools",
                         "INTPTLAT": "+39.2900766",
                         "INTPTLON": "-086.8414148",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6195"
                     }
                 },
                 {
@@ -20755,7 +21005,8 @@
                         "NAME": "Springs Valley Community School Corporation",
                         "INTPTLAT": "+38.5352174",
                         "INTPTLON": "-086.6202325",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6160"
                     }
                 },
                 {
@@ -20776,7 +21027,8 @@
                         "NAME": "MSD Steuben County",
                         "INTPTLAT": "+41.6224288",
                         "INTPTLON": "-084.9625745",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7615"
                     }
                 },
                 {
@@ -20799,7 +21051,8 @@
                         "NAME": "Sunman-Dearborn Community School Corporation",
                         "INTPTLAT": "+39.2502234",
                         "INTPTLON": "-084.9691529",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1560"
                     }
                 },
                 {
@@ -20819,7 +21072,8 @@
                         "NAME": "Switzerland County School Corporation",
                         "INTPTLAT": "+38.8258545",
                         "INTPTLON": "-085.0296810",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7775"
                     }
                 },
                 {
@@ -20840,7 +21094,8 @@
                         "NAME": "Taylor Community School Corporation",
                         "INTPTLAT": "+40.4350968",
                         "INTPTLON": "-086.0521036",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3460"
                     }
                 },
                 {
@@ -20861,7 +21116,8 @@
                         "NAME": "Tell City-Troy Township School Corporation",
                         "INTPTLAT": "+37.9609680",
                         "INTPTLON": "-086.7152274",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6350"
                     }
                 },
                 {
@@ -20892,7 +21148,8 @@
                         "NAME": "Tippecanoe School Corporation",
                         "INTPTLAT": "+40.3047647",
                         "INTPTLON": "-086.9849353",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7865"
                     }
                 },
                 {
@@ -20914,7 +21171,8 @@
                         "NAME": "Tippecanoe Valley School Corporation",
                         "INTPTLAT": "+41.1220774",
                         "INTPTLON": "-086.0285931",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4445"
                     }
                 },
                 {
@@ -20936,7 +21194,8 @@
                         "NAME": "Tipton Community School Corporation",
                         "INTPTLAT": "+40.2711350",
                         "INTPTLON": "-086.0439648",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7945"
                     }
                 },
                 {
@@ -20958,7 +21217,8 @@
                         "NAME": "Tri-County School Corporation",
                         "INTPTLAT": "+40.7277029",
                         "INTPTLON": "-087.0826000",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8535"
                     }
                 },
                 {
@@ -20980,7 +21240,8 @@
                         "NAME": "Tri-Creek School Corporation",
                         "INTPTLAT": "+41.2674829",
                         "INTPTLON": "-087.3819539",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4645"
                     }
                 },
                 {
@@ -21002,7 +21263,8 @@
                         "NAME": "Triton School Corporation",
                         "INTPTLAT": "+41.2801355",
                         "INTPTLON": "-086.0990519",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5495"
                     }
                 },
                 {
@@ -21022,7 +21284,8 @@
                         "NAME": "Twin Lakes School Corporation",
                         "INTPTLAT": "+40.7456488",
                         "INTPTLON": "-086.6923485",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8565"
                     }
                 },
                 {
@@ -21043,7 +21306,8 @@
                         "NAME": "Union County-College Corner Joint School District",
                         "INTPTLAT": "+39.6152589",
                         "INTPTLON": "-084.9145998",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7950"
                     }
                 },
                 {
@@ -21064,7 +21328,8 @@
                         "NAME": "Union Township School Corporation",
                         "INTPTLAT": "+41.4742233",
                         "INTPTLON": "-087.1764637",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6530"
                     }
                 },
                 {
@@ -21087,7 +21352,8 @@
                         "NAME": "Union School Corporation",
                         "INTPTLAT": "+40.0552625",
                         "INTPTLON": "-085.1552238",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6795"
                     }
                 },
                 {
@@ -21108,7 +21374,8 @@
                         "NAME": "Union-North United School Corporation",
                         "INTPTLAT": "+41.4757940",
                         "INTPTLON": "-086.2762496",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7215"
                     }
                 },
                 {
@@ -21128,7 +21395,8 @@
                         "NAME": "Valparaiso Community Schools",
                         "INTPTLAT": "+41.4759657",
                         "INTPTLON": "-087.0741680",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6560"
                     }
                 },
                 {
@@ -21150,7 +21418,8 @@
                         "NAME": "Crothersville Community Schools",
                         "INTPTLAT": "+38.8121474",
                         "INTPTLON": "-085.8438739",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3710"
                     }
                 },
                 {
@@ -21172,7 +21441,8 @@
                         "NAME": "Vigo County School Corporation",
                         "INTPTLAT": "+39.4308740",
                         "INTPTLON": "-087.3909894",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8030"
                     }
                 },
                 {
@@ -21191,7 +21461,8 @@
                         "NAME": "Vincennes Community School Corporation",
                         "INTPTLAT": "+38.6719083",
                         "INTPTLON": "-087.5156240",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4335"
                     }
                 },
                 {
@@ -21208,7 +21479,8 @@
                         "NAME": "Wabash City Schools",
                         "INTPTLAT": "+40.7982051",
                         "INTPTLON": "-085.8251960",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8060"
                     }
                 },
                 {
@@ -21234,7 +21506,8 @@
                         "NAME": "MSD Wabash County Schools",
                         "INTPTLAT": "+40.7920664",
                         "INTPTLON": "-085.8000835",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8050"
                     }
                 },
                 {
@@ -21259,7 +21532,8 @@
                         "NAME": "Wa-Nee Community Schools",
                         "INTPTLAT": "+41.4893930",
                         "INTPTLON": "-085.9712045",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "2285"
                     }
                 },
                 {
@@ -21281,7 +21555,8 @@
                         "NAME": "MSD Warren Township",
                         "INTPTLAT": "+39.7692952",
                         "INTPTLON": "-086.0100789",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5360"
                     }
                 },
                 {
@@ -21305,7 +21580,8 @@
                         "NAME": "Warrick County School Corporation",
                         "INTPTLAT": "+38.0977282",
                         "INTPTLON": "-087.2720486",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8130"
                     }
                 },
                 {
@@ -21327,7 +21603,8 @@
                         "NAME": "Warsaw Community Schools",
                         "INTPTLAT": "+41.2204696",
                         "INTPTLON": "-085.8617223",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4415"
                     }
                 },
                 {
@@ -21349,7 +21626,8 @@
                         "NAME": "Washington Community Schools",
                         "INTPTLAT": "+38.6240637",
                         "INTPTLON": "-087.1549932",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "1405"
                     }
                 },
                 {
@@ -21370,7 +21648,8 @@
                         "NAME": "MSD Washington Township",
                         "INTPTLAT": "+39.8853630",
                         "INTPTLON": "-086.1441502",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5370"
                     }
                 },
                 {
@@ -21393,7 +21672,8 @@
                         "NAME": "MSD Wayne Township",
                         "INTPTLAT": "+39.7614881",
                         "INTPTLON": "-086.2746698",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5375"
                     }
                 },
                 {
@@ -21410,7 +21690,8 @@
                         "NAME": "West Lafayette Community School Corporation",
                         "INTPTLAT": "+40.4432272",
                         "INTPTLON": "-086.9069508",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "7875"
                     }
                 },
                 {
@@ -21433,7 +21714,8 @@
                         "NAME": "Frankton-Lapel Community Schools",
                         "INTPTLAT": "+40.1568832",
                         "INTPTLON": "-085.7763291",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "5245"
                     }
                 },
                 {
@@ -21455,7 +21737,8 @@
                         "NAME": "West Noble School Corporation",
                         "INTPTLAT": "+41.4308679",
                         "INTPTLON": "-085.5695570",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "6065"
                     }
                 },
                 {
@@ -21480,7 +21763,8 @@
                         "NAME": "West Washington School Corporation",
                         "INTPTLAT": "+38.5558147",
                         "INTPTLON": "-086.2408860",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8220"
                     }
                 },
                 {
@@ -21503,7 +21787,8 @@
                         "NAME": "Western Boone County Community School District",
                         "INTPTLAT": "+40.0619394",
                         "INTPTLON": "-086.5685580",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "615"
                     }
                 },
                 {
@@ -21523,7 +21808,8 @@
                         "NAME": "Western Wayne Schools",
                         "INTPTLAT": "+39.7722134",
                         "INTPTLON": "-085.1295787",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "8355"
                     }
                 },
                 {
@@ -21544,7 +21830,8 @@
                         "NAME": "Westfield-Washington Schools",
                         "INTPTLAT": "+40.0529748",
                         "INTPTLON": "-086.1725842",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "3030"
                     }
                 },
                 {
@@ -21565,7 +21852,8 @@
                         "NAME": "Westview School Corporation",
                         "INTPTLAT": "+41.6372779",
                         "INTPTLON": "-085.5511804",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4525"
                     }
                 },
                 {
@@ -21584,7 +21872,8 @@
                         "NAME": "School City of Whiting",
                         "INTPTLAT": "+41.6729292",
                         "INTPTLON": "-087.4839423",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4760"
                     }
                 },
                 {
@@ -21605,7 +21894,8 @@
                         "NAME": "Whitko Community School Corporation",
                         "INTPTLAT": "+41.1325363",
                         "INTPTLON": "-085.6799661",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "4455"
                     }
                 },
                 {
@@ -21625,7 +21915,8 @@
                         "NAME": "School District Not Defined",
                         "INTPTLAT": "+39.3960143",
                         "INTPTLON": "-086.0581156",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "9999"
                     }
                 },
                 {
@@ -21645,7 +21936,8 @@
                         "NAME": "School District Not Defined",
                         "INTPTLAT": "+39.3960143",
                         "INTPTLON": "-086.0581156",
-                        "GEO_YEAR": "2021"
+                        "GEO_YEAR": "2021",
+                        "CORPID": "9999"
                     }
                 }
             ]

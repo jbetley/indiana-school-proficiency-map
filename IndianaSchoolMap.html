@@ -161,17 +161,16 @@
     <form>
       <div class="radio-group">
         <span>Scoring:</span>
-        <input type="radio" id="option-1a" name="scoring" value="Standard"><label for="option-1a">Standard</label>
-        <input type="radio" id="option-1b" name="scoring" value="Scaled" checked><label for="option-1b">Scaled</label>
+        <input type="radio" id="option-1a" name="scoring" value="Percentage"><label for="option-1a">Percentage</label>
+        <input type="radio" id="option-1b" name="scoring" value="Relative" checked><label
+          for="option-1b">Relative</label>
       </div>
       <div class="radio-group">
         <span>Year:</span>
         <input type="radio" id="option-2a" name="year" value="2023" checked><label for="option-2a">2023</label>
         <input type="radio" id="option-2b" name="year" value="2022" checked><label for="option-2b">2022</label>
         <input type="radio" id="option-2c" name="year" value="2021" checked><label for="option-2c">2021</label>
-        <!-- <input type="radio" id="option-2b" name="year" value="2020"><label for="option-2b">2020</label> -->
         <input type="radio" id="option-2d" name="year" value="2019"><label for="option-2d">2019</label>
-        <!-- <input type="radio" id="option-2d" name="year" value="2018"><label for="option-2d">2018</label> -->
       </div>
       <div class="radio-group">
         <span>Grades:</span>
@@ -314,8 +313,8 @@
       // .defer(d3.csv, "ilearn2021-schools.csv")
       .defer(d3.csv, "corporation_data_k8.csv")
       .defer(d3.csv, "academic_data_k8.csv")
-      .defer(d3.json, "INschool-corporations.geo.v2.json")
-      .defer(d3.json, "geocodes_schools.json")
+      .defer(d3.json, "geocodes_corporations_2023.json")
+      .defer(d3.json, "geocodes_schools_2023.json")
       .await(function (error, scdata, schdata, INdistricts, INschools) {
 
         if (error) {
@@ -362,7 +361,7 @@
           var updateMap = function (a, b, c, d, e) {
             // a - scoring; b - year; c - grades; d - group; e - subject
 
-            if (a == 'Scaled') {
+            if (a == 'Relative') {
               selectedDomain = [.05, .10, .15, .25, .35, .45, .55, .65];
               labels = ['0-5%', '6-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '> 66%'];
             }
@@ -386,12 +385,9 @@
               .call(legend);
 
             // Calculate the top 10 schools for each Subject/Group (with n-size > 10)
-
             const v = d + "|" + e + " Proficiency %",
               w = d + "|" + e + " Total Tested";
 
-            console.log(v)
-            console.log(w)
             let y = 0,
               txt = [];
 
@@ -404,7 +400,6 @@
               return obj.Year === b
             })
 
-            // const nSize = scdata.filter(d => +d[w] > 10);
             const nSize = year_data_school.filter(d => +d[w] > 10);
             const proficiencyGroup = nSize.filter(d => isNumeric(d[v]));
 
@@ -442,7 +437,10 @@
                 /// TODO: Choking here. Prob need to figure out what I meant above
                 console.log(year_data_corp)
                 const milla = year_data_corp.find(f => f['GEO ID'] === d.properties.GEOID)
+                const tst = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORP_ID)
                 console.log(milla)
+                console.log(d.properties.CORP_ID)
+                console.log(tst)
                 if (milla[v] === "" || milla[v] === "***" || isNaN(milla[v])) {
                   return "grey"
                 } else
@@ -528,7 +526,7 @@
                   //if (!isNumeric(s.properties.SCHOOL_ID)) {console.log(s.properties.SCHOOL_ID)} ;
                   const nico = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
-                  console.log(nico)
+                  // console.log(nico)
 
                   if (nico == null) { return "grey" }
 
@@ -578,7 +576,7 @@
             updateMap(selectedScoring, selectedYear, selectedGrade, selectedGroup, selectedSubject)
           })
 
-          updateMap('Scaled', '2021', '3-8', 'General Education', 'ELA & Math')
+          updateMap('Relative', '2023', '3-8', 'General Education', 'ELA')
 
         }
       });
