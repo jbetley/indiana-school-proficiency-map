@@ -133,7 +133,7 @@
       top: 270px;
       width: 310px;
       font-family: roboto;
-      font-size: 10px;
+      font-size: 12px;
       background: #e3e3e3;
       font-weight: bold;
       float: left;
@@ -309,8 +309,6 @@
     //  .call(zoom); 
 
     d3.queue()
-      // .defer(d3.csv, "ilearn2021-corporations.csv")
-      // .defer(d3.csv, "ilearn2021-schools.csv")
       .defer(d3.csv, "corporation_data_k8.csv")
       .defer(d3.csv, "academic_data_k8.csv")
       .defer(d3.json, "geocodes_corporations_2023.json")
@@ -433,23 +431,54 @@
               .attr("d", path)
               .attr("fill", function (d, i) {
 
-                //// TODO: Change to Corp ID //////// ADD CORP ID TO DISTRICT FILE ////
-                /// TODO: Choking here. Prob need to figure out what I meant above
-                console.log(year_data_corp)
-                const milla = year_data_corp.find(f => f['GEO ID'] === d.properties.GEOID)
-                const tst = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORP_ID)
-                console.log(milla)
-                console.log(d.properties.CORP_ID)
-                console.log(tst)
+                // TODO: Not filling corp arcs on load. only on switch
+
+                // const milla = year_data_corp.find(f => f['GEO ID'] === d.properties.GEOID)
+                const milla = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
+
+                // will be null if the school corporation does not exist
+                // exist or was created (e.g., West Clark Community Schools 
+                // dissolved in 2020 and Borden-Henryville was formed
+                // TODO: Add West Clark Community Schools back for 2019
+                // TODO: Will need to add a variable for Active/NonActive in
+                // geocodes_corporations.js
+
+                if (milla == null) { return "grey" }
+
                 if (milla[v] === "" || milla[v] === "***" || isNaN(milla[v])) {
+                  console.log('GARAYA')
                   return "grey"
                 } else
                   return color(milla[v])
               })
               .attr("stroke", "white")
-              .on("click", clicked);
+              .on("click", clicked)
+              .on('mouseover', function (d, i) {
 
-            // Zoom - Add schools
+                let pos = d3.select(this).node().getBoundingClientRect();
+
+                d3.select(this).classed("selected", true);
+
+                const ber = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
+
+                if (ber != null) {
+                  tooltip.html(
+                    ber['Corporation Name'] + "<br>" + v.slice(0, -2) + ": " + per(ber[v]) + "<br>Total Tested: " + ber[w]
+                  )
+                    // .style("left", 750 + "px")
+                    // .style("top", 420 + "px")
+                    .style('left', `${pos['x'] - 20}px`)
+                    .style('top', `${(window.pageYOffset + pos['y'] - 40)}px`)
+                    .style("opacity", 1);
+                }
+              })
+              .on('mouseout', function (d) {
+
+                d3.select(this).classed("selected", false);
+                tooltip.style("opacity", 0)
+              });
+
+            // Zoom - Add points (schools)
             function clicked(d) {
 
               if (active.node() === this) return reset();
@@ -495,10 +524,10 @@
                 .duration(500)
                 .remove();
 
+              // reduce radius based on number of points
+              if (schoolsInDist.features.length < 25) { rad = 2 } else if (schoolsInDist.features.length > 40) { rad = 1 } else { rad = 1.5 }
+
               // Explode circles where there is overlap (shifty())
-
-              if (schoolsInDist.features.length > 50) { rad = 1.5 } else { rad = 2 } // reduce radius if there are > 50 points
-
               // Is it faster to map to matrix first? Or run schoolsInDist.features through shifty()?
               // the latter hits projection() far more times (each time it loops)
               group = schoolsInDist.features.map(o => ({
@@ -522,11 +551,8 @@
                 .attr("r", function (d) { return d.r })
                 .style("stroke", "white")
                 .style("fill", function (d, i) {
-                  //// Deal with case where ID begins with alpha - accredited non-pubs ////
-                  //if (!isNumeric(s.properties.SCHOOL_ID)) {console.log(s.properties.SCHOOL_ID)} ;
-                  const nico = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
-                  // console.log(nico)
+                  const nico = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
                   if (nico == null) { return "grey" }
 
@@ -540,19 +566,18 @@
                 .style("opacity", 0)
                 .on('mouseover', function (d, i) {
 
+                  let pos = d3.select(this).node().getBoundingClientRect();
+
                   d3.select(this).classed("selected", true);
 
-                  //// Deal with case where ID begins with alpha - accredited non-pubs ////
-                  const ber = year_data_school.find(f => +f['School ID'] === +d.school_id)
+                  const echo = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
-                  // console.log(active.datum().properties)
-
-                  if (ber != null) {
+                  if (echo != null) {
                     tooltip.html(
-                      ber['Corporation Name'] + "<br>" + ber['School Name'] + "<br>" + v.slice(0, -2) + ": " + per(ber[v]) + "<br>Total Tested: " + ber[w]
+                      echo['Corporation Name'] + "<br>" + echo['School Name'] + "<br>" + v.slice(0, -2) + ": " + per(echo[v]) + "<br>Total Tested: " + echo[w]
                     )
-                      .style("left", 750 + "px")
-                      .style("top", 420 + "px")
+                      .style('left', `${pos['x'] + 20}px`)
+                      .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
                       .style("opacity", 1);
                   }
                 })
