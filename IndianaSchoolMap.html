@@ -46,6 +46,37 @@
       pointer-events: none;
     }
 
+    #top10-school {
+      position: absolute;
+      text-align: left;
+      text-wrap: nowrap;
+      line-height: 2;
+      width: 300px;
+      padding: 5px;
+      font: 11px 'Inter', sans-serif;
+      background: #e3e3e3;
+      color: steelblue;
+      border-radius: 8px;
+      border: thin solid steelblue;
+      pointer-events: none;
+    }
+
+    #top10-corp {
+      position: absolute;
+      text-align: left;
+      text-wrap: nowrap;
+      line-height: 2;
+      width: 300px;
+      padding: 5px;
+      font: 11px 'Inter', sans-serif;
+      /* font-weight: bold; */
+      background: #e3e3e3;
+      color: steelblue;
+      border-radius: 8px;
+      border: thin solid steelblue;
+      pointer-events: none;
+    }
+
     input[type=radio] {
       position: absolute;
       visibility: hidden;
@@ -74,36 +105,6 @@
       padding: 7px 7px;
       margin: 2px;
     }
-
-    /** Buttons (modified Bootstrap.css) **/
-    /* button {
-      border-radius: 0;
-    }
-
-    button:focus:not(:focus-visible) {
-      outline: 0;
-    }
-
-    button,
-    select {
-      text-transform: none;
-    }
-
-    [role="button"] {
-      cursor: pointer;
-    }
-
-    button {
-      -webkit-appearance: button;
-      appearance: button;
-    } */
-
-    /* [type="button"]:not(:disabled),
-    [type="reset"]:not(:disabled),
-    [type="submit"]:not(:disabled),
-    button:not(:disabled) {
-      cursor: pointer;
-    } */
 
     .input-group .btn {
       position: relative;
@@ -369,13 +370,13 @@
 
     .map {
       float: left;
-      margin-top: 20px;
+      /* margin-top: 30px; */
       width: 100%;
       height: 100%;
       z-index: 99;
     }
 
-    /* TODO: Fix this */
+    /* TODO: Fix this button arrangement*/
     .top-row {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
@@ -542,31 +543,12 @@
           <div class="map"></div>
         </div>
       </div>
-
-      <!-- <div class="pretty-container--close--top four columns">
-
-        <div class="center">
-
-          <div class="stats-container">
-            <div class="stats-header">Top 10 School Corporations</div>
-            <div class="corp-stats"></div>
-          </div>
-
-          <div class="stats-container">
-            <div class="stats-header">Top 10 Schools</div>
-            <div class="school-stats"></div>
-          </div>
-
-        </div>
-
-      </div> -->
-
     </div>
   </div>
 
   <script>
 
-    function per(d) {
+    function calc_percent(d) {
       if (d === "***") {
         return "***"
       } else if (d === "" || isNaN(d)) {
@@ -586,8 +568,7 @@
       svg.attr("stroke-width", 1 / transform.k);
     }
 
-    // called when a node (district) is clicked while active,
-    // resets the map
+    // map is reset when a node (district) is clicked while active
     function reset() {
       active.classed("active", false);
       active = d3.select(null);
@@ -610,6 +591,8 @@
     // if the circles overlap and if so, shifts their coordinates
     // away from each other. can give inconsistent results if there
     // are multiple points right next to each other
+    // if dx > 0 -> shift x0 left, else shift x0 right
+    // if dy > 0 -> shift y0 up, else shift y0 down
     function shifty(s) {
       for (let q = 0; q < s.length - 1; q++) {
         for (let p = q + 1; p < s.length; p++) {
@@ -617,10 +600,7 @@
             dx = s[p].x - s[q].x;
             dy = s[p].y - s[q].y;
             shift = (s[q].r * 2) - Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y)
-
-            // if dx > 0 -> shift x0 left, else shift x0 right
             if (dx > 0) { s[q].x = s[q].x - shift / 1.5 } else { s[q].x = s[q].x + shift / 1.5 }
-            // if dy > 0 -> shift y0 up, else shift y0 down
             if (dy > 0) { s[q].y = s[q].y - shift / 1.5 } else { s[q].y = s[q].y + shift / 1.5 }
           }
         }
@@ -649,14 +629,14 @@
 
     var leg = svg.append("g")
       .attr("class", "legendThreshold")
-      .attr("transform", "translate(20,20)");
+      .attr("transform", "translate(20,80)");
     leg.append("text")
       .attr("fill", "steelblue")
       .attr("font-weight", "bold")
       .attr("class", "caption")
       .attr("x", 0)
       .attr("y", -6)
-      .text("Proficiency");
+      .text("Percentage Proficient");
 
     var zoom = d3.zoom()
       .scaleExtent([1, 8])
@@ -680,6 +660,21 @@
 
       var updateMap = function (scale, year, subject, category) {
 
+        // changing category while zoomed changes district color
+        // and hides school points, which isn't ideal (would prefer
+        // for points to shift color as appropriate), until this is
+        // fixed, we just reset any potential zoom every time 
+        // category is changed
+        // TODO: change behavior of district/points when category is
+        // changes while zoomed
+
+        reset()
+
+        // clear category title each update, otherwise will 
+        // keep adding on top of one another
+        d3.selectAll('.toptitle')
+          .style("opacity", 0)
+
         if (scale == 'Relative') {
           selectedDomain = [.05, .10, .15, .25, .35, .45, .55, .65];
           labels = ['0-5%', '6-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '> 66%'];
@@ -700,7 +695,7 @@
         svg.select(".legendThreshold")
           .call(legend);
 
-        // Filter data by selected year for both schools and corporations
+        // Filter data by selected year
         var year_data_school = schdata.filter(obj => {
           return obj.Year === year
         })
@@ -709,141 +704,154 @@
           return obj.Year === year
         })
 
-        // // calculate top 10s (schools and corps) for each category
+        // categories for Top 10 tooltips
         const proficiency_category = category + "|" + subject + " Proficiency %";
         const n_size_category = category + "|" + subject + " Total Tested";
 
-        // const corpProficiency = year_data_corp.filter(d => isNumeric(d[proficiency_category]));
+        // add title
+        var toptenTitle = svg.append("g")
+          .attr("class", "toptitle")
+          .attr("transform", "translate(180,5)");
 
-        // corpProficiency.sort(function (a, b) {
-        //   if (+a[proficiency_category] === +b[proficiency_category]) { return 0 } else { return (+a[proficiency_category] < +b[proficiency_category]) ? -1 : 1 };
-        // });
-
-        // corpTopTen = corpProficiency.slice(corpProficiency.length - 10);
-
-        // const school_nSize = year_data_school.filter(d => +d[n_size_category] > 10);
-        // const schoolProficiency = school_nSize.filter(d => isNumeric(d[proficiency_category]));
-
-        // schoolProficiency.sort(function (a, b) {
-        //   if (+a[proficiency_category] === +b[proficiency_category]) { return 0 } else { return (+a[proficiency_category] < +b[proficiency_category]) ? -1 : 1 };
-        // });
-
-        // schoolTopTen = schoolProficiency.slice(schoolProficiency.length - 10);
-
-        // // create top ten string (back to front)
-        // let h = 0,
-        //   corp_txt = [];
-
-        // for (i = corpTopTen.length - 1; i >= 0; i--) {
-        //   corp_txt[h] = h + 1 + ") " + corpTopTen[i]['Corporation Name'] + ": " + per(corpTopTen[i][proficiency_category]) + "."
-        //   h++
-        // }
-
-        // // create top ten string (back to front)
-        // let j = 0,
-        //   school_txt = [];
-
-        // for (k = schoolTopTen.length - 1; k >= 0; k--) {
-        //   school_txt[j] = j + 1 + ") " + schoolTopTen[k]['School Name'] + " (" + schoolTopTen[k]['Corporation Name'] + "): " + per(schoolTopTen[k][proficiency_category]) + " (n-size: " + schoolTopTen[k][n_size_category] + ")."
-        //   j++
-        // }
-
-        // d3.selectAll('.school-stats')
-        //   .html(school_txt.join('<br/>'))
-
-        // d3.selectAll('.corp-stats')
-        //   .html(corp_txt.join('<br/>'))
-
-        var box = svg.append("g")
-          .attr("class", "box")
-          .attr("transform", "translate(560,80)");
-
-        box.append("rect")
-          .attr("height", 400)
-          .attr("width", 150)
-          .style("fill", "none");
-
-        var rekt1 = svg.append("g")
-          .attr("class", "reckt1")
-          .attr("transform", "translate(610,40)");
-
-        rekt1.append("rect")
-          .attr('width', 90)
+        toptenTitle.append("rect")
+          .attr('width', 350)
           .attr('height', 20)
-          .attr("class", "background")
-          .style("stroke", "steelblue")
-          .style("fill", "steelblue")
+          .attr("class", "top10")
+          // .style("stroke", "steelblue")
+          .style("fill", "white")
           .style("pointer-events", "visible")
-          .on("mouseover", function (event, d) {
 
-            const school_nSize = year_data_school.filter(d => +d[n_size_category] > 10);
-            const schoolProficiency = school_nSize.filter(d => isNumeric(d[proficiency_category]));
-
-            schoolProficiency.sort(function (a, b) {
-              if (+a[proficiency_category] === +b[proficiency_category]) { return 0 } else { return (+a[proficiency_category] < +b[proficiency_category]) ? -1 : 1 };
-            });
-
-            schoolTopTen = schoolProficiency.slice(schoolProficiency.length - 10);
-
-            let j = 0,
-              school_txt = [];
-
-            for (k = schoolTopTen.length - 1; k >= 0; k--) {
-              school_txt[j] = j + 1 + ") " + schoolTopTen[k]['School Name'] + " (" + schoolTopTen[k]['Corporation Name'] + "): " + per(schoolTopTen[k][proficiency_category]) + " (n-size: " + schoolTopTen[k][n_size_category] + ")."
-              j++
-            }
-
-            box.append("foreignObject")
-              .attr("width", 399)
-              .attr("height", 189)
-              .attr("dx", function (d) { return 6 })
-              .attr("dy", function (d) { return 13 })
-              .style("width", "100%")
-              .style("height", "100%")
-              // .append("xhtml:div")
-              // .attr("width", 399)
-              // .attr("height", 189)
-              // .attr("x", 10)
-              // .attr("y", 20)
-              // .style("overflow-y", "auto")
-              .attr("font-size", "8px")
-              .attr("fill", "steelblue")
-              .html(function (d) {
-                return school_txt.join('<br/>')
-              });
-            // .text(school_txt)
-
-            // d3.selectAll('.top-list')
-            //   .html(school_txt.join('<br/>'))
-            //   .style("opacity", 1)
-
-            // d3.selectAll('.school-stats')
-            //   .html(school_txt.join('<br/>'))
-            //   .style("opacity", 1)
-            console.log(school_txt)
-
-          })
-          .on('mouseout', function (d) {
-            d3.select(this).classed("selected", false);
-            // d3.selectAll('.school-stats')
-            //   .style("opacity", 0)
-            d3.selectAll('.top-list')
-              .style("opacity", 0)
-          });
-
-        rekt1.append("text")
-          .attr("fill", "white")
+        toptenTitle.append("text")
+          .attr("fill", "steelblue")
           .attr("font-weight", "bold")
-          .attr("font-size", "10px")
-          .attr("class", "caption")
+          .attr("font-size", "14px")
+          .attr("class", "toptitletext")
           .style("pointer-events", "visible")
           .attr("dx", function (d) { return 6 })
           .attr("dy", function (d) { return 13 })
-          .text("Top 10 Schools");
+          .style("opacity", 1)
+          .text("Selected Category: " + proficiency_category);
+
+        // add tooltips for Top 10 Schools and School Corporations
+        // for selected category
+
+        // top10 schools
+        var schooltop = svg.append("g")
+          .attr("class", "schooltop")
+          .attr("transform", "translate(565,40)");
+
+        schooltop.append("rect")
+          .attr('width', 152)
+          .attr('height', 20)
+          .attr("class", "top10")
+          .style("stroke", "steelblue")
+          .style("fill", "steelblue")
+          .style("pointer-events", "visible")
+
+        schooltop.append("text")
+          .attr("fill", "white")
+          .attr("font-weight", "bold")
+          .attr("font-size", "10px")
+          .attr("class", "top10-school")
+          .style("pointer-events", "visible")
+          .attr("dx", function (d) { return 6 })
+          .attr("dy", function (d) { return 13 })
+          .text("Highest Proficiency: Schools");
+
+        schooltop.on("mouseover", function (event, d) {
+          let pos = d3.select(this).node().getBoundingClientRect();
+
+          const school_nSize = year_data_school.filter(d => +d[n_size_category] > 10);
+          const schoolProficiency = school_nSize.filter(d => isNumeric(d[proficiency_category]));
+
+          schoolProficiency.sort(function (a, b) {
+            if (+a[proficiency_category] === +b[proficiency_category]) { return 0 } else { return (+a[proficiency_category] < +b[proficiency_category]) ? -1 : 1 };
+          });
+
+          schoolTopTen = schoolProficiency.slice(schoolProficiency.length - 10);
+
+          let j = 0,
+            school_txt = [];
+
+          for (k = schoolTopTen.length - 1; k >= 0; k--) {
+            school_txt[j] = j + 1 + ") <b>" + schoolTopTen[k]['School Name'] + "</b>: <b>" + calc_percent(schoolTopTen[k][proficiency_category]) + "</b><br/> (n-size: " + schoolTopTen[k][n_size_category] + ") (" + schoolTopTen[k]['Corporation Name'] + ")."
+            j++
+
+            tooltip.html(school_txt.join('<br/><br/>'))
+              .style('left', `${pos['x'] + 0}px`)
+              .attr("id", "top10-school")
+              .style('top', `${(window.pageYOffset + pos['y'] + 80)}px`)
+              .style("opacity", 1);
+          }
+        })
+          .on('mouseout', function (d) {
+            d3.select(this).classed("selected", false);
+            d3.selectAll('.tooltip')
+              .style("opacity", 0)
+          });
+
+        // top10 school corporations
+        var corptop = svg.append("g")
+          .attr("class", "corptop")
+          .attr("transform", "translate(565,80)");
+
+        corptop.append("rect")
+          .attr('width', 178)
+          .attr('height', 20)
+          .attr("class", "top10")
+          .style("stroke", "steelblue")
+          .style("fill", "steelblue")
+          .style("pointer-events", "visible")
+
+        corptop.append("text")
+          .attr("fill", "white")
+          .attr("font-weight", "bold")
+          .attr("font-size", "10px")
+          .attr("class", "top10-school")
+          .style("pointer-events", "visible")
+          .attr("dx", function (d) { return 6 })
+          .attr("dy", function (d) { return 13 })
+          .text("Highest Proficiency: Corporations");
+
+        corptop.on("mouseover", function (event, d) {
+          let pos = d3.select(this).node().getBoundingClientRect();
+
+          const corpProficiency = year_data_corp.filter(d => isNumeric(d[proficiency_category]));
+
+          corpProficiency.sort(function (a, b) {
+            if (+a[proficiency_category] === +b[proficiency_category]) { return 0 } else { return (+a[proficiency_category] < +b[proficiency_category]) ? -1 : 1 };
+          });
+
+          corpTopTen = corpProficiency.slice(corpProficiency.length - 10);
+
+          let j = 0,
+            corp_txt = [];
+
+          for (k = corpTopTen.length - 1; k >= 0; k--) {
+            corp_txt[j] = j + 1 + ") <b>" + corpTopTen[k]['Corporation Name'] + "</b>: <b>" + calc_percent(corpTopTen[k][proficiency_category]) + "</b>."
+            j++
+
+            tooltip.html(corp_txt.join('<br/><br/>'))
+              .style('left', `${pos['x'] + 0}px`)
+              .attr("id", "top10-corp")
+              .style('top', `${(window.pageYOffset + pos['y'] + 40)}px`)
+              .style("opacity", 1);
+          }
+        })
+          .on('mouseout', function (d) {
+            d3.select(this).classed("selected", false);
+            d3.selectAll('.tooltip')
+              .style("opacity", 0)
+          });
 
         // Draw Map
         var path = d3.geoPath().projection(projection);
 
+        // we are shifting map, 100px left and 50px down
+        // all other objects must be shifted the same amount
+        // in order to line up correctly (especially during
+        // zoom, where we need to multiply the shift by
+        // the scale factor)
         svg.append("g")
           .attr("class", "districts")
           .selectAll("path")
@@ -853,7 +861,7 @@
             return d.properties.NAME
           })
           .attr("d", path)
-          .attr("transform", "translate(-100,0)")
+          .attr("transform", "translate(-100,30)")
           .attr("fill", function (d, i) {
 
             // TODO: On the very first load of the map, the district background color is
@@ -874,11 +882,8 @@
 
             if
               (milla[proficiency_category] === "" || milla[proficiency_category] === "***" || isNaN(milla[proficiency_category])) {
-
               return "grey"
-
             } else
-
               return color(milla[proficiency_category])
 
           })
@@ -893,7 +898,7 @@
 
             if (ber != null) {
               tooltip.html(
-                ber['Corporation Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + per(ber[proficiency_category]) + "<br>Total Tested: " + ber[n_size_category]
+                ber['Corporation Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(ber[proficiency_category]) + "<br>Total Tested: " + ber[n_size_category]
               )
                 // tooltip is offset from mouse position
                 .style('left', `${pos['x'] + 10}px`)
@@ -920,6 +925,9 @@
           // set current selection as active
           active = d3.select(this).classed("active", true);
 
+          // get the LEAID of the active (selected) node
+          activeDistrictLEAID = active._groups[0][0].__data__.properties.GEOID
+
           var bounds = path.bounds(d),
             dx = bounds[1][0] - bounds[0][0],
             dy = bounds[1][1] - bounds[0][1],
@@ -928,31 +936,50 @@
             scale = Math.max(1, Math.min(10.5, 1 / Math.max(dx / width, dy / height))), // Size of zoomed district
             translate = [width / 2 - scale * x, height / 2 - scale * y];
 
+          // map is shifted (-100,30). in order to account for this, we need
+          // to translate the zoom, but first we need to multiple it by the
+          // scale. Adding fifty seems to center the districts a bit
+          // better. if scale changes, need to to re-examine the appropriate
+          // x and y shift values
+          let xshift = (scale * 100) + 50
+          let yshift = (scale * 30) + 50
           svg.transition()
             .duration(750)
-            .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+            .call(zoom.transform, d3.zoomIdentity.translate(translate[0] + xshift, translate[1] - yshift).scale(scale));
 
           var schoolsInPOLY = schools.features.filter(function (s) {
 
+            // this finds all points located inside of the coordinates of the
+            // selected district. this will capture schools that are in another
+            // district that the geographically located wholly inside the
+            // selected district, so we need to filter those schools out by
+            // checking the LEAID property against the LEAID of the active
+            // district
             if (d3.polygonContains(active.datum().geometry.coordinates[0], [s.geometry.coordinates[0], s.geometry.coordinates[1]])) {
 
-              const max = 9; // Grade levels -> TODO: set according to checkbox tag (3-8 or 9-12)
+              // TODO: add HS categories
+              const max = 9;
               const min = 2;
               var low;
 
               if (s.properties.GSLO == 'PK' || s.properties.GSLO == 'KG') { low = 0 } else { low = parseInt(s.properties.GSLO) }
 
-              if ((low < max && s.properties.GSHI > min) && (s.properties.SCHOOL_LEV != "CLOSED"
-                && s.properties.SCHOOL_LEV != "Cooperative" && s.properties.SCHOOL_LEV != "Other"
-                && s.properties.SCHOOL_LEV != "Special Education" && s.properties.SCHOOL_LEV != "Adult High School")) {
+              if ((
+                low < max && s.properties.GSHI > min) && (s.properties.LEAID == activeDistrictLEAID)
+                && (s.properties.SCHOOL_LEV != "CLOSED" && s.properties.SCHOOL_LEV != "Cooperative"
+                  && s.properties.SCHOOL_LEV != "Other" && s.properties.SCHOOL_LEV != "Special Education"
+                  && s.properties.SCHOOL_LEV != "Adult High School"
+                )) {
 
                 return s.properties.LEAID
               }
             }
           })
+
           var schoolsInDist = { type: "FeatureCollection", "features": schoolsInPOLY };
 
-          // Remove existing points each click (otherwise points keep propagating until reset event)
+          // Remove existing points each click (otherwise points
+          // keep propagating until reset event)
           svg.selectAll(".points")
             .transition()
             .duration(200)
@@ -1024,9 +1051,8 @@
             }
           }
 
-          // spread out circles where there is overlap (shifty())
-          // Is it faster to map to matrix first? Or run schoolsInDist.features through shifty()?
-          // the latter hits projection() far more times (each time it loops)
+          // points can be on top of each other, so we use the shifty()
+          // function to spread out circles whenever points overlap
           group = schoolsInDist.features.map(o => ({
             x: projection(o.geometry.coordinates)[0],
             y: projection(o.geometry.coordinates)[1],
@@ -1037,7 +1063,8 @@
           // a second call to shifty pushes points out farther, but starts
           // to distort locations. if you call it more than more than two
           // times points get pushed outside of district boundaries
-          // TODO: max push coordinates limited by district boundaries
+
+          // TODO: max push coordinates limited by district boundaries?
           shifty(group);
 
           points = svg.append("g")
@@ -1049,6 +1076,7 @@
             .attr("cx", function (d) { return d.x })
             .attr("cy", function (d) { return d.y })
             .attr("r", function (d) { return d.r })
+            .attr("transform", "translate(-100,30)") // account for map shift
             .style("stroke", "white")
             .style("fill", function (d) {
 
@@ -1060,14 +1088,6 @@
                 return "#ffffff"
               }
               else {
-
-                // if (nico[proficiency_category].includes("%")) {
-                //   value = parseFloat(nico[proficiency_category]) / 100.0;
-                // }
-                // else {
-                //   value = nico[proficiency_category]
-                // }
-
                 return color(nico[proficiency_category])
               }
             })
@@ -1082,22 +1102,13 @@
 
               if (echo != null) {
 
-                // if (echo[proficiency_category].includes("%")) {
-                //   value = parseFloat(echo[proficiency_category]) / 100.0;
-                // }
-                // else {
-                //   value = echo[proficiency_category]
-                // }
-
                 tooltip.html(
-                  // echo['Corporation Name'] + "<br>" + echo['School Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + per(echo[proficiency_category]) + "<br>Total Tested: " + echo[n_size_category]
-                  echo['School Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + per(echo[proficiency_category]) + "<br>Total Tested: " + echo[n_size_category]
+                  echo['School Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(echo[proficiency_category]) + "<br>Total Tested: " + echo[n_size_category]
                 )
                   .style('left', `${pos['x'] + 20}px`)
                   .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
                   .style("opacity", 1);
               }
-
             })
             .on('mouseout', function (d) {
               d3.select(this).classed("selected", false);
