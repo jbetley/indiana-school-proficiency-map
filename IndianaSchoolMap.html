@@ -24,7 +24,6 @@
       font-family: 'Inter', sans-serif;
       color: steelblue;
       background-color: #F2F2F2;
-      /* margin: 0 8px 8px 8px; */
     }
 
     span {
@@ -35,7 +34,7 @@
     div.tooltip {
       position: absolute;
       text-align: center;
-      width: 310px;
+      /* width: 310px; */
       padding: 2px;
       font: 11px 'Inter', sans-serif;
       font-weight: bold;
@@ -46,30 +45,14 @@
       pointer-events: none;
     }
 
-    #top10-school {
+    #popup-box {
       position: absolute;
       text-align: left;
       text-wrap: nowrap;
       line-height: 2;
-      width: 300px;
+      /* width: 310px; */
       padding: 5px;
       font: 11px 'Inter', sans-serif;
-      background: #e3e3e3;
-      color: steelblue;
-      border-radius: 8px;
-      border: thin solid steelblue;
-      pointer-events: none;
-    }
-
-    #top10-corp {
-      position: absolute;
-      text-align: left;
-      text-wrap: nowrap;
-      line-height: 2;
-      width: 300px;
-      padding: 5px;
-      font: 11px 'Inter', sans-serif;
-      /* font-weight: bold; */
       background: #e3e3e3;
       color: steelblue;
       border-radius: 8px;
@@ -665,6 +648,7 @@
         // for points to shift color as appropriate), until this is
         // fixed, we just reset any potential zoom every time 
         // category is changed
+
         // TODO: change behavior of district/points when category is
         // changes while zoomed
 
@@ -672,7 +656,7 @@
 
         // clear category title each update, otherwise will 
         // keep adding on top of one another
-        d3.selectAll('.toptitle')
+        d3.selectAll('.map-title-text')
           .style("opacity", 0)
 
         if (scale == 'Relative') {
@@ -708,23 +692,57 @@
         const proficiency_category = category + "|" + subject + " Proficiency %";
         const n_size_category = category + "|" + subject + " Total Tested";
 
-        // TODO: Add state averages for each category
-        // TODO: Add achievement gap calculations for each school
-        const state_average = d3.mean(year_data_school, d => d[proficiency_category]);
-        // console.log(state_average)
+        // calculate state average (TODO: calc all tested and all proficient and divide)
+        const state_average_school = d3.mean(year_data_school, d => d[proficiency_category]);
+        // const state_average_corp = d3.mean(year_data_corp, d => d[proficiency_category]);
 
-        function calculateGap(data, subject, first_category, second_category) {
+        function calculateGap(data, subject, category) {
+
+          if (category == "Black" || category == "Multiracial" ||
+            category == "Hispanic" || category == "Asian") {
+            first_category = "White"
+            second_category = category
+          }
+
+          else if (category == "Paid Meals") {
+            first_category = category
+            second_category = "Free or Reduced Price Meals"
+          }
+
+          else if (category == "Free or Reduced Price Meals") {
+            first_category = "Paid Meals"
+            second_category = category
+          }
+
+          else if (category == "Non-English Language Learners") {
+            first_category = "English Language Learners"
+            second_category = category
+          }
+
+          else if (category == "English Language Learners") {
+            first_category = category
+            second_category = "Non-English Language Learners"
+          }
+
+          else if (category == "Special Education") {
+            first_category = "General Education"
+            second_category = category
+          }
+
+          else if (category == "General Education") {
+            first_category = category
+            second_category = "Special Education"
+          }
+          else { return }
 
           first_tested = first_category + "|" + subject + " Total Tested";
           second_tested = second_category + "|" + subject + " Total Tested";
 
-          //TODO: Test sort to make sure it is working
-          // Ace Prep with >10 here?
+          // minimum n-size
+          const n = 20
           const gapSet = data.filter(d => {
-
-            if (+d[first_tested] < 10) return false;
-            if (+d[second_tested] < 10) return false;
-
+            if (+d[first_tested] < n) return false;
+            if (+d[second_tested] < n) return false;
             return d;
 
           });
@@ -735,99 +753,58 @@
           second_proficiency = second_category + "|" + subject + " Proficiency %";
 
           const gapDifference = gapSet.map(item => {
-            first = parseFloat(item[first_proficiency]);
-            second = parseFloat(item[second_proficiency]);
+            first_item = parseFloat(item[first_proficiency]);
+            second_item = parseFloat(item[second_proficiency]);
+
+            if (second_item > first_item) {
+              first_value = second_item
+              second_value = first_item
+              higher_category = second_category
+              lower_category = first_category
+            }
+            else {
+              first_value = first_item
+              second_value = second_item
+              higher_category = first_category
+              lower_category = second_category
+            }
 
             gapObj = new Object();
-            gapObj['School Name'] = item['School Name']
+            if ("School Name" in item) {
+              gapObj['School Name'] = item['School Name']
+            }
             gapObj['Corporation Name'] = item['Corporation Name']
-            gapObj.difference = Math.abs(first - second);
+
+            gapObj["First Name"] = higher_category
+            gapObj["First"] = first_value
+            gapObj["Second Name"] = lower_category
+            gapObj["Second"] = second_value
+            gapObj["Difference"] = Math.abs(first_value - second_value);
             gapList.push(gapObj)
           });
 
           gapList.sort(function (a, b) {
-            if (+a.difference === +b.difference) { return 0 } else { return (+a.difference < +b.difference) ? -1 : 1 };
+            if (+a["Difference"] === +b["Difference"]) { return 0 } else { return (+a["Difference"] < +b["Difference"]) ? -1 : 1 };
           });
 
-          badGaps = gapList.slice(gapList.length - 20);
+          badGaps = gapList.slice(gapList.length - 10);
 
           return badGaps
         }
 
-        // const frlGapSet = year_data_school.filter(d => {
-        //   if (+d["Paid Meals|ELA Total Tested"] < 10) return false;
-        //   if (+d["Free or Reduced Price Meals|ELA Total Tested"] < 10) return false;
-        //   return d;
-        // });
+        school_gap = calculateGap(year_data_school, subject, category)
+        corp_gap = calculateGap(year_data_corp, subject, category)
 
-        // frl_gap_list = []
-        // const frl_gap = frlGapSet.map(item => {
-        //   first = parseFloat(item["Paid Meals|ELA Proficiency %"]);
-        //   second = parseFloat(item["Free or Reduced Price Meals|ELA Proficiency %"]);
-        //   item.difference = Math.abs(first - second);
-
-        //   tmp = new Object();
-        //   tmp['School Name'] = item['School Name']
-        //   tmp['Corporation Name'] = item['Corporation Name']
-        //   tmp.difference = Math.abs(first - second);
-        //   frl_gap_list.push(tmp)
-
-        //   return item;
-        // });
-
-        // frl_gap_list.sort(function (a, b) {
-        //   if (+a.difference === +b.difference) { return 0 } else { return (+a.difference < +b.difference) ? -1 : 1 };
-        // });
-
-        // frl_gap_bad = frl_gap_list.slice(frl_gap_list.length - 20);
-
-        // console.log(frl_gap_bad)
-
-        tst_frl = calculateGap(year_data_school, "ELA", "Paid Meals", "Free or Reduced Price Meals")
-        tst_eth = calculateGap(year_data_school, "ELA", "White", "Black")
-
-        tst_eth_corp = calculateGap(year_data_corp, "ELA", "White", "Black")
-
-        // const ethGapSet = year_data_school.filter(d => {
-        //   if (+d[["White|ELA Total Tested"]] < 10) return false;
-        //   if (+d["Black|ELA Total Tested"] < 10) return false;
-        //   return d;
-        // });
-
-        // eth_gap_list = []
-        // const eth_gap = ethGapSet.map(item => {
-        //   first = parseFloat(item["White|ELA Proficiency %"]);
-        //   second = parseFloat(item["Black|ELA Proficiency %"]);
-        //   item.difference = Math.abs(first - second);
-
-        //   tmp = new Object();
-        //   tmp['School Name'] = item['School Name']
-        //   tmp['Corporation Name'] = item['Corporation Name']
-        //   tmp.difference = Math.abs(first - second);
-        //   eth_gap_list.push(tmp)
-        //   return item;
-        // });
-
-        // eth_gap_list.sort(function (a, b) {
-        //   if (+a.difference === +b.difference) { return 0 } else { return (+a.difference < +b.difference) ? -1 : 1 };
-        // });
-
-        // eth_gap_bad = eth_gap_list.slice(eth_gap_list.length - 20);
-
-        // console.log(eth_gap_bad)
-        // console.log(tst_eth)
-
+        // TODO: WRAP TEXT: https://gist.github.com/mbostock/7555321
 
         // add map title
         var maptitle = svg.append("g")
-          .attr("class", "maptitle")
+          .attr("class", "map-title")
           .attr("transform", "translate(180,5)");
 
         maptitle.append("rect")
           .attr('width', 350)
           .attr('height', 20)
-          .attr("class", "top10")
-          // .style("stroke", "steelblue")
           .style("fill", "white")
           .style("pointer-events", "visible")
 
@@ -835,27 +812,26 @@
           .attr("fill", "steelblue")
           .attr("font-weight", "bold")
           .attr("font-size", "14px")
-          .attr("class", "toptitletext")
+          .attr("class", "map-title-text")
           .style("pointer-events", "visible")
           .attr("dx", function (d) { return 6 })
           .attr("dy", function (d) { return 13 })
           .style("opacity", 1)
-          .text("Selected Category: " + proficiency_category);
+          .text(proficiency_category + " (State Average: " + calc_percent(state_average_school) + ")");
 
         // add tooltips for Top 10 Schools and School Corporations
         // for selected category
 
         // top10 schools
         var schooltop = svg.append("g")
-          .attr("class", "schooltop")
+          .attr("class", "top-schools")
           .attr("transform", "translate(565,40)");
 
         schooltop.append("rect")
-          .attr('width', 152)
+          .attr('width', 220)
           .attr('height', 20)
           .attr("rx", function (d) { return 5 })
           .attr("ry", function (d) { return 5 })
-          .attr("class", "top10")
           .style("stroke", "steelblue")
           .style("fill", "steelblue")
           .style("pointer-events", "visible")
@@ -864,10 +840,12 @@
           .attr("fill", "white")
           .attr("font-weight", "bold")
           .attr("font-size", "10px")
-          .attr("class", "top10-school")
+          .attr("class", "infobar-text")
           .style("pointer-events", "visible")
-          .attr("dx", function (d) { return 6 })
-          .attr("dy", function (d) { return 13 })
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .attr("dx", 110)
+          .attr("dy", 11)
           .text("Highest Proficiency: Schools");
 
         schooltop.on("mouseover", function (event, d) {
@@ -886,13 +864,15 @@
             school_txt = [];
 
           for (k = schoolTopTen.length - 1; k >= 0; k--) {
-            school_txt[j] = j + 1 + ") <b>" + schoolTopTen[k]['School Name'] + "</b>: <b>" + calc_percent(schoolTopTen[k][proficiency_category]) + "</b><br/> (n-size: " + schoolTopTen[k][n_size_category] + ") (" + schoolTopTen[k]['Corporation Name'] + ")."
+            school_txt[j] = j + 1 + ") <b>" + schoolTopTen[k]['School Name'] + "</b>: <b>" +
+              calc_percent(schoolTopTen[k][proficiency_category]) + "</b> (n-size: " +
+              schoolTopTen[k][n_size_category] + ")<br/> (" + schoolTopTen[k]['Corporation Name'] + ")."
             j++
 
             tooltip.html(school_txt.join('<br/><br/>'))
-              .style('left', `${pos['x'] + 0}px`)
-              .attr("id", "top10-school")
-              .style('top', `${(window.pageYOffset + pos['y'] + 80)}px`)
+              .style('left', `${pos['x'] - 1}px`)
+              .attr("id", "popup-box")
+              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
               .style("opacity", 1);
           }
         })
@@ -904,15 +884,14 @@
 
         // top10 school corporations
         var corptop = svg.append("g")
-          .attr("class", "corptop")
+          .attr("class", "top-corps")
           .attr("transform", "translate(565,80)");
 
         corptop.append("rect")
-          .attr('width', 178)
+          .attr('width', 220)
           .attr('height', 20)
           .attr("rx", function (d) { return 5 })
           .attr("ry", function (d) { return 5 })
-          .attr("class", "top10")
           .style("stroke", "steelblue")
           .style("fill", "steelblue")
           .style("pointer-events", "visible")
@@ -921,10 +900,12 @@
           .attr("fill", "white")
           .attr("font-weight", "bold")
           .attr("font-size", "10px")
-          .attr("class", "top10-school")
+          .attr("class", "infobar-text")
           .style("pointer-events", "visible")
-          .attr("dx", function (d) { return 6 })
-          .attr("dy", function (d) { return 13 })
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .attr("dx", 110)
+          .attr("dy", 11)
           .text("Highest Proficiency: Corporations");
 
         corptop.on("mouseover", function (event, d) {
@@ -942,13 +923,148 @@
             corp_txt = [];
 
           for (k = corpTopTen.length - 1; k >= 0; k--) {
-            corp_txt[j] = j + 1 + ") <b>" + corpTopTen[k]['Corporation Name'] + "</b>: <b>" + calc_percent(corpTopTen[k][proficiency_category]) + "</b>."
+            corp_txt[j] = j + 1 + ") <b>" + corpTopTen[k]['Corporation Name'] + "</b>: <b>" +
+              calc_percent(corpTopTen[k][proficiency_category]) + "</b>."
             j++
 
             tooltip.html(corp_txt.join('<br/><br/>'))
-              .style('left', `${pos['x'] + 0}px`)
-              .attr("id", "top10-corp")
-              .style('top', `${(window.pageYOffset + pos['y'] + 40)}px`)
+              .style('left', `${pos['x'] - 1}px`)
+              .attr("id", "popup-box")
+              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+              .style("opacity", 1);
+          }
+        })
+          .on('mouseout', function (d) {
+            d3.select(this).classed("selected", false);
+            d3.selectAll('.tooltip')
+              .style("opacity", 0)
+          });
+
+
+        // Achievement Gaps - School
+        var schoolgaps = svg.append("g")
+          .attr("class", "gaps-school")
+          .attr("transform", "translate(565,120)");
+
+        schoolgaps.append("rect")
+          .attr('width', 220)
+          .attr('height', 20)
+          .attr("rx", function (d) { return 5 })
+          .attr("ry", function (d) { return 5 })
+          .style("stroke", "steelblue")
+          .style("fill", "steelblue")
+          .style("pointer-events", "visible")
+
+        schoolgaps.append("text")
+          .attr("fill", "white")
+          .attr("font-weight", "bold")
+          .attr("font-size", "10px")
+          .attr("class", "infobar-text")
+          .style("pointer-events", "visible")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .attr("dx", 110)
+          .attr("dy", 11)
+          .text("Largest Achievement Gaps: Schools");
+
+        schoolgaps.on("mouseover", function (event, d) {
+          let pos = d3.select(this).node().getBoundingClientRect();
+
+          school_gap = calculateGap(year_data_school, subject, category)
+
+          if (typeof school_gap == 'undefined') { return }
+
+          let j = 0,
+            school_gap_txt = [];
+
+          for (k = school_gap.length - 1; k >= 0; k--) {
+
+            school_gap_txt[j] = j + 1 + ") <b>" + school_gap[k]["School Name"] + "</b>: <b>" +
+              calc_percent(school_gap[k]["Difference"]) + "</b><br/>(" + school_gap[k]["First Name"] +
+              ": " + calc_percent(school_gap[k]["First"]) + " - " + school_gap[k]["Second Name"] + ": " +
+              calc_percent(school_gap[k]["Second"]) + ")."
+
+            j++
+
+            // get length of sample string (first element in array) from
+            // "<br/>" to the end "."
+            // first_line = school_gap_txt[0].split('<br/>')[0]
+            // second_line = school_gap_txt[0].split('<br/>')[1]
+            // console.log(first_line)
+            // console.log(second_line)
+
+            // if (first_line.length > second_line.length) {
+            //   line_length = first_line.length
+            // }
+            // else { line_length = second_line.length }
+
+
+            // box_width = line_length * 4
+            // console.log(box_width)
+
+            tooltip.html(school_gap_txt.join('<br/><br/>'))
+              .style('left', `${pos['x'] - 1}px`)
+              .attr("id", "popup-box")
+              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+              .style("opacity", 1)
+            // .attr('width', box_width);
+          }
+        })
+          .on('mouseout', function (d) {
+            d3.select(this).classed("selected", false);
+            d3.selectAll('.tooltip')
+              .style("opacity", 0)
+          });
+
+        // Achievement Gaps - Corporations
+        var corpgaps = svg.append("g")
+          .attr("class", "gaps-corp")
+          .attr("transform", "translate(565,160)");
+
+        corpgaps.append("rect")
+          .attr('width', 220)
+          .attr('height', 20)
+          .attr("rx", function (d) { return 5 })
+          .attr("ry", function (d) { return 5 })
+          .style("stroke", "steelblue")
+          .style("fill", "steelblue")
+          .style("pointer-events", "visible")
+
+        corpgaps.append("text")
+          .attr("fill", "white")
+          .attr("font-weight", "bold")
+          .attr("font-size", "10px")
+          .attr("class", "infobar-text")
+          .style("pointer-events", "visible")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .attr("dx", 110)
+          .attr("dy", 11)
+          .text("Largest Achievement Gaps: Corporations");
+
+        corpgaps.on("mouseover", function (event, d) {
+          let pos = d3.select(this).node().getBoundingClientRect();
+
+          corp_gap = calculateGap(year_data_corp, subject, category)
+
+          if (typeof corp_gap == 'undefined') { return }
+
+          let j = 0,
+            corp_gap_txt = [];
+
+          for (k = corp_gap.length - 1; k >= 0; k--) {
+
+            corp_gap_txt[j] = j + 1 + ") <b>" + corp_gap[k]["Corporation Name"] + "</b>: <b>" +
+              calc_percent(corp_gap[k]["Difference"]) + "</b><br/> (" + corp_gap[k]["First Name"] +
+              ": " + calc_percent(corp_gap[k]["First"]) + " - " + corp_gap[k]["Second Name"] + ": " +
+              calc_percent(corp_gap[k]["Second"]) + ")."
+
+            j++
+
+            tooltip.html(corp_gap_txt.join('<br/><br/>'))
+              .style('left', `${pos['x'] - 1}px`)
+              .attr("id", "popup-box")
+              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
               .style("opacity", 1);
           }
         })
