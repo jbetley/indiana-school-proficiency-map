@@ -422,17 +422,35 @@
   <form>
     <div class="top-row twelve columns">
 
-      <div class="btn-group">
+      <!-- <div class="btn-group">
         <span class="label">Scale:</span>
         <input type="radio" id="option-1a" name="scale" value="Percentage"><label for="option-1a"
           class="btn btn-outline-primary">Percentage</label>
         <input type="radio" id="option-1b" name="scale" value="Relative" checked><label for="option-1b"
           class="btn btn-outline-primary">Relative</label>
-      </div>
+      </div> -->
 
       <div class="btn-group">
-        <!-- TODO: Make dropdown -->
-        <span class="label">Year:</span>
+        <label for="scale">Scale:</label>
+        <select id="scale" name="scale">
+          <option value="Percentage">Percentage</option>
+          <option value="Relative">Relative</option>
+        </select>
+        <label for="year">Year:</label>
+        <select id="year" name="year">
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2019</option>
+        </select>
+        <label for="subject">Subject:</label>
+        <select id="subject" name="subject">
+          <option value="ELA">ELA</option>
+          <option value="Math">Math</option>
+          <option value="ELA & Math">ELA & Math</option>
+        </select>
+        <!-- 
+      <span class="label">Year:</span>
         <input type="radio" id="option-2a" name="year" value="2023" checked><label for="option-2a"
           class="btn btn-outline-primary">2023</label>
         <input type="radio" id="option-2b" name="year" value="2022"><label for="option-2b"
@@ -441,9 +459,8 @@
           class="btn btn-outline-primary">2021</label>
         <input type="radio" id="option-2d" name="year" value="2019"><label for="option-2d"
           class="btn btn-outline-primary">2019</label>
-      </div>
-
-      <div class="btn-group">
+      </div> -->
+        <!-- <div class="btn-group">
         <span class="label">Subject:</span>
         <input type="radio" id="option-3a" name="subject" value="Math"><label for="option-3a"
           class="btn btn-outline-primary">Math</label>
@@ -452,71 +469,70 @@
         <input type="radio" id="option-3c" name="subject" value="ELA & Math"><label for="option-3c"
           class="btn btn-outline-primary">ELA &
           Math</label>
+      </div> -->
       </div>
 
-    </div>
+      <div class="second-row twelve columns">
 
-    <div class="second-row twelve columns">
+        <div class="btn-group">
+          <span class="label">Grades:</span>
+          <input type="radio" id="option-4a" name="category" value="School Total" checked><label for="option-4a"
+            class="btn btn-outline-primary">School
+            Total</label>
+          <input type="radio" id="option-4b" name="category" value="Grade 3"><label for="option-4b"
+            class="btn btn-outline-primary">3</label>
+          <input type="radio" id="option-4c" name="category" value="Grade 4"><label for="option-4c"
+            class="btn btn-outline-primary">4</label>
+          <input type="radio" id="option-4d" name="category" value="Grade 5"><label for="option-4d"
+            class="btn btn-outline-primary">5</label>
+          <input type="radio" id="option-4e" name="category" value="Grade 6"><label for="option-4e"
+            class="btn btn-outline-primary">6</label>
+          <input type="radio" id="option-4f" name="category" value="Grade 7"><label for="option-4f"
+            class="btn btn-outline-primary">7</label>
+          <input type="radio" id="option-4g" name="category" value="Grade 8"><label for="option-4g"
+            class="btn btn-outline-primary">8</label>
+        </div>
 
-      <div class="btn-group">
-        <span class="label">Grades:</span>
-        <input type="radio" id="option-4a" name="category" value="School Total" checked><label for="option-4a"
-          class="btn btn-outline-primary">School
-          Total</label>
-        <input type="radio" id="option-4b" name="category" value="Grade 3"><label for="option-4b"
-          class="btn btn-outline-primary">3</label>
-        <input type="radio" id="option-4c" name="category" value="Grade 4"><label for="option-4c"
-          class="btn btn-outline-primary">4</label>
-        <input type="radio" id="option-4d" name="category" value="Grade 5"><label for="option-4d"
-          class="btn btn-outline-primary">5</label>
-        <input type="radio" id="option-4e" name="category" value="Grade 6"><label for="option-4e"
-          class="btn btn-outline-primary">6</label>
-        <input type="radio" id="option-4f" name="category" value="Grade 7"><label for="option-4f"
-          class="btn btn-outline-primary">7</label>
-        <input type="radio" id="option-4g" name="category" value="Grade 8"><label for="option-4g"
-          class="btn btn-outline-primary">8</label>
+        <div class="btn-group">
+          <span class="label">Race/Ethnicity:</span>
+          <input type="radio" id="option-4h" name="category" value="American Indian"><label for="option-4h"
+            class="btn btn-outline-primary">American
+            Indian</label>
+          <input type="radio" id="option-4i" name="category" value="Asian"><label for="option-4i"
+            class="btn btn-outline-primary">Asian</label>
+          <input type="radio" id="option-4j" name="category" value="Black"><label for="option-4j"
+            class="btn btn-outline-primary">Black</label>
+          <input type="radio" id="option-4k" name="category" value="Hispanic"><label for="option-4k"
+            class="btn btn-outline-primary">Hispanic</label>
+          <input type="radio" id="option-4l" name="category" value="Multiracial"><label for="option-4l"
+            class="btn btn-outline-primary">Multiracial</label>
+          <input type="radio" id="option-4m" name="category" value="Native Hawaiian or Other Pacific Islander"><label
+            for="option-4m" class="btn btn-outline-primary">Pacific Islander</label>
+          <input type="radio" id="option-4n" name="category" value="White"><label for="option-4n"
+            class="btn btn-outline-primary">White</label>
+        </div>
+
+        <div class="btn-group">
+          <span class="label">Subgroup:</span>
+          <input type="radio" id="option-4o" name="category" value="Special Education"><label for="option-4o"
+            class="btn btn-outline-primary">Special
+            Education</label>
+          <input type="radio" id="option-4p" name="category" value="General Education"><label for="option-4p"
+            class="btn btn-outline-primary">General
+            Education</label>
+          <input type="radio" id="option-4q" name="category" value="Paid Meals"><label for="option-4q"
+            class="btn btn-outline-primary">Paid Meals</label>
+          <input type="radio" id="option-4r" name="category" value="Free or Reduced Price Meals"><label for="option-4r"
+            class="btn btn-outline-primary">Free
+            or Reduced Price Meals</label>
+          <input type="radio" id="option-4s" name="category" value="English Language Learners"><label for="option-4s"
+            class="btn btn-outline-primary">English
+            Learners</label>
+          <input type="radio" id="option-4t" name="category" value="Non-English Language Learners"><label
+            for="option-4t" class="btn btn-outline-primary">Non-English Learners</label>
+        </div>
+
       </div>
-
-      <div class="btn-group">
-        <span class="label">Race/Ethnicity:</span>
-        <input type="radio" id="option-4h" name="category" value="American Indian"><label for="option-4h"
-          class="btn btn-outline-primary">American
-          Indian</label>
-        <input type="radio" id="option-4i" name="category" value="Asian"><label for="option-4i"
-          class="btn btn-outline-primary">Asian</label>
-        <input type="radio" id="option-4j" name="category" value="Black"><label for="option-4j"
-          class="btn btn-outline-primary">Black</label>
-        <input type="radio" id="option-4k" name="category" value="Hispanic"><label for="option-4k"
-          class="btn btn-outline-primary">Hispanic</label>
-        <input type="radio" id="option-4l" name="category" value="Multiracial"><label for="option-4l"
-          class="btn btn-outline-primary">Multiracial</label>
-        <input type="radio" id="option-4m" name="category" value="Native Hawaiian or Other Pacific Islander"><label
-          for="option-4m" class="btn btn-outline-primary">Pacific Islander</label>
-        <input type="radio" id="option-4n" name="category" value="White"><label for="option-4n"
-          class="btn btn-outline-primary">White</label>
-      </div>
-
-      <div class="btn-group">
-        <span class="label">Subgroup:</span>
-        <input type="radio" id="option-4o" name="category" value="Special Education"><label for="option-4o"
-          class="btn btn-outline-primary">Special
-          Education</label>
-        <input type="radio" id="option-4p" name="category" value="General Education"><label for="option-4p"
-          class="btn btn-outline-primary">General
-          Education</label>
-        <input type="radio" id="option-4q" name="category" value="Paid Meals"><label for="option-4q"
-          class="btn btn-outline-primary">Paid Meals</label>
-        <input type="radio" id="option-4r" name="category" value="Free or Reduced Price Meals"><label for="option-4r"
-          class="btn btn-outline-primary">Free
-          or Reduced Price Meals</label>
-        <input type="radio" id="option-4s" name="category" value="English Language Learners"><label for="option-4s"
-          class="btn btn-outline-primary">English
-          Learners</label>
-        <input type="radio" id="option-4t" name="category" value="Non-English Language Learners"><label for="option-4t"
-          class="btn btn-outline-primary">Non-English Learners</label>
-      </div>
-
-    </div>
   </form>
   <div class="main-container">
     <div class="bare-container--flex--center twelve columns">
@@ -1350,9 +1366,24 @@
       }
 
       d3.selectAll("input").on("change", function () {
-        var selectedScale = d3.select("input[name='scale']:checked").attr('value');
-        var selectedYear = d3.select("input[name='year']:checked").attr('value');
-        var selectedSubject = d3.select("input[name='subject']:checked").attr('value');
+        // var selectedScale = d3.select("input[name='scale']:checked").attr('value');
+        var selectedScale = d3.select("#scale")._groups[0][0].value
+        var selectedYear = d3.select("#year")._groups[0][0].value
+        var selectedSubject = d3.select("#subject")._groups[0][0].value
+        // var selectedYear = d3.select("input[name='year']:checked").attr('value');
+        // var selectedSubject = d3.select("input[name='subject']:checked").attr('value');
+        var selectedCategory = d3.select("input[name='category']:checked").attr('value');
+
+        updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
+      })
+
+      d3.selectAll("select").on("change", function () {
+        // var selectedScale = d3.select("input[name='scale']:checked").attr('value');
+        var selectedScale = d3.select("#scale")._groups[0][0].value
+        var selectedYear = d3.select("#year")._groups[0][0].value
+        var selectedSubject = d3.select("#subject")._groups[0][0].value
+        // var selectedYear = d3.select("input[name='year']:checked").attr('value');
+        // var selectedSubject = d3.select("input[name='subject']:checked").attr('value');
         var selectedCategory = d3.select("input[name='category']:checked").attr('value');
 
         updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
