@@ -708,12 +708,122 @@
         const proficiency_category = category + "|" + subject + " Proficiency %";
         const n_size_category = category + "|" + subject + " Total Tested";
 
-        // add title
-        var toptenTitle = svg.append("g")
-          .attr("class", "toptitle")
+        // TODO: Add state averages for each category
+        // TODO: Add achievement gap calculations for each school
+        const state_average = d3.mean(year_data_school, d => d[proficiency_category]);
+        // console.log(state_average)
+
+        function calculateGap(data, subject, first_category, second_category) {
+
+          first_tested = first_category + "|" + subject + " Total Tested";
+          second_tested = second_category + "|" + subject + " Total Tested";
+
+          //TODO: Test sort to make sure it is working
+          // Ace Prep with >10 here?
+          const gapSet = data.filter(d => {
+
+            if (+d[first_tested] < 10) return false;
+            if (+d[second_tested] < 10) return false;
+
+            return d;
+
+          });
+
+          gapList = []
+
+          first_proficiency = first_category + "|" + subject + " Proficiency %";
+          second_proficiency = second_category + "|" + subject + " Proficiency %";
+
+          const gapDifference = gapSet.map(item => {
+            first = parseFloat(item[first_proficiency]);
+            second = parseFloat(item[second_proficiency]);
+
+            gapObj = new Object();
+            gapObj['School Name'] = item['School Name']
+            gapObj['Corporation Name'] = item['Corporation Name']
+            gapObj.difference = Math.abs(first - second);
+            gapList.push(gapObj)
+          });
+
+          gapList.sort(function (a, b) {
+            if (+a.difference === +b.difference) { return 0 } else { return (+a.difference < +b.difference) ? -1 : 1 };
+          });
+
+          badGaps = gapList.slice(gapList.length - 20);
+
+          return badGaps
+        }
+
+        // const frlGapSet = year_data_school.filter(d => {
+        //   if (+d["Paid Meals|ELA Total Tested"] < 10) return false;
+        //   if (+d["Free or Reduced Price Meals|ELA Total Tested"] < 10) return false;
+        //   return d;
+        // });
+
+        // frl_gap_list = []
+        // const frl_gap = frlGapSet.map(item => {
+        //   first = parseFloat(item["Paid Meals|ELA Proficiency %"]);
+        //   second = parseFloat(item["Free or Reduced Price Meals|ELA Proficiency %"]);
+        //   item.difference = Math.abs(first - second);
+
+        //   tmp = new Object();
+        //   tmp['School Name'] = item['School Name']
+        //   tmp['Corporation Name'] = item['Corporation Name']
+        //   tmp.difference = Math.abs(first - second);
+        //   frl_gap_list.push(tmp)
+
+        //   return item;
+        // });
+
+        // frl_gap_list.sort(function (a, b) {
+        //   if (+a.difference === +b.difference) { return 0 } else { return (+a.difference < +b.difference) ? -1 : 1 };
+        // });
+
+        // frl_gap_bad = frl_gap_list.slice(frl_gap_list.length - 20);
+
+        // console.log(frl_gap_bad)
+
+        tst_frl = calculateGap(year_data_school, "ELA", "Paid Meals", "Free or Reduced Price Meals")
+        tst_eth = calculateGap(year_data_school, "ELA", "White", "Black")
+
+        tst_eth_corp = calculateGap(year_data_corp, "ELA", "White", "Black")
+
+        // const ethGapSet = year_data_school.filter(d => {
+        //   if (+d[["White|ELA Total Tested"]] < 10) return false;
+        //   if (+d["Black|ELA Total Tested"] < 10) return false;
+        //   return d;
+        // });
+
+        // eth_gap_list = []
+        // const eth_gap = ethGapSet.map(item => {
+        //   first = parseFloat(item["White|ELA Proficiency %"]);
+        //   second = parseFloat(item["Black|ELA Proficiency %"]);
+        //   item.difference = Math.abs(first - second);
+
+        //   tmp = new Object();
+        //   tmp['School Name'] = item['School Name']
+        //   tmp['Corporation Name'] = item['Corporation Name']
+        //   tmp.difference = Math.abs(first - second);
+        //   eth_gap_list.push(tmp)
+        //   return item;
+        // });
+
+        // eth_gap_list.sort(function (a, b) {
+        //   if (+a.difference === +b.difference) { return 0 } else { return (+a.difference < +b.difference) ? -1 : 1 };
+        // });
+
+        // eth_gap_bad = eth_gap_list.slice(eth_gap_list.length - 20);
+
+        // console.log(eth_gap_bad)
+        // console.log(tst_eth)
+
+
+        // add map title
+        var maptitle = svg.append("g")
+          .attr("class", "maptitle")
           .attr("transform", "translate(180,5)");
 
-        toptenTitle.append("rect")
+        maptitle.append("rect")
           .attr('width', 350)
           .attr('height', 20)
           .attr("class", "top10")
@@ -721,7 +831,7 @@
           .style("fill", "white")
           .style("pointer-events", "visible")
 
-        toptenTitle.append("text")
+        maptitle.append("text")
           .attr("fill", "steelblue")
           .attr("font-weight", "bold")
           .attr("font-size", "14px")
