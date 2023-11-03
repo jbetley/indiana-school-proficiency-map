@@ -60,11 +60,7 @@
       pointer-events: none;
     }
 
-    input[type=radio] {
-      position: absolute;
-      visibility: hidden;
-      display: none;
-    }
+
 
     span.label {
       height: auto;
@@ -188,58 +184,30 @@
       float: left;
     }
 
-    /* .btn:checked {
-      position: absolute;
-      clip: rect(0, 0, 0, 0);
-      pointer-events: none;
+    .navigation {
+      position: relative;
+      display: inline-flex;
+      vertical-align: middle;
+      z-index: 99;
+      margin: 0;
+      padding: 0;
+      margin-top: 3px;
+      width: fit-content;
+      white-space: nowrap;
+      float: left;
     }
 
-    .btn:checked:disabled+.btn,
-    .btn:checked[disabled]+.btn {
-      pointer-events: none;
-      filter: none;
-      opacity: 0.65;
-    } */
+    input[type=radio] {
+      position: absolute;
+      visibility: hidden;
+      display: none;
+    }
 
     input[type=radio]:checked+label {
       color: #ffffff;
       background: #c0c1c7;
       border: 1px solid rgba(70, 130, 180, .5);
       border-radius: .5rem;
-    }
-
-    .corp-stats {
-      font-family: 'Inter', sans-serif;
-      font-size: .6em;
-      line-height: 1.7em;
-      background: #e3e3e3;
-      font-weight: bold;
-      float: left;
-      border: thin solid steelblue;
-      padding: 3px;
-      border-radius: 5px;
-    }
-
-    .stats-header {
-      padding-top: 15px;
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .school-stats {
-      width: 300px;
-      font-family: 'Inter', sans-serif;
-      font-size: .6em;
-      line-height: 1.5em;
-      background: #e3e3e3;
-      font-weight: bold;
-      float: left;
-      border: thin solid steelblue;
-      padding: 3px;
-      border-radius: 5px;
-      display: flex;
     }
 
     .legendThreshold {
@@ -400,17 +368,16 @@
       box-shadow: 2px 2px 2px lightgrey;
     }
 
-    /* 
-    .center {
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    } */
-
     /* This controls the color of the school corporations when selected */
     .active {
       fill: #dbdbdb;
       opacity: .8;
+    }
+
+    #by-grade-content,
+    #by-ethnicity-content,
+    #by-subgroup-content {
+      display: none;
     }
   </style>
 </head>
@@ -421,35 +388,35 @@
   </div>
   <form>
     <div class="top-row twelve columns">
+      <label for="scale">Scale:</label>
+      <select id="scale" name="scale">
+        <option value="Percentage">Percentage</option>
+        <option value="Relative">Relative</option>
+      </select>
+      <label for="year">Year:</label>
+      <select id="year" name="year">
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2019</option>
+      </select>
+      <label for="subject">Subject:</label>
+      <select id="subject" name="subject">
+        <option value="ELA">ELA</option>
+        <option value="Math">Math</option>
+        <option value="ELA & Math">ELA & Math</option>
+      </select>
+    </div>
 
-      <!-- <div class="btn-group">
+    <!-- <div class="btn-group">
         <span class="label">Scale:</span>
         <input type="radio" id="option-1a" name="scale" value="Percentage"><label for="option-1a"
           class="btn btn-outline-primary">Percentage</label>
         <input type="radio" id="option-1b" name="scale" value="Relative" checked><label for="option-1b"
           class="btn btn-outline-primary">Relative</label>
       </div> -->
-
+    <!-- 
       <div class="btn-group">
-        <label for="scale">Scale:</label>
-        <select id="scale" name="scale">
-          <option value="Percentage">Percentage</option>
-          <option value="Relative">Relative</option>
-        </select>
-        <label for="year">Year:</label>
-        <select id="year" name="year">
-          <option value="2023">2023</option>
-          <option value="2022">2022</option>
-          <option value="2021">2021</option>
-          <option value="2020">2019</option>
-        </select>
-        <label for="subject">Subject:</label>
-        <select id="subject" name="subject">
-          <option value="ELA">ELA</option>
-          <option value="Math">Math</option>
-          <option value="ELA & Math">ELA & Math</option>
-        </select>
-        <!-- 
       <span class="label">Year:</span>
         <input type="radio" id="option-2a" name="year" value="2023" checked><label for="option-2a"
           class="btn btn-outline-primary">2023</label>
@@ -460,7 +427,7 @@
         <input type="radio" id="option-2d" name="year" value="2019"><label for="option-2d"
           class="btn btn-outline-primary">2019</label>
       </div> -->
-        <!-- <div class="btn-group">
+    <!-- <div class="btn-group">
         <span class="label">Subject:</span>
         <input type="radio" id="option-3a" name="subject" value="Math"><label for="option-3a"
           class="btn btn-outline-primary">Math</label>
@@ -469,70 +436,85 @@
         <input type="radio" id="option-3c" name="subject" value="ELA & Math"><label for="option-3c"
           class="btn btn-outline-primary">ELA &
           Math</label>
+          </div>
       </div> -->
+
+    <div class="second-row twelve columns">
+
+      <!-- <div class="btn-group"> -->
+      <div class="navigation">
+        <div class="btn btn-outline-primary" id="by-grade">By Grade</div>
+        <div class="btn btn-outline-primary" id="by-ethnicity">By Ethnicity</div>
+        <div class="btn btn-outline-primary" id="by-subgroup">By Subgroup</div>
       </div>
+      <!-- </div> -->
+    </div>
 
-      <div class="second-row twelve columns">
-
-        <div class="btn-group">
-          <span class="label">Grades:</span>
-          <input type="radio" id="option-4a" name="category" value="School Total" checked><label for="option-4a"
-            class="btn btn-outline-primary">School
-            Total</label>
-          <input type="radio" id="option-4b" name="category" value="Grade 3"><label for="option-4b"
-            class="btn btn-outline-primary">3</label>
-          <input type="radio" id="option-4c" name="category" value="Grade 4"><label for="option-4c"
-            class="btn btn-outline-primary">4</label>
-          <input type="radio" id="option-4d" name="category" value="Grade 5"><label for="option-4d"
-            class="btn btn-outline-primary">5</label>
-          <input type="radio" id="option-4e" name="category" value="Grade 6"><label for="option-4e"
-            class="btn btn-outline-primary">6</label>
-          <input type="radio" id="option-4f" name="category" value="Grade 7"><label for="option-4f"
-            class="btn btn-outline-primary">7</label>
-          <input type="radio" id="option-4g" name="category" value="Grade 8"><label for="option-4g"
-            class="btn btn-outline-primary">8</label>
+    <div class="second-row twelve columns">
+      <div class="subnavigation">
+        <div id="by-grade-content">
+          <div class="btn-group">
+            <input type="radio" id="option-1a" name="category1" value="School Total" checked><label for="option-1a"
+              class="btn btn-outline-primary">School Total</label>
+            <input type="radio" id="option-1b" name="category1" value="Grade 3"><label for="option-1b"
+              class="btn btn-outline-primary">3</label>
+            <input type="radio" id="option-1c" name="category1" value="Grade 4"><label for="option-1c"
+              class="btn btn-outline-primary">4</label>
+            <input type="radio" id="option-1d" name="category1" value="Grade 5"><label for="option-1d"
+              class="btn btn-outline-primary">5</label>
+            <input type="radio" id="option-1e" name="category1" value="Grade 6"><label for="option-1e"
+              class="btn btn-outline-primary">6</label>
+            <input type="radio" id="option-1f" name="category1" value="Grade 7"><label for="option-1f"
+              class="btn btn-outline-primary">7</label>
+            <input type="radio" id="option-1g" name="category1" value="Grade 8"><label for="option-1g"
+              class="btn btn-outline-primary">8</label>
+          </div>
         </div>
 
-        <div class="btn-group">
-          <span class="label">Race/Ethnicity:</span>
-          <input type="radio" id="option-4h" name="category" value="American Indian"><label for="option-4h"
-            class="btn btn-outline-primary">American
-            Indian</label>
-          <input type="radio" id="option-4i" name="category" value="Asian"><label for="option-4i"
-            class="btn btn-outline-primary">Asian</label>
-          <input type="radio" id="option-4j" name="category" value="Black"><label for="option-4j"
-            class="btn btn-outline-primary">Black</label>
-          <input type="radio" id="option-4k" name="category" value="Hispanic"><label for="option-4k"
-            class="btn btn-outline-primary">Hispanic</label>
-          <input type="radio" id="option-4l" name="category" value="Multiracial"><label for="option-4l"
-            class="btn btn-outline-primary">Multiracial</label>
-          <input type="radio" id="option-4m" name="category" value="Native Hawaiian or Other Pacific Islander"><label
-            for="option-4m" class="btn btn-outline-primary">Pacific Islander</label>
-          <input type="radio" id="option-4n" name="category" value="White"><label for="option-4n"
-            class="btn btn-outline-primary">White</label>
+        <div id="by-ethnicity-content">
+          <div class="btn-group">
+            <input type="radio" id="option-2a" name="category2" value="American Indian" checked><label for="option-2a"
+              class="btn btn-outline-primary">American Indian</label>
+            <input type="radio" id="option-2b" name="category2" value="Asian"><label for="option-2b"
+              class="btn btn-outline-primary">Asian</label>
+            <input type="radio" id="option-2c" name="category2" value="Black"><label for="option-2c"
+              class="btn btn-outline-primary">Black</label>
+            <input type="radio" id="option-2d" name="category2" value="Hispanic"><label for="option-2d"
+              class="btn btn-outline-primary">Hispanic</label>
+            <input type="radio" id="option-2e" name="category2" value="Multiracial"><label for="option-2e"
+              class="btn btn-outline-primary">Multiracial</label>
+            <input type="radio" id="option-2f" name="category2" value="Native Hawaiian or Other Pacific Islander"><label
+              for="option-2f" class="btn btn-outline-primary">Pacific Islander</label>
+            <input type="radio" id="option-2g" name="category2" value="White"><label for="option-2g"
+              class="btn btn-outline-primary">White</label>
+          </div>
         </div>
 
-        <div class="btn-group">
-          <span class="label">Subgroup:</span>
-          <input type="radio" id="option-4o" name="category" value="Special Education"><label for="option-4o"
-            class="btn btn-outline-primary">Special
-            Education</label>
-          <input type="radio" id="option-4p" name="category" value="General Education"><label for="option-4p"
-            class="btn btn-outline-primary">General
-            Education</label>
-          <input type="radio" id="option-4q" name="category" value="Paid Meals"><label for="option-4q"
-            class="btn btn-outline-primary">Paid Meals</label>
-          <input type="radio" id="option-4r" name="category" value="Free or Reduced Price Meals"><label for="option-4r"
-            class="btn btn-outline-primary">Free
-            or Reduced Price Meals</label>
-          <input type="radio" id="option-4s" name="category" value="English Language Learners"><label for="option-4s"
-            class="btn btn-outline-primary">English
-            Learners</label>
-          <input type="radio" id="option-4t" name="category" value="Non-English Language Learners"><label
-            for="option-4t" class="btn btn-outline-primary">Non-English Learners</label>
-        </div>
+        <div id="by-subgroup-content">
+          <div class="btn-group">
+            <input type="radio" id="option-3a" name="category3" value="English Language Learners" checked><label
+              for="option-3a" class="btn btn-outline-primary">English
+              Learners</label>
+            <input type="radio" id="option-3b" name="category3" value="Non-English Language Learners"><label
+              for="option-3b" class="btn btn-outline-primary">Non-English Learners</label>
+            <input type="radio" id="option-3c" name="category3" value="General Education"><label for="option-3c"
+              class="btn btn-outline-primary">General
+              Education</label>
+            <input type="radio" id="option-3d" name="category3" value="Special Education"><label for="option-3d"
+              class="btn btn-outline-primary">Special
+              Education</label>
+            <input type="radio" id="option-3e" name="category3" value="Free or Reduced Price Meals"><label
+              for="option-3e" class="btn btn-outline-primary">Free
+              or Reduced Price Meals</label>
+            <input type="radio" id="option-3f" name="category3" value="Paid Meals"><label for="option-3f"
+              class="btn btn-outline-primary">Paid Meals</label>
 
+
+          </div>
+        </div>
       </div>
+    </div>
+
   </form>
   <div class="main-container">
     <div class="bare-container--flex--center twelve columns">
@@ -547,6 +529,28 @@
 
   <script>
 
+    // Subnavigation
+
+    var subNavigation = document.querySelector(".navigation");
+    subNavigation.addEventListener("click", function (e) {
+
+      // Get content divs and set default display to none
+      var divs = document.querySelectorAll('div.subnavigation > div');
+
+      for (let div of divs) {
+        div.style.display = "none";
+      }
+
+      // set target id div content to block
+      if (e.target.id) {
+        target_div = e.target.id + "-content"
+        document.getElementById(target_div).style.display = "block";
+        // TODO: Figure out how to get selected nav button active
+        // document.getElementById(e.target.id).className = ".btn .active";
+      }
+    });
+
+    // dashboard helper functions
     function calc_percent(d) {
       if (d === "***") {
         return "***"
@@ -1365,6 +1369,9 @@
         }
       }
 
+      // TODO: the selectAll determines what changes trigger this, right now
+      // we have 'select', 'input' and just a 'div' - can we select multiple
+      // things
       d3.selectAll("input").on("change", function () {
         // var selectedScale = d3.select("input[name='scale']:checked").attr('value');
         var selectedScale = d3.select("#scale")._groups[0][0].value
@@ -1372,6 +1379,21 @@
         var selectedSubject = d3.select("#subject")._groups[0][0].value
         // var selectedYear = d3.select("input[name='year']:checked").attr('value');
         // var selectedSubject = d3.select("input[name='subject']:checked").attr('value');
+
+        var subCategory1 = d3.select("input[name='category1']:checked").attr('value');
+        var subCategory2 = d3.select("input[name='category2']:checked").attr('value');
+        var subCategory3 = d3.select("input[name='category3']:checked").attr('value');
+
+        // TODO: in order to get subnav to show with a default, they need to be
+        // separate groups. but all three dfeaults show as checked above. so we need
+        // some other attribute to be triggered on selection that we can then check for
+        // here. Need to account both for situations when subgroup changes or subgroup
+        // stays the same but year/subject changes
+        console.log(d3.select("input[name='category1']:checked"))
+        console.log(subCategory1)
+        console.log(subCategory2)
+        console.log(subCategory3)
+
         var selectedCategory = d3.select("input[name='category']:checked").attr('value');
 
         updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
@@ -1384,6 +1406,15 @@
         var selectedSubject = d3.select("#subject")._groups[0][0].value
         // var selectedYear = d3.select("input[name='year']:checked").attr('value');
         // var selectedSubject = d3.select("input[name='subject']:checked").attr('value');
+        var subCategory1 = d3.select("input[name='category1']:checked").attr('value');
+        var subCategory2 = d3.select("input[name='category2']:checked").attr('value');
+        var subCategory3 = d3.select("input[name='category3']:checked").attr('value');
+
+
+        console.log(subCategory1)
+        console.log(subCategory2)
+        console.log(subCategory3)
+
         var selectedCategory = d3.select("input[name='category']:checked").attr('value');
 
         updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
