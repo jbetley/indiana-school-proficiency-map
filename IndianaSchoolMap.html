@@ -17,6 +17,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+    /* TODO: Remove unused */
+
     body {
       font-size: 1em;
       line-height: 1.6;
@@ -34,7 +36,6 @@
     div.tooltip {
       position: absolute;
       text-align: center;
-      /* width: 310px; */
       padding: 2px;
       font: 11px 'Inter', sans-serif;
       font-weight: bold;
@@ -50,7 +51,6 @@
       text-align: left;
       text-wrap: nowrap;
       line-height: 2;
-      /* width: 310px; */
       padding: 5px;
       font: 11px 'Inter', sans-serif;
       background: #e3e3e3;
@@ -60,9 +60,7 @@
       pointer-events: none;
     }
 
-
-
-    span.label {
+    /* span.label {
       height: auto;
       font-size: .75em;
       font-family: 'Inter', sans-serif;
@@ -72,9 +70,88 @@
       font-weight: 500;
       padding-right: 5px;
       padding-left: 10px;
+    } */
+
+    .navigation {
+      float: left;
     }
 
-    text.label {
+    .subnavigation {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .dropdowns {
+      outline: none;
+      display: inline-block;
+      vertical-align: middle;
+      padding-bottom: 2px;
+      width: fit-content;
+      white-space: nowrap;
+      float: left;
+    }
+
+    select:focus {
+      outline: none;
+    }
+
+    /*
+    Cannot style option box/border unless you roll your own. See:
+    https://www.w3schools.com/howto/tryit.asp?filename=tryhow_custom_select
+    */
+
+    .dropdown {
+      display: inline-block;
+      vertical-align: middle;
+      background-color: white;
+      border: thin steelblue;
+      border-radius: 12px;
+      font: inherit;
+      font-size: 11px;
+      padding: .2em 1em .2em 1em;
+      color: #6783a9;
+      border: 1px solid rgba(192, 193, 199, .5);
+      border-radius: .5rem;
+      text-transform: uppercase;
+
+      /* reset */
+      margin: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    .dropdown-label {
+      padding-left: 7px;
+      font-size: 12px;
+      font-weight: 400;
+      color: "steelblue";
+    }
+
+    .category-label {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 7px;
+      padding-right: 7px;
+      font-size: 12px;
+      font-weight: 400;
+      color: "steelblue";
+    }
+
+    .subcategory-label {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 7px;
+      padding-right: 7px;
+      font-size: 12px;
+      font-weight: 400;
+      color: "steelblue";
+      float: left;
+    }
+
+    /* text.label {
       font-size: 1.2em;
       fill: #6783a9;
       background: #e3e3e3;
@@ -83,7 +160,7 @@
       font-weight: 600;
       padding: 7px 7px;
       margin: 2px;
-    }
+    } */
 
     .input-group .btn {
       position: relative;
@@ -184,19 +261,6 @@
       float: left;
     }
 
-    .navigation {
-      position: relative;
-      display: inline-flex;
-      vertical-align: middle;
-      z-index: 99;
-      margin: 0;
-      padding: 0;
-      margin-top: 3px;
-      width: fit-content;
-      white-space: nowrap;
-      float: left;
-    }
-
     input[type=radio] {
       position: absolute;
       visibility: hidden;
@@ -219,8 +283,8 @@
       border-radius: 5px;
       background-color: #6783a9;
       color: #ffffff;
-      margin: 10px;
-      padding: 15px;
+      margin: 5px;
+      padding: 5px;
       position: relative;
       box-shadow: 2px 2px 2px lightgrey;
     }
@@ -230,6 +294,7 @@
     }
 
     /* Containers */
+
     .container {
       position: relative;
       width: 100%;
@@ -310,49 +375,37 @@
     }
 
     .map-container {
-      /* float: left; */
-      /* height: 100%;
-      width: 100%; */
-      /* border-radius: 5px;
-      border: thin solid steelblue; */
       overflow: visible;
-      z-index: 98;
     }
 
     .map {
       float: left;
-      /* margin-top: 30px; */
       width: 100%;
       height: 100%;
-      z-index: 99;
     }
 
-    /* TODO: Fix this button arrangement*/
-    .top-row {
+    .row {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
       justify-content: center;
       text-align: center;
-      /* display: flex; */
     }
 
-    .second-row {
+    /* .second-row {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
       justify-content: center;
       text-align: center;
-      /* display: flex; */
-    }
+    } */
 
     .main-container {
-      /* display: flex; */
       flex-direction: column;
     }
 
-    .stats-container {
+    /* .stats-container {
       display: inline-block;
       z-index: -1;
-    }
+    } */
 
     .pretty-container--close {
       border-top-left-radius: 5px;
@@ -386,147 +439,117 @@
   <div class="title-container">
     <div class="title">ILEARN Proficiency by School and School Corporation</div>
   </div>
+
   <form>
-    <div class="top-row twelve columns">
-      <label for="scale">Scale:</label>
-      <select id="scale" name="scale">
-        <option value="Percentage">Percentage</option>
-        <option value="Relative">Relative</option>
-      </select>
-      <label for="year">Year:</label>
-      <select id="year" name="year">
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-        <option value="2020">2019</option>
-      </select>
-      <label for="subject">Subject:</label>
-      <select id="subject" name="subject">
-        <option value="ELA">ELA</option>
-        <option value="Math">Math</option>
-        <option value="ELA & Math">ELA & Math</option>
-      </select>
-    </div>
+    <div class="row twelve columns">
+      <div class="top-level-navigation">
 
-    <!-- <div class="btn-group">
-        <span class="label">Scale:</span>
-        <input type="radio" id="option-1a" name="scale" value="Percentage"><label for="option-1a"
-          class="btn btn-outline-primary">Percentage</label>
-        <input type="radio" id="option-1b" name="scale" value="Relative" checked><label for="option-1b"
-          class="btn btn-outline-primary">Relative</label>
-      </div> -->
-    <!-- 
-      <div class="btn-group">
-      <span class="label">Year:</span>
-        <input type="radio" id="option-2a" name="year" value="2023" checked><label for="option-2a"
-          class="btn btn-outline-primary">2023</label>
-        <input type="radio" id="option-2b" name="year" value="2022"><label for="option-2b"
-          class="btn btn-outline-primary">2022</label>
-        <input type="radio" id="option-2c" name="year" value="2021"><label for="option-2c"
-          class="btn btn-outline-primary">2021</label>
-        <input type="radio" id="option-2d" name="year" value="2019"><label for="option-2d"
-          class="btn btn-outline-primary">2019</label>
-      </div> -->
-    <!-- <div class="btn-group">
-        <span class="label">Subject:</span>
-        <input type="radio" id="option-3a" name="subject" value="Math"><label for="option-3a"
-          class="btn btn-outline-primary">Math</label>
-        <input type="radio" id="option-3b" name="subject" value="ELA" checked><label for="option-3b"
-          class="btn btn-outline-primary">ELA</label>
-        <input type="radio" id="option-3c" name="subject" value="ELA & Math"><label for="option-3c"
-          class="btn btn-outline-primary">ELA &
-          Math</label>
-          </div>
-      </div> -->
-
-    <div class="second-row twelve columns">
-
-
-      <!-- <div class="btn btn-outline-primary" id="by-grade">By Grade</div>
-      <div class="btn btn-outline-primary" id="by-ethnicity">By Ethnicity</div>
-      <div class="btn btn-outline-primary" id="by-subgroup">By Subgroup</div> -->
-
-
-      <div class="navigation">
-        <input type="radio" id="option-1n" name="navigation" value="by-grade" checked><label for="option-1n"
-          class="btn btn-outline-primary">By Grade</label>
-        <input type="radio" id="option-2n" name="navigation" value="by-ethnicity"><label for="option-2n"
-          class="btn btn-outline-primary">By Ethnicity</label>
-        <input type="radio" id="option-3n" name="navigation" value="by-subgroup"><label for="option-3n"
-          class="btn btn-outline-primary">By Subgroup</label>
-      </div>
-    </div>
-
-    <div class="second-row twelve columns">
-      <div class="subnavigation">
-        <div id="by-grade-content">
-          <div class="btn-group">
-            <input type="radio" id="option-1a" name="category-by-grade" value="School Total" checked><label
-              for="option-1a" class="btn btn-outline-primary">School Total</label>
-            <input type="radio" id="option-1b" name="category-by-grade" value="Grade 3"><label for="option-1b"
-              class="btn btn-outline-primary">3</label>
-            <input type="radio" id="option-1c" name="category-by-grade" value="Grade 4"><label for="option-1c"
-              class="btn btn-outline-primary">4</label>
-            <input type="radio" id="option-1d" name="category-by-grade" value="Grade 5"><label for="option-1d"
-              class="btn btn-outline-primary">5</label>
-            <input type="radio" id="option-1e" name="category-by-grade" value="Grade 6"><label for="option-1e"
-              class="btn btn-outline-primary">6</label>
-            <input type="radio" id="option-1f" name="category-by-grade" value="Grade 7"><label for="option-1f"
-              class="btn btn-outline-primary">7</label>
-            <input type="radio" id="option-1g" name="category-by-grade" value="Grade 8"><label for="option-1g"
-              class="btn btn-outline-primary">8</label>
-          </div>
+        <div class="dropdowns">
+          <label for="scale" class="dropdown-label">Scale:</label>
+          <select id="scale" name="scale" class="dropdown">
+            <option value="Relative">Relative</option>
+            <option value="Percentage">Percentage</option>
+          </select>
+          <label for="year" class="dropdown-label">Year:</label>
+          <select id="year" name="year" class="dropdown">
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2019">2019</option>
+          </select>
+          <label for="subject" class="dropdown-label">Subject:</label>
+          <select id="subject" name="subject" class="dropdown">
+            <option value="ELA">ELA</option>
+            <option value="Math">Math</option>
+            <option value="ELA & Math">ELA & Math</option>
+          </select>
         </div>
 
-        <div id="by-ethnicity-content">
-          <div class="btn-group">
-            <input type="radio" id="option-2a" name="category-by-ethnicity" value="American Indian" checked><label
-              for="option-2a" class="btn btn-outline-primary">American Indian</label>
-            <input type="radio" id="option-2b" name="category-by-ethnicity" value="Asian"><label for="option-2b"
-              class="btn btn-outline-primary">Asian</label>
-            <input type="radio" id="option-2c" name="category-by-ethnicity" value="Black"><label for="option-2c"
-              class="btn btn-outline-primary">Black</label>
-            <input type="radio" id="option-2d" name="category-by-ethnicity" value="Hispanic"><label for="option-2d"
-              class="btn btn-outline-primary">Hispanic</label>
-            <input type="radio" id="option-2e" name="category-by-ethnicity" value="Multiracial"><label for="option-2e"
-              class="btn btn-outline-primary">Multiracial</label>
-            <input type="radio" id="option-2f" name="category-by-ethnicity"
-              value="Native Hawaiian or Other Pacific Islander"><label for="option-2f"
-              class="btn btn-outline-primary">Pacific Islander</label>
-            <input type="radio" id="option-2g" name="category-by-ethnicity" value="White"><label for="option-2g"
-              class="btn btn-outline-primary">White</label>
-          </div>
-        </div>
-
-        <div id="by-subgroup-content">
-          <div class="btn-group">
-            <input type="radio" id="option-3a" name="category-by-subgroup" value="English Language Learners"
-              checked><label for="option-3a" class="btn btn-outline-primary">English
-              Learners</label>
-            <input type="radio" id="option-3b" name="category-by-subgroup" value="Non-English Language Learners"><label
-              for="option-3b" class="btn btn-outline-primary">Non-English Learners</label>
-            <input type="radio" id="option-3c" name="category-by-subgroup" value="General Education"><label
-              for="option-3c" class="btn btn-outline-primary">General
-              Education</label>
-            <input type="radio" id="option-3d" name="category-by-subgroup" value="Special Education"><label
-              for="option-3d" class="btn btn-outline-primary">Special
-              Education</label>
-            <input type="radio" id="option-3e" name="category-by-subgroup" value="Free or Reduced Price Meals"><label
-              for="option-3e" class="btn btn-outline-primary">Free
-              or Reduced Price Meals</label>
-            <input type="radio" id="option-3f" name="category-by-subgroup" value="Paid Meals"><label for="option-3f"
-              class="btn btn-outline-primary">Paid Meals</label>
-          </div>
+        <div class="navigation">
+          <label for="navigation" class="category-label">Category:</label>
+          <input type="radio" id="option-1n" name="navigation" value="by-grade" checked><label for="option-1n"
+            class="btn btn-outline-primary">By Grade</label>
+          <input type="radio" id="option-2n" name="navigation" value="by-ethnicity"><label for="option-2n"
+            class="btn btn-outline-primary">By Ethnicity</label>
+          <input type="radio" id="option-3n" name="navigation" value="by-subgroup"><label for="option-3n"
+            class="btn btn-outline-primary">By Subgroup</label>
         </div>
 
       </div>
+    </div>
+
+    <div class="subnavigation">
+
+      <div id="by-grade-content">
+        <div class="btn-group">
+          <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
+          <input type="radio" id="option-1a" name="category-by-grade" value="School Total" checked><label
+            for="option-1a" class="btn btn-outline-primary">School Total</label>
+          <input type="radio" id="option-1b" name="category-by-grade" value="Grade 3"><label for="option-1b"
+            class="btn btn-outline-primary">3</label>
+          <input type="radio" id="option-1c" name="category-by-grade" value="Grade 4"><label for="option-1c"
+            class="btn btn-outline-primary">4</label>
+          <input type="radio" id="option-1d" name="category-by-grade" value="Grade 5"><label for="option-1d"
+            class="btn btn-outline-primary">5</label>
+          <input type="radio" id="option-1e" name="category-by-grade" value="Grade 6"><label for="option-1e"
+            class="btn btn-outline-primary">6</label>
+          <input type="radio" id="option-1f" name="category-by-grade" value="Grade 7"><label for="option-1f"
+            class="btn btn-outline-primary">7</label>
+          <input type="radio" id="option-1g" name="category-by-grade" value="Grade 8"><label for="option-1g"
+            class="btn btn-outline-primary">8</label>
+        </div>
+      </div>
+
+      <div id="by-ethnicity-content">
+        <div class="btn-group">
+          <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
+          <input type="radio" id="option-2a" name="category-by-ethnicity" value="American Indian" checked><label
+            for="option-2a" class="btn btn-outline-primary">American Indian</label>
+          <input type="radio" id="option-2b" name="category-by-ethnicity" value="Asian"><label for="option-2b"
+            class="btn btn-outline-primary">Asian</label>
+          <input type="radio" id="option-2c" name="category-by-ethnicity" value="Black"><label for="option-2c"
+            class="btn btn-outline-primary">Black</label>
+          <input type="radio" id="option-2d" name="category-by-ethnicity" value="Hispanic"><label for="option-2d"
+            class="btn btn-outline-primary">Hispanic</label>
+          <input type="radio" id="option-2e" name="category-by-ethnicity" value="Multiracial"><label for="option-2e"
+            class="btn btn-outline-primary">Multiracial</label>
+          <input type="radio" id="option-2f" name="category-by-ethnicity"
+            value="Native Hawaiian or Other Pacific Islander"><label for="option-2f"
+            class="btn btn-outline-primary">Pacific Islander</label>
+          <input type="radio" id="option-2g" name="category-by-ethnicity" value="White"><label for="option-2g"
+            class="btn btn-outline-primary">White</label>
+        </div>
+      </div>
+
+      <div id="by-subgroup-content">
+        <div class="btn-group">
+          <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
+          <input type="radio" id="option-3a" name="category-by-subgroup" value="English Language Learners"
+            checked><label for="option-3a" class="btn btn-outline-primary">English
+            Learners</label>
+          <input type="radio" id="option-3b" name="category-by-subgroup" value="Non-English Language Learners"><label
+            for="option-3b" class="btn btn-outline-primary">Non-English Learners</label>
+          <input type="radio" id="option-3c" name="category-by-subgroup" value="General Education"><label
+            for="option-3c" class="btn btn-outline-primary">General
+            Education</label>
+          <input type="radio" id="option-3d" name="category-by-subgroup" value="Special Education"><label
+            for="option-3d" class="btn btn-outline-primary">Special
+            Education</label>
+          <input type="radio" id="option-3e" name="category-by-subgroup" value="Free or Reduced Price Meals"><label
+            for="option-3e" class="btn btn-outline-primary">Free
+            or Reduced Price Meals</label>
+          <input type="radio" id="option-3f" name="category-by-subgroup" value="Paid Meals"><label for="option-3f"
+            class="btn btn-outline-primary">Paid Meals</label>
+        </div>
+      </div>
+    </div>
     </div>
 
   </form>
+
   <div class="main-container">
     <div class="bare-container--flex--center twelve columns">
       <div class="pretty-container--close--top twelve columns">
-
         <div class="map-container">
           <div class="map"></div>
         </div>
@@ -536,24 +559,22 @@
 
   <script>
 
-    // Subnavigation
-
+    // hide/show subnavigation radio buttons based on navigation selection
     var subNavigation = document.querySelector(".navigation");
 
-    // set by-grade-content to display initially or on reload
+    // set by-grade-content to display initially or on reload (default)
     document.getElementById("by-grade-content").style.display = "block";
 
-    // hide or display subnavigation content depending on navigation selector
     subNavigation.addEventListener("click", function (e) {
 
-      // Get content divs and set default display to none
+      //  On click, get subnav content divs and set default display to none
       var divs = document.querySelectorAll('div.subnavigation > div');
 
       for (let div of divs) {
         div.style.display = "none";
       }
 
-      // set target id div content to block
+      // display target id div
       if (e.target.value) {
         target_div = e.target.value + "-content"
         document.getElementById(target_div).style.display = "block";
@@ -621,6 +642,100 @@
       return s
     }
 
+    function calculateGap(data, subject, category) {
+      if (category == "Black" || category == "Multiracial" ||
+        category == "Hispanic" || category == "Asian") {
+        first_category = "White"
+        second_category = category
+      }
+
+      else if (category == "Paid Meals") {
+        first_category = category
+        second_category = "Free or Reduced Price Meals"
+      }
+
+      else if (category == "Free or Reduced Price Meals") {
+        first_category = "Paid Meals"
+        second_category = category
+      }
+
+      else if (category == "Non-English Language Learners") {
+        first_category = "English Language Learners"
+        second_category = category
+      }
+
+      else if (category == "English Language Learners") {
+        first_category = category
+        second_category = "Non-English Language Learners"
+      }
+
+      else if (category == "Special Education") {
+        first_category = "General Education"
+        second_category = category
+      }
+
+      else if (category == "General Education") {
+        first_category = category
+        second_category = "Special Education"
+      }
+      else { return }
+
+      first_tested = first_category + "|" + subject + " Total Tested";
+      second_tested = second_category + "|" + subject + " Total Tested";
+
+      // minimum n-size
+      const n = 20
+      const gapSet = data.filter(d => {
+        if (+d[first_tested] < n) return false;
+        if (+d[second_tested] < n) return false;
+        return d;
+
+      });
+
+      gapList = []
+
+      first_proficiency = first_category + "|" + subject + " Proficiency %";
+      second_proficiency = second_category + "|" + subject + " Proficiency %";
+
+      const gapDifference = gapSet.map(item => {
+        first_item = parseFloat(item[first_proficiency]);
+        second_item = parseFloat(item[second_proficiency]);
+
+        if (second_item > first_item) {
+          first_value = second_item
+          second_value = first_item
+          higher_category = second_category
+          lower_category = first_category
+        }
+        else {
+          first_value = first_item
+          second_value = second_item
+          higher_category = first_category
+          lower_category = second_category
+        }
+
+        gapObj = new Object();
+        if ("School Name" in item) {
+          gapObj['School Name'] = item['School Name']
+        }
+        gapObj['Corporation Name'] = item['Corporation Name']
+
+        gapObj["First Name"] = higher_category
+        gapObj["First"] = first_value
+        gapObj["Second Name"] = lower_category
+        gapObj["Second"] = second_value
+        gapObj["Difference"] = Math.abs(first_value - second_value);
+        gapList.push(gapObj)
+      });
+
+      gapList.sort(function (a, b) {
+        if (+a["Difference"] === +b["Difference"]) { return 0 } else { return (+a["Difference"] < +b["Difference"]) ? -1 : 1 };
+      });
+
+      badGaps = gapList.slice(gapList.length - 10);
+
+      return badGaps
+    }
     var width = 800,
       height = 800,
       points,
@@ -628,8 +743,6 @@
       legend,
       active = d3.select(null);
 
-    // TODO: hide district tooltip when zoomed
-    // try https://github.com/caged/d3-tip ?
     var tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
@@ -679,7 +792,7 @@
         // fixed, we just reset any potential zoom every time 
         // category is changed
 
-        // TODO: change behavior of district/points when category is
+        // TODO: make it so that points change color when category
         // changes while zoomed
 
         reset()
@@ -721,111 +834,34 @@
         // categories for Top 10 tooltips
         const proficiency_category = category + "|" + subject + " Proficiency %";
         const n_size_category = category + "|" + subject + " Total Tested";
+        const total_proficient = category + "|" + subject + " Total Proficient";
 
-        // calculate state average (TODO: calc all tested and all proficient and divide)
-        const state_average_school = d3.mean(year_data_school, d => d[proficiency_category]);
-        // const state_average_corp = d3.mean(year_data_corp, d => d[proficiency_category]);
+        // calculate state average for each category
+        // NOTE: This is much harder than it sounds for certain categories due
+        // to the large number of redactions due to insufficient n-size - for
+        // example: we are unable to generate an average at all for American
+        // Indian using school data because no school has a sufficiently large
+        // American Indian population to generate a value. We can generate an
+        // average using aggregated corporation data, but it is also skewed
+        // because tested students show up in the denominator but not in
+        // the numerator (e.g., the numerator is "***") - so perhaps best case
+        // scenario is to disregard all rows with a total proficiency of "***".
+        // the final number still will not be completely accurate, but it is 
+        // probably the best we can do.
 
-        function calculateGap(data, subject, category) {
+        // only keep objects where the total # of tested students for a category
+        // is not either "***" or ""
+        const data_adjusted = year_data_corp.filter(function (el) {
+          return el[total_proficient] != "***" && el[total_proficient] != ""
+        });
 
-          if (category == "Black" || category == "Multiracial" ||
-            category == "Hispanic" || category == "Asian") {
-            first_category = "White"
-            second_category = category
-          }
-
-          else if (category == "Paid Meals") {
-            first_category = category
-            second_category = "Free or Reduced Price Meals"
-          }
-
-          else if (category == "Free or Reduced Price Meals") {
-            first_category = "Paid Meals"
-            second_category = category
-          }
-
-          else if (category == "Non-English Language Learners") {
-            first_category = "English Language Learners"
-            second_category = category
-          }
-
-          else if (category == "English Language Learners") {
-            first_category = category
-            second_category = "Non-English Language Learners"
-          }
-
-          else if (category == "Special Education") {
-            first_category = "General Education"
-            second_category = category
-          }
-
-          else if (category == "General Education") {
-            first_category = category
-            second_category = "Special Education"
-          }
-          else { return }
-
-          first_tested = first_category + "|" + subject + " Total Tested";
-          second_tested = second_category + "|" + subject + " Total Tested";
-
-          // minimum n-size
-          const n = 20
-          const gapSet = data.filter(d => {
-            if (+d[first_tested] < n) return false;
-            if (+d[second_tested] < n) return false;
-            return d;
-
-          });
-
-          gapList = []
-
-          first_proficiency = first_category + "|" + subject + " Proficiency %";
-          second_proficiency = second_category + "|" + subject + " Proficiency %";
-
-          const gapDifference = gapSet.map(item => {
-            first_item = parseFloat(item[first_proficiency]);
-            second_item = parseFloat(item[second_proficiency]);
-
-            if (second_item > first_item) {
-              first_value = second_item
-              second_value = first_item
-              higher_category = second_category
-              lower_category = first_category
-            }
-            else {
-              first_value = first_item
-              second_value = second_item
-              higher_category = first_category
-              lower_category = second_category
-            }
-
-            gapObj = new Object();
-            if ("School Name" in item) {
-              gapObj['School Name'] = item['School Name']
-            }
-            gapObj['Corporation Name'] = item['Corporation Name']
-
-            gapObj["First Name"] = higher_category
-            gapObj["First"] = first_value
-            gapObj["Second Name"] = lower_category
-            gapObj["Second"] = second_value
-            gapObj["Difference"] = Math.abs(first_value - second_value);
-            gapList.push(gapObj)
-          });
-
-          gapList.sort(function (a, b) {
-            if (+a["Difference"] === +b["Difference"]) { return 0 } else { return (+a["Difference"] < +b["Difference"]) ? -1 : 1 };
-          });
-
-          badGaps = gapList.slice(gapList.length - 10);
-
-          return badGaps
-        }
+        const sum_tested = d3.sum(data_adjusted, d => d[n_size_category]);
+        const sum_proficient = d3.sum(data_adjusted, d => d[total_proficient]);
+        const state_average = sum_proficient / sum_tested
 
         school_gap = calculateGap(year_data_school, subject, category)
-        corp_gap = calculateGap(year_data_corp, subject, category)
 
-        // TODO: WRAP TEXT: https://gist.github.com/mbostock/7555321
+        corp_gap = calculateGap(year_data_corp, subject, category)
 
         // add map title
         var maptitle = svg.append("g")
@@ -847,12 +883,12 @@
           .attr("dx", function (d) { return 6 })
           .attr("dy", function (d) { return 13 })
           .style("opacity", 1)
-          .text(proficiency_category + " (State Average: " + calc_percent(state_average_school) + ")");
+          .text(proficiency_category + " (State Average: " + calc_percent(state_average) + ")");
 
         // add tooltips for Top 10 Schools and School Corporations
         // for selected category
 
-        // top10 schools
+        // top10 schools for selected category
         var schooltop = svg.append("g")
           .attr("class", "top-schools")
           .attr("transform", "translate(565,40)");
@@ -970,7 +1006,6 @@
               .style("opacity", 0)
           });
 
-
         // Achievement Gaps - School
         var schoolgaps = svg.append("g")
           .attr("class", "gaps-school")
@@ -1009,35 +1044,19 @@
 
           for (k = school_gap.length - 1; k >= 0; k--) {
 
+            // school achievement gap popup window
             school_gap_txt[j] = j + 1 + ") <b>" + school_gap[k]["School Name"] + "</b>: <b>" +
-              calc_percent(school_gap[k]["Difference"]) + "</b><br/>(" + school_gap[k]["First Name"] +
-              ": " + calc_percent(school_gap[k]["First"]) + " - " + school_gap[k]["Second Name"] + ": " +
-              calc_percent(school_gap[k]["Second"]) + ")."
+              calc_percent(school_gap[k]["Difference"]) + "</b><br/>" + school_gap[k]["Corporation Name"] +
+              "<br/>(" + school_gap[k]["First Name"] + ": " + calc_percent(school_gap[k]["First"]) +
+              " - " + school_gap[k]["Second Name"] + ": " + calc_percent(school_gap[k]["Second"]) + ")."
 
             j++
-
-            // get length of sample string (first element in array) from
-            // "<br/>" to the end "."
-            // first_line = school_gap_txt[0].split('<br/>')[0]
-            // second_line = school_gap_txt[0].split('<br/>')[1]
-            // console.log(first_line)
-            // console.log(second_line)
-
-            // if (first_line.length > second_line.length) {
-            //   line_length = first_line.length
-            // }
-            // else { line_length = second_line.length }
-
-
-            // box_width = line_length * 4
-            // console.log(box_width)
 
             tooltip.html(school_gap_txt.join('<br/><br/>'))
               .style('left', `${pos['x'] - 1}px`)
               .attr("id", "popup-box")
               .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
               .style("opacity", 1)
-            // .attr('width', box_width);
           }
         })
           .on('mouseout', function (d) {
@@ -1084,6 +1103,7 @@
 
           for (k = corp_gap.length - 1; k >= 0; k--) {
 
+            // corporation achievement gap popup window
             corp_gap_txt[j] = j + 1 + ") <b>" + corp_gap[k]["Corporation Name"] + "</b>: <b>" +
               calc_percent(corp_gap[k]["Difference"]) + "</b><br/> (" + corp_gap[k]["First Name"] +
               ": " + calc_percent(corp_gap[k]["First"]) + " - " + corp_gap[k]["Second Name"] + ": " +
@@ -1134,10 +1154,6 @@
             // will be null if the school corporation does not exist
             // exist or was created (e.g., West Clark Community Schools 
             // dissolved in 2020 and Borden-Henryville was formed
-            // TODO: Add West Clark Community Schools back for 2019
-            // TODO: Will need to add a variable for Active/NonActive in
-            // geocodes_corporations.js
-
             if (milla == null) { return "grey" }
 
             if
@@ -1156,7 +1172,9 @@
 
             const ber = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
 
-            if (ber != null) {
+            // NOTE: svg._groups[0][0].__zoom.k gives us the "k" transform value, aka the
+            // current zoom amount. so tooltips are only shown if k == 1 (it is not zoomed in)
+            if ((ber != null) & (svg._groups[0][0].__zoom.k == 1)) {
               tooltip.html(
                 ber['Corporation Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(ber[proficiency_category]) + "<br>Total Tested: " + ber[n_size_category]
               )
@@ -1167,7 +1185,6 @@
             }
           })
           .on('mouseout', function (event, d) {
-
             d3.select(this).classed("selected", false);
             tooltip.style("opacity", 0)
           });
@@ -1178,8 +1195,8 @@
           // if active node (district) is clicked, reset map
           if (active.node() === this) return reset();
 
-          // clear active status from current node (if first click
-          // there will be no active node)
+          // clear active status from whichever node is
+          // currently active
           active.classed("active", false);
 
           // set current selection as active
@@ -1209,12 +1226,6 @@
 
           var schoolsInPOLY = schools.features.filter(function (s) {
 
-            // this finds all points located inside of the coordinates of the
-            // selected district. this will capture schools that are in another
-            // district that the geographically located wholly inside the
-            // selected district, so we need to filter those schools out by
-            // checking the LEAID property against the LEAID of the active
-            // district
             if (d3.polygonContains(active.datum().geometry.coordinates[0], [s.geometry.coordinates[0], s.geometry.coordinates[1]])) {
 
               // TODO: add HS categories
@@ -1222,6 +1233,12 @@
               const min = 2;
               var low;
 
+              // filter points by characteristic (hides schools we do not want 
+              // to display. we also check to make sure that all points are
+              // contained within the same LEIAD as the active district - this
+              // makes sure we do not display schools that are located in another
+              // district that the geographically located wholly inside the
+              // selected district
               if (s.properties.GSLO == 'PK' || s.properties.GSLO == 'KG') { low = 0 } else { low = parseInt(s.properties.GSLO) }
 
               if ((
@@ -1244,10 +1261,6 @@
             .transition()
             .duration(200)
             .remove();
-
-          // TODO: hide school corp tooltips when zoomed.
-          // svg.selectAll("path").on('mouseover', null);
-          // tooltip.style("display", "none")
 
           // calculate radius of individual points based on the number of
           // schools and the area per school of each district (this is 
@@ -1311,8 +1324,7 @@
             }
           }
 
-          // points can be on top of each other, so we use the shifty()
-          // function to spread out circles whenever points overlap
+          // get points located within the geographic coordinates
           group = schoolsInDist.features.map(o => ({
             x: projection(o.geometry.coordinates)[0],
             y: projection(o.geometry.coordinates)[1],
@@ -1320,11 +1332,11 @@
             school_id: o.properties.SCHOOL_ID
           }))
 
-          // a second call to shifty pushes points out farther, but starts
-          // to distort locations. if you call it more than more than two
-          // times points get pushed outside of district boundaries
-
-          // TODO: max push coordinates limited by district boundaries?
+          // points can be on top of each other, so we use the shifty()
+          // function to spread out circles whenever points overlap
+          // NOTE: a second call to shifty pushes points out farther, but
+          // starts to distort locations. more than 2 calls and points 
+          // get pushed outside of district boundaries
           shifty(group);
 
           points = svg.append("g")
@@ -1336,7 +1348,7 @@
             .attr("cx", function (d) { return d.x })
             .attr("cy", function (d) { return d.y })
             .attr("r", function (d) { return d.r })
-            .attr("transform", "translate(-100,30)") // account for map shift
+            .attr("transform", "translate(-100,30)") // accounting for map shift
             .style("stroke", "white")
             .style("fill", function (d) {
 
@@ -1392,19 +1404,6 @@
 
         updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
       })
-
-      // d3.selectAll("select").on("change", function () {
-
-      //   var selectedScale = d3.select("#scale")._groups[0][0].value
-      //   var selectedYear = d3.select("#year")._groups[0][0].value
-      //   var selectedSubject = d3.select("#subject")._groups[0][0].value
-      //   var selectedNav = d3.select("input[name='navigation']:checked").attr('value');
-
-      //   subNavigation = "category-" + selectedNav
-      //   var selectedCategory = d3.select("input[name=" + subNavigation + "]:checked").attr('value');
-
-      //   updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
-      // });
 
       updateMap('Relative', '2023', 'ELA', 'School Total')
 
