@@ -561,7 +561,7 @@
 
     // TEST
     /*
-    RainbowVis-JS 
+    RainbowVis-JS
     Released under Eclipse Public License - v 1.0
     */
 
@@ -855,20 +855,7 @@
       module.exports = Rainbow;
     }
     // https://codepen.io/eqvis/pen/ExdLdBZ#anon-signup//
-    // var rainbow1 = new Rainbow(['5da4d0', 'dbdbdb']);
-    // var hex1 = '#' + rainbow1.colourAt(50);
-    // console.log(hex1)
 
-    // var rainbow2 = new Rainbow(['b0d1e7', 'dbdbdb']);
-    // var hex2 = '#' + rainbow2.colourAt(50);
-    // console.log(hex2)
-
-    // var count = 0;
-    // for (var i = 0; i <= 100; i = i + 4) {
-    //   var hex = '#' + rainbow.colourAt(60);
-    //   console.log(hex)
-    //   // s += '<span style="color:' + hex + '">' + count++ + " " + i + ' -&gt; ' + hex + '</span><br/>';
-    // }
 
     // hide/show subnavigation radio buttons based on navigation selection
     var subNavigation = document.querySelector(".navigation");
@@ -916,6 +903,8 @@
     // map is reset when a node (district) is
     //clicked while active
     function reset() {
+      console.log("RESETTING - COLOR IS CHANGING BY REMOVING ACTIVE TAG")
+      // active.style("fill", actual_color);
       active.classed("active", false);
       active = d3.select(null);
 
@@ -1083,7 +1072,9 @@
 
     // Enable Free Zoom
     //svg
-    //  .call(zoom); 
+    //  .call(zoom);
+
+    var current_color;
 
     Promise.all([
       d3.csv("corporation_data_k8.csv"),
@@ -1102,14 +1093,14 @@
         // changing category while zoomed changes district color
         // and hides school points, which isn't ideal (would prefer
         // for points to shift color as appropriate), until this is
-        // fixed, we just reset any potential zoom every time 
+        // fixed, we just reset any potential zoom every time
         // category is changed
 
         // NOTE: Uncomment if we want to zoom back out every time a new category
         // is selected
         // reset()
 
-        // clear category title each update, otherwise will 
+        // clear category title each update, otherwise will
         // keep adding on top of one another
         d3.selectAll('.map-title-text')
           .style("opacity", 0)
@@ -1158,7 +1149,7 @@
         // because tested students show up in the denominator but not in
         // the numerator (e.g., the numerator is "***") - so perhaps best case
         // scenario is to disregard all rows with a total proficiency of "***".
-        // the final number still will not be completely accurate, but it is 
+        // the final number still will not be completely accurate, but it is
         // probably the best we can do.
 
         // only keep objects where the total # of tested students for a category
@@ -1233,7 +1224,8 @@
           const schoolProficiency = school_nSize.filter(d => isNumeric(d[proficiency_category]));
 
           schoolProficiency.sort(function (a, b) {
-            if (+a[proficiency_category] === +b[proficiency_category]) { return 0 } else { return (+a[proficiency_category] < +b[proficiency_category]) ? -1 : 1 };
+            if (+a[proficiency_category] === +b[proficiency_category]) { return 0 }
+            else { return (+a[proficiency_category] < +b[proficiency_category]) ? -1 : 1 };
           });
 
           schoolTopTen = schoolProficiency.slice(schoolProficiency.length - 10);
@@ -1439,16 +1431,13 @@
         // The Map
         var path = d3.geoPath().projection(projection);
 
-        // we are shifting map, 100px left and 50px down
-        // all other objects must be shifted the same amount
-        // in order to line up correctly (especially during
-        // zoom, where we need to multiply the shift by
+        // we are shifting map, 100px left and 50px down all other objects
+        // must be shifted the same amount in order to line up correctly
+        // (especially during zoom, where we need to multiply the shift by
         // the scale factor)
 
-        // TODO: Changing point color seems to work, currently cannot figure out
-        // how to ensure that the points (circle) appear on top of the background (path)
-        // maybe has to do with which layers they are appended to? raise() isnt working, 
-
+        // get name of currently active school (will be null on)
+        // initial load
         if (active.node() != null) {
           current_school = active._groups[0][0].__data__.properties.NAME
         }
@@ -1468,54 +1457,56 @@
           .attr("transform", "translate(-100,30)")
           .attr("fill", function (d, i) {
 
-            // TODO: District does not revert back to normal color when changed in zoom and then zoomed out
+            const milla = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
 
-            // TODO: On the very first load of the map, the district background color is
-            // not kept when zooming. After reloading the updateMap() function, district
-            // background color starts behaving normally (e.g., background color has the
-            // selected color with low opacity overlaid on it).
-
-            // TODO: conditional coloring (since "active" does not seem to work)
-            // using: RainbowVis-JS
-            // https://codepen.io/eqvis/pen/ExdLdBZ#anon-signup
-
+            // If the current school is the active school we want to give it
+            // the same color as an "active" school. However, for some reason
+            // "active" when applied is not actually applying the correct
+            // css style. So we are currently forcing the issue using a color gradient
+            // generator (RainbowVis-JS). See:https://codepen.io/eqvis/pen/ExdLdBZ#anon-signup
             // Other options here - maybe find a skinnier one
             // https://stackoverflow.com/questions/3080421/javascript-color-gradient
+
             if (current_school === d.properties.NAME) {
-              const active_school_data = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
 
               // will be null if the school corporation does not exist
-              // exist or was created (e.g., West Clark Community Schools 
+              // exist or was created (e.g., West Clark Community Schools
               // dissolved in 2020 and Borden-Henryville was formed
-              if (active_school_data == null) { return "grey" }
+              if (milla == null) { fill_color = "grey" }
 
-              if (active_school_data[proficiency_category] === "" || active_school_data[proficiency_category] === "***" ||
-                isNaN(active_school_data[proficiency_category])) { return "grey" }
+              else if (milla[proficiency_category] == "" || milla[proficiency_category] == "***" ||
+                isNaN(milla[proficiency_category])) { fill_color = "grey" }
+
               else {
-                base_color = color(active_school_data[proficiency_category])
-                base_color = base_color.slice(1)
 
-                var mixed_color = new Rainbow([base_color, 'dbdbdb']);
-                var hex = '#' + mixed_color.colourAt(60);
+                // the color the district would be if not selected
+                original_color = color(milla[proficiency_category])
 
-                return hex
+                original_color_string = original_color.slice(1)
+
+                mixed_color = new Rainbow([original_color_string, 'dbdbdb']);
+                fill_color = '#' + mixed_color.colourAt(60);
               }
+              current_color = original_color
+              return fill_color
             }
 
+            // all schools that are not the selected school get filled as normal
             else {
-              const milla = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
 
               // will be null if the school corporation does not exist
-              // exist or was created (e.g., West Clark Community Schools 
+              // exist or was created (e.g., West Clark Community Schools
               // dissolved in 2020 and Borden-Henryville was formed
-              if (milla == null) { return "grey" }
+              if (milla == null) { fill_color = "grey" }
 
-              if (milla[proficiency_category] === "" || milla[proficiency_category] === "***" ||
-                isNaN(milla[proficiency_category])) { return "grey" }
+              else if (milla[proficiency_category] === "" || milla[proficiency_category] === "***" ||
+                isNaN(milla[proficiency_category])) { fill_color = "grey" }
 
               else {
-                return color(milla[proficiency_category])
+
+                fill_color = color(milla[proficiency_category])
               }
+              return fill_color
             }
           })
           .attr("stroke", "white")
@@ -1547,12 +1538,12 @@
             tooltip.style("opacity", 0)
           });
 
-        // If user is zoomed, we change the point colors and values for
-        // tooltip and 'raise()' the points so that they are above the
-        // path fill
+        // Check the value of k to determine if user is zoomed (e.g., k > 1), if so
+        // we change the point colors and values for tooltip
         if (svg._groups[0][0].__zoom != null) {
           if (svg._groups[0][0].__zoom.k > 1) {
 
+            // change color of the schools (circles)
             svg.selectAll("circle").style("fill", function (d) {
 
               const nico = year_data_school.find(f => +f['School ID'] === +d.school_id)
@@ -1590,30 +1581,42 @@
               });
 
             points.transition().duration(800).style("opacity", .7);
-
-            // TODO: Using kludge to mimic active colors above - could get rid of
-            // if I can just figure out how to set the zoomed path as active in
-            // a way that triggers css
-            // active.classed("active", true);
-            // active.style("opacity", .8)
-            // active.style("fill", "#dbdbdb")
           }
         };
 
-        // ensure that points are on top of path fill
+        // ensure that points are on top of fill
         svg.selectAll(".points").raise()
 
-        // Zoom - Add points (schools)
+        // triggered on click of a district
         function clicked(event, d) {
 
-          // if active node (district) is clicked, reset map
-          if (active.node() === this) return reset();
+          // "active.node() === this" while be true for a click on a zoomed
+          // path where there has not been an update. If there has been an update
+          // triggered when zoomed, then active node will not match this because
+          // the active node will have an "active" class while "this" whill
+          // not (not sure why and couldn't figure out how to remove the class),
+          // so insteadn we need to check whether the current school name is equal to
+          // the selected school
+          if (((current_school === d.properties.NAME) && (svg._groups[0][0].__zoom.k > 1))
+            || (active.node() === this)) {
 
-          // clear active status from whichever node is
-          // currently active
-          active.classed("active", false);
+            // TODO: SOOOO CLOSE. This returns the original color when clicked, not the color that
+            // it should be following the update. Need to recalculate out color to match whatever
+            // update color it should be
+            // original_color = active._groups[0][0].attributes[3].nodeValue
+            // console.log(original_color)
+            // console.log(current_color)
+
+            // NOTE: This is a bit of a hack. current_color is a global variable that
+            // stores the current fill value of the selected path based on the 
+            // selected category. But it works!
+            d3.select(this).attr("fill", current_color)
+            // d3.selectAll('.active').attr("fill", original_color)
+            return reset();
+          }
 
           // set current selection as the active (selected) node
+          active.classed("active", false);
           active = d3.select(this).classed("active", true);
 
           // get the LEAID of the active (selected) node
@@ -1648,7 +1651,7 @@
               const min = 2;
               var low;
 
-              // filter points by characteristic (hides schools we do not want 
+              // filter points by characteristic (hides schools we do not want
               // to display. we also check to make sure that all points are
               // contained within the same LEIAD as the active district - this
               // makes sure we do not display schools that are located in another
@@ -1678,7 +1681,7 @@
             .remove();
 
           // calculate radius of individual points based on the number of
-          // schools and the area per school of each district (this is 
+          // schools and the area per school of each district (this is
           // somewhat arbitrary, but is needed to prevent weird outliers)
           district_size = dx * dy
 
@@ -1750,7 +1753,7 @@
           // points can be on top of each other, so we use the shifty()
           // function to spread out circles whenever points overlap
           // NOTE: a second call to shifty pushes points out farther, but
-          // starts to distort locations. more than 2 calls and points 
+          // starts to distort locations. more than 2 calls and points
           // get pushed outside of district boundaries
           shifty(group);
 
@@ -1804,6 +1807,35 @@
 
           points.transition().duration(1000).style("opacity", .7);
 
+          // NOTE: Initial color is not being retained upon initial click, not
+          // sure why - so this is a kludge to ensure it is until I get it
+          // figured out
+          // TODO: initial background fill is not kept on initial zoom only
+
+          // svg.select("path")
+          d3.selectAll('.active').style("fill", function (d) {
+
+            const milla = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
+            // will be null if the school corporation does not exist
+            // exist or was created (e.g., West Clark Community Schools
+            // dissolved in 2020 and Borden-Henryville was formed
+            if (milla == null) { fill_color = "grey" }
+
+            else if (milla[proficiency_category] == "" || milla[proficiency_category] == "***" ||
+              isNaN(milla[proficiency_category])) { fill_color = "grey" }
+
+            else {
+
+              // the color the district would be if not selected
+              original_color = color(milla[proficiency_category])
+
+              original_color_string = original_color.slice(1)
+
+              mixed_color = new Rainbow([original_color_string, 'dbdbdb']);
+              fill_color = '#' + mixed_color.colourAt(60);
+            }
+            return fill_color
+          })
         }
       }
 
