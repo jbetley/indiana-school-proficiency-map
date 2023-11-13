@@ -902,9 +902,16 @@
 
     // map is reset when a node (district) is
     //clicked while active
-    function reset() {
-      console.log("RESETTING - COLOR IS CHANGING BY REMOVING ACTIVE TAG")
-      // active.style("fill", actual_color);
+    function reset(return_color) {
+      console.log("ON RESET: Passed 'updated' COLOR")
+      console.log(return_color)
+
+      console.log('ON RESET:  global current color')
+      console.log(current_color)
+
+      active.style("fill", null)
+      active.attr("fill", current_color)
+
       active.classed("active", false);
       active = d3.select(null);
 
@@ -1074,7 +1081,7 @@
     //svg
     //  .call(zoom);
 
-    var current_color;
+    var update_color;
 
     Promise.all([
       d3.csv("corporation_data_k8.csv"),
@@ -1487,7 +1494,10 @@
                 mixed_color = new Rainbow([original_color_string, 'dbdbdb']);
                 fill_color = '#' + mixed_color.colourAt(60);
               }
-              current_color = original_color
+
+              update_color = original_color
+              console.log('COLOR UPDATED TO:')
+              console.log(update_color)
               return fill_color
             }
 
@@ -1589,7 +1599,14 @@
 
         // triggered on click of a district
         function clicked(event, d) {
+          //TODO: NEED TO STORE THE ORIGINAL COLOR WHEN THERE IS AN IN ZOOM CLICK
+          // PROBABLY NEED TO USE GLOBAL - PERHAPS AN ARRAY THAT WE ITERATE OVER?
+          // COULD JUST BE AN ARRAY OF 2 VALUES
+          original_color = d3.select(this).attr('fill')
 
+          console.log(original_color)
+          console.log('INCLICK - UPDATE')
+          console.log(update_color)
           // "active.node() === this" while be true for a click on a zoomed
           // path where there has not been an update. If there has been an update
           // triggered when zoomed, then active node will not match this because
@@ -1597,8 +1614,16 @@
           // not (not sure why and couldn't figure out how to remove the class),
           // so insteadn we need to check whether the current school name is equal to
           // the selected school
-          if (((current_school === d.properties.NAME) && (svg._groups[0][0].__zoom.k > 1))
+
+          if (((current_school === d.properties.NAME) && (d3.zoomTransform(this).k > 1))
             || (active.node() === this)) {
+
+            if (update_color == null) {
+              current_color = d3.select(this).attr('fill')
+              // console.log('NULL - So current color is:')
+              // console.log(current_color)
+            }
+            else { current_color = update_color }
 
             // TODO: SOOOO CLOSE. This returns the original color when clicked, not the color that
             // it should be following the update. Need to recalculate out color to match whatever
@@ -1611,8 +1636,26 @@
             // stores the current fill value of the selected path based on the 
             // selected category. But it works!
             d3.select(this).attr("fill", current_color)
+
             // d3.selectAll('.active').attr("fill", original_color)
-            return reset();
+            return reset(current_color);
+          }
+          else if ((active.node() != this) && (d3.zoomTransform(this).k > 1)) {
+            console.log("==================================================")
+            if (update_color == null) {
+              current_color = d3.select(this).attr('fill')
+            }
+            else { current_color = update_color }
+            console.log('ON CLICK - Updated color is:')
+            console.log(update_color)
+            console.log('ON CLICK - Current color is:')
+            console.log(current_color)
+
+            console.log('This works, but wrong color')
+            // d3.select(this).attr("fill", current_color)
+            active.attr("fill", current_color)
+            active.style("fill", null)
+
           }
 
           // set current selection as the active (selected) node
