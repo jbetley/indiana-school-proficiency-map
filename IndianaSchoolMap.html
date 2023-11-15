@@ -903,14 +903,10 @@
     // map is reset when a node (district) is
     //clicked while active
     function reset(return_color) {
-      console.log("ON RESET: Passed 'updated' COLOR")
-      console.log(return_color)
 
-      console.log('ON RESET:  global current color')
-      console.log(current_color)
-
-      active.style("fill", null)
+      // TODO: use return or current?
       active.attr("fill", current_color)
+      active.style("fill", null)
 
       active.classed("active", false);
       active = d3.select(null);
@@ -928,6 +924,19 @@
     function stopped(event, d) {
       if (event.defaultPrevented) event.stopPropagation();
     }
+
+    var tst_history;
+
+    let clr_history = [];
+
+    // function store_original_color(clr) {
+    //   clr_history.push(clr)
+
+    // }
+
+    // function get_original_color(clr) {
+    //   clr_history.pop()
+    // }
 
     // takes as input an array of points x, y and r values, determines
     // if the circles overlap and if so, shifts their coordinates
@@ -1496,8 +1505,12 @@
               }
 
               update_color = original_color
-              console.log('COLOR UPDATED TO:')
-              console.log(update_color)
+              console.log('SELECTED SCHOOL - UPDATE')
+              console.log("New Fill Color")
+              console.log(original_color)
+
+              console.log("Updated [grayish] Fill Color")
+              console.log(fill_color)
               return fill_color
             }
 
@@ -1597,16 +1610,17 @@
         // ensure that points are on top of fill
         svg.selectAll(".points").raise()
 
-        // triggered on click of a district
+        // whenever district is clicked we need to store one level of
+        // historical fill information to ensure the correct color
+        // is returned if user clicks from one district to another
+        // while zoomed
         function clicked(event, d) {
-          //TODO: NEED TO STORE THE ORIGINAL COLOR WHEN THERE IS AN IN ZOOM CLICK
-          // PROBABLY NEED TO USE GLOBAL - PERHAPS AN ARRAY THAT WE ITERATE OVER?
-          // COULD JUST BE AN ARRAY OF 2 VALUES
-          original_color = d3.select(this).attr('fill')
 
-          console.log(original_color)
-          console.log('INCLICK - UPDATE')
-          console.log(update_color)
+          // store fill color selected district in our color history
+          clr_history.push(d3.select(this).attr('fill'))
+
+          console.log("CLICKED - ADD Current color to history")
+          console.log(clr_history)
           // "active.node() === this" while be true for a click on a zoomed
           // path where there has not been an update. If there has been an update
           // triggered when zoomed, then active node will not match this because
@@ -1615,47 +1629,45 @@
           // so insteadn we need to check whether the current school name is equal to
           // the selected school
 
+          // if we click on a zoomed node twice in a row, we store the current color
+          // and then reset (). Note, current color changes if the user changes the
+          // category while zoomed. This is a bit of a hack because we have to use
+          // current_color as a global variable
           if (((current_school === d.properties.NAME) && (d3.zoomTransform(this).k > 1))
             || (active.node() === this)) {
 
             if (update_color == null) {
               current_color = d3.select(this).attr('fill')
-              // console.log('NULL - So current color is:')
-              // console.log(current_color)
             }
             else { current_color = update_color }
 
-            // TODO: SOOOO CLOSE. This returns the original color when clicked, not the color that
-            // it should be following the update. Need to recalculate out color to match whatever
-            // update color it should be
-            // original_color = active._groups[0][0].attributes[3].nodeValue
-            // console.log(original_color)
-            // console.log(current_color)
 
-            // NOTE: This is a bit of a hack. current_color is a global variable that
-            // stores the current fill value of the selected path based on the 
-            // selected category. But it works!
+            console.log("SAME CLICKED - filling with current color & clearing history")
+            console.log(current_color)
             d3.select(this).attr("fill", current_color)
 
-            // d3.selectAll('.active').attr("fill", original_color)
+            // whenever we reset (zoom out), empty the color history
+            clr_history.length = 0
+
+            // include current color so we get the correct fill on zoom out
             return reset(current_color);
+
           }
+          // if user clicks on a different district while zoomed
           else if ((active.node() != this) && (d3.zoomTransform(this).k > 1)) {
-            console.log("==================================================")
-            if (update_color == null) {
-              current_color = d3.select(this).attr('fill')
-            }
-            else { current_color = update_color }
-            console.log('ON CLICK - Updated color is:')
+
+            // get the first (previous) color in the array and then delete it
+            // by index. NOTE: This ensures that we never have more than 2
+            // colors in our color history. They are deleted once they are used.
+            original_color = clr_history[0]
+            clr_history.splice(0, 1);
+            console.log('ZOOM CLICK - THIS WAS THE UPDATED COLOR')
             console.log(update_color)
-            console.log('ON CLICK - Current color is:')
-            console.log(current_color)
 
-            console.log('This works, but wrong color')
-            // d3.select(this).attr("fill", current_color)
-            active.attr("fill", current_color)
+            console.log('ZOOM CLICK - This was the original color (according to array)')
+            console.log(original_color)
+            active.attr("fill", original_color)
             active.style("fill", null)
-
           }
 
           // set current selection as the active (selected) node
@@ -1702,8 +1714,10 @@
               // selected district
               if (s.properties.GSLO == 'PK' || s.properties.GSLO == 'KG') { low = 0 } else { low = parseInt(s.properties.GSLO) }
 
+              // || s.properties.CHARTER_TEXT == "1-Yes"
               if ((
-                low < max && s.properties.GSHI > min) && (s.properties.LEAID == activeDistrictLEAID)
+                low < max && s.properties.GSHI > min) &&
+                ((s.properties.LEAID == activeDistrictLEAID) || (s.properties.CHARTER_TEXT == "1-Yes"))
                 && (s.properties.SCHOOL_LEV != "CLOSED" && s.properties.SCHOOL_LEV != "Cooperative"
                   && s.properties.SCHOOL_LEV != "Other" && s.properties.SCHOOL_LEV != "Special Education"
                   && s.properties.SCHOOL_LEV != "Adult High School"
