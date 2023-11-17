@@ -410,6 +410,8 @@
       box-shadow: 2px 2px 2px lightgrey;
     }
 
+    /* Not Working Consistently */
+
     .active {
       fill: #dbdbdb;
       opacity: .8;
@@ -547,10 +549,10 @@
 
   <script>
 
-    // TEST
     /*
     RainbowVis-JS
     Released under Eclipse Public License - v 1.0
+    https://codepen.io/eqvis/pen/ExdLdBZ#anon-signup//
     */
 
     function Rainbow(colours) {
@@ -576,7 +578,6 @@
             colourGradient.setNumberRange(minNum + increment * i, minNum + increment * (i + 1));
             gradients[i] = colourGradient;
           }
-
           colours = spectrum;
         }
       }
@@ -841,8 +842,16 @@
     if (typeof module !== 'undefined') {
       module.exports = Rainbow;
     }
-    // https://codepen.io/eqvis/pen/ExdLdBZ#anon-signup//
 
+    // RGB to HEX
+    // function componentToHex(c) {
+    //   var hex = c.toString(16);
+    //   return hex.length == 1 ? "0" + hex : hex;
+    // }
+
+    // function rgbToHex(r, g, b) {
+    //   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    // }
 
     // hide/show subnavigation radio buttons based on navigation selection
     var subNavigation = document.querySelector(".navigation");
@@ -866,7 +875,7 @@
       }
     });
 
-    // calculate percentage only if we have two numeric values
+
     function calc_percent(d) {
       if (d === "***") {
         return "***"
@@ -889,13 +898,17 @@
 
     // map is reset when a node (district) is
     //clicked while active
-    function reset(return_color) {
+    function reset() {
 
-      // TODO: use return or current?
-      active.style("fill", current_color)
+      // TODO: DO I NEED TO ERASE ACTIVITY?
+      console.log('IN RESET')
 
-      active.classed("active", false);
-      active = d3.select(null);
+      // active.style("fill", current_color)
+      // console.log(active)
+      active.attr("class", null)
+      // console.log(active)
+      // active.classed("active", false);
+      // active = d3.select(null);
 
       svg.selectAll(".points")
         .transition()
@@ -1036,9 +1049,6 @@
       update_color,
       active = d3.select(null);
 
-    // var update_color;
-    // let color_history = [];
-
     var tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
@@ -1060,13 +1070,74 @@
       .style("fill", "steelblue")
       .text("Percentage Proficient");
 
+    var maptitle = svg.append("g")
+      .attr("class", "map-title")
+      .attr("transform", "translate(180,5)");
+
+    maptitle.append("rect")
+      .attr('width', 350)
+      .attr('height', 20)
+      .style("fill", "white")
+      .style("pointer-events", "visible")
+
+    var schooltop = svg.append("g")
+      .attr("class", "top-schools")
+      .attr("transform", "translate(565,40)");
+
+    schooltop.append("rect")
+      .attr('width', 220)
+      .attr('height', 20)
+      .attr("rx", function (d) { return 5 })
+      .attr("ry", function (d) { return 5 })
+      .style("stroke", "steelblue")
+      .style("fill", "steelblue")
+      .style("pointer-events", "visible")
+
+    var corptop = svg.append("g")
+      .attr("class", "top-corps")
+      .attr("transform", "translate(565,80)");
+
+    corptop.append("rect")
+      .attr('width', 220)
+      .attr('height', 20)
+      .attr("rx", function (d) { return 5 })
+      .attr("ry", function (d) { return 5 })
+      .style("stroke", "steelblue")
+      .style("fill", "steelblue")
+      .style("pointer-events", "visible")
+
+    var schoolgaps = svg.append("g")
+      .attr("class", "school-gaps")
+      .attr("transform", "translate(565,120)");
+
+    schoolgaps.append("rect")
+      .attr('width', 220)
+      .attr('height', 20)
+      .attr("rx", function (d) { return 5 })
+      .attr("ry", function (d) { return 5 })
+      .style("stroke", "steelblue")
+      .style("fill", "steelblue")
+      .style("pointer-events", "visible")
+
+    var corpgaps = svg.append("g")
+      .attr("class", "corp-gaps")
+      .attr("transform", "translate(565,160)");
+
+    corpgaps.append("rect")
+      .attr('width', 220)
+      .attr('height', 20)
+      .attr("rx", function (d) { return 5 })
+      .attr("ry", function (d) { return 5 })
+      .style("stroke", "steelblue")
+      .style("fill", "steelblue")
+      .style("pointer-events", "visible")
+
     var zoom = d3.zoom()
       .scaleExtent([1, 8])
       .on("zoom", zoomed);
 
     // Enable Free Zoom
-    //svg
-    //  .call(zoom);
+    // svg.call(zoom);
 
     Promise.all([
       d3.csv("corporation_data_k8.csv"),
@@ -1080,16 +1151,21 @@
       const mesh = topojson.mesh(INdistricts, INdistricts.objects.districts);
       const projection = d3.geoMercator().fitSize([width, height], mesh);
 
+      /* Draw the Map */
+      var path = d3.geoPath().projection(projection);
+
+      var paths = svg.append("g")
+        .attr("class", "districts")
+        .selectAll("path")
+        .data(districts.features)
+        .enter().append("path")
+        .attr('data-fips', function (d) {
+          return d.properties.NAME
+        })
+        .attr("d", path)
+        .attr("transform", "translate(-100,30)");
+
       var updateMap = function (scale, year, subject, category) {
-
-        // NOTE: Uncomment if we want to zoom back out every time a new category
-        // is selected
-        // reset()
-
-        // clear category title each update, otherwise will
-        // keep adding on top of one another
-        d3.selectAll('.map-title-text')
-          .style("opacity", 0)
 
         if (scale == 'Relative') {
           selectedDomain = [.05, .10, .15, .25, .35, .45, .55, .65];
@@ -1152,18 +1228,11 @@
 
         corp_gap = calculateGap(year_data_corp, subject, category)
 
-        // add map title
-        var maptitle = svg.append("g")
-          .attr("class", "map-title")
-          .attr("transform", "translate(180,5)");
+        // map title
+        d3.select('.map-title-text').remove()
 
-        maptitle.append("rect")
-          .attr('width', 350)
-          .attr('height', 20)
-          .style("fill", "white")
-          .style("pointer-events", "visible")
-
-        maptitle.append("text")
+        maptitle = d3.select(".map-title")
+          .append("text")
           .attr("font-weight", "bold")
           .attr("font-size", "14px")
           .attr("class", "map-title-text")
@@ -1174,23 +1243,9 @@
           .style("opacity", 1)
           .text(proficiency_category + " (State Average: " + calc_percent(state_average) + ")");
 
-        // add popups (tooltips) for Top 10 Schools and School Corporations
-
         // top10 schools for selected category
-        var schooltop = svg.append("g")
-          .attr("class", "top-schools")
-          .attr("transform", "translate(565,40)");
-
-        schooltop.append("rect")
-          .attr('width', 220)
-          .attr('height', 20)
-          .attr("rx", function (d) { return 5 })
-          .attr("ry", function (d) { return 5 })
-          .style("stroke", "steelblue")
-          .style("fill", "steelblue")
-          .style("pointer-events", "visible")
-
-        schooltop.append("text")
+        schooltop = d3.select(".top-schools")
+          .append("text")
           .attr("font-weight", "bold")
           .attr("font-size", "10px")
           .attr("class", "infobar-text")
@@ -1202,6 +1257,7 @@
           .style("fill", "white")
           .text("Highest Proficiency: Schools");
 
+        // TODO: Can the school and corp functions be reused?
         schooltop.on("mouseover", function (event, d) {
           let pos = d3.select(this).node().getBoundingClientRect();
 
@@ -1237,21 +1293,9 @@
               .style("opacity", 0)
           });
 
-        // top10 school corporations
-        var corptop = svg.append("g")
-          .attr("class", "top-corps")
-          .attr("transform", "translate(565,80)");
-
-        corptop.append("rect")
-          .attr('width', 220)
-          .attr('height', 20)
-          .attr("rx", function (d) { return 5 })
-          .attr("ry", function (d) { return 5 })
-          .style("stroke", "steelblue")
-          .style("fill", "steelblue")
-          .style("pointer-events", "visible")
-
-        corptop.append("text")
+        // top10 corporations for selected category
+        schooltop = d3.select(".top-corps")
+          .append("text")
           .attr("font-weight", "bold")
           .attr("font-size", "10px")
           .attr("class", "infobar-text")
@@ -1296,20 +1340,8 @@
           });
 
         // Achievement Gaps - School
-        var schoolgaps = svg.append("g")
-          .attr("class", "gaps-school")
-          .attr("transform", "translate(565,120)");
-
-        schoolgaps.append("rect")
-          .attr('width', 220)
-          .attr('height', 20)
-          .attr("rx", function (d) { return 5 })
-          .attr("ry", function (d) { return 5 })
-          .style("stroke", "steelblue")
-          .style("fill", "steelblue")
-          .style("pointer-events", "visible")
-
-        schoolgaps.append("text")
+        schoolgaps = d3.select(".school-gaps")
+          .append("text")
           .attr("font-weight", "bold")
           .attr("font-size", "10px")
           .attr("class", "infobar-text")
@@ -1355,20 +1387,8 @@
           });
 
         // Achievement Gaps - Corporations
-        var corpgaps = svg.append("g")
-          .attr("class", "gaps-corp")
-          .attr("transform", "translate(565,160)");
-
-        corpgaps.append("rect")
-          .attr('width', 220)
-          .attr('height', 20)
-          .attr("rx", function (d) { return 5 })
-          .attr("ry", function (d) { return 5 })
-          .style("stroke", "steelblue")
-          .style("fill", "steelblue")
-          .style("pointer-events", "visible")
-
-        corpgaps.append("text")
+        corpgaps = d3.select('.corp-gaps')
+          .append("text")
           .attr("font-weight", "bold")
           .attr("font-size", "10px")
           .attr("class", "infobar-text")
@@ -1413,93 +1433,101 @@
               .style("opacity", 0)
           });
 
-        // The Map
-        var path = d3.geoPath().projection(projection);
+        // /* Draw and update the Map */
+        // var path = d3.geoPath().projection(projection);
 
-        // we are shifting map, 100px left and 50px down all other objects
+        // map is translated 100px left and 50px down, so all other objects
         // must be shifted the same amount in order to line up correctly
         // (especially during zoom, where we need to multiply the shift by
         // the scale factor)
 
-        // get name of currently active school (will be null on)
+        // get name of currently selected district (will be null on)
         // initial load
         if (d3.select(this)._groups[0][0].active._groups[0][0] != null) {
-          current_school = d3.select(this)._groups[0][0].active._groups[0][0].__data__.properties.NAME //active._groups[0][0].__data__.properties.NAME
+          selected_district = d3.select(this)._groups[0][0].active._groups[0][0].__data__.properties.NAME
         }
         else {
-          current_school = null
+          selected_district = null
         }
 
-        svg.append("g")
-          .attr("class", "districts")
+        // svg.append("g")
+        //   .attr("class", "districts")
+        //   .selectAll("path")
+        paths = d3.select('.districts')
           .selectAll("path")
           .data(districts.features)
-          .enter().append("path")
+          // .enter().append("path")
           .attr('data-fips', function (d) {
             return d.properties.NAME
           })
           .attr("d", path)
           .attr("transform", "translate(-100,30)")
-          .style("fill", function (d, i) {
-            const milla = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
+          .attr("fill", function (d, i) {
 
-            // If the current school is the active school we want to give it
-            // the same color as an "active" school. However, for some reason
-            // "active" when applied is not actually applying the correct
-            // css style. So we are currently forcing the issue using a color gradient
-            // generator (RainbowVis-JS). See:https://codepen.io/eqvis/pen/ExdLdBZ#anon-signup
-            // Other options here - maybe find a skinnier one
+            const data = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
+
+            // want to give the same color as an "active" school to the
+            // selected district. However, this is not working- 
+            // "active" when applied is not  applying the correct
+            // css style.
+            // So we are currently forcing the issue using a color gradient
+            // generator (RainbowVis-JS). Other options here - maybe find a skinnier one
             // https://stackoverflow.com/questions/3080421/javascript-color-gradient
 
-            if (current_school === d.properties.NAME) {
+            if (selected_district === d.properties.NAME) {
 
               // value will be null if the school corporation does not exist
               // exist or was created (e.g., West Clark Community Schools
               // dissolved in 2020 and Borden-Henryville was formed
-              if (milla == null) { fill_color = "grey" }
+              if (data == null) { fill_color = "grey" }
 
-              else if (milla[proficiency_category] == "" || milla[proficiency_category] == "***" ||
-                isNaN(milla[proficiency_category])) { fill_color = "grey" }
+              else if (data[proficiency_category] == "" || data[proficiency_category] == "***" ||
+                isNaN(data[proficiency_category])) { fill_color = "grey" }
 
               else {
 
-                // the color the district would be if not selected
-                original_color = color(milla[proficiency_category])
+                fill_color = color(data[proficiency_category])
 
-                // remove "#"
-                original_color_string = original_color.slice(1)
 
-                mixed_color = new Rainbow([original_color_string, 'dbdbdb']);
+                // update_color = color(data[proficiency_category])
 
-                // Add "#"
-                fill_color = '#' + mixed_color.colourAt(60);
+                // // remove "#"
+                // update_color_string = update_color.slice(1)
+
+                // // Get mixed (active) color
+                // mixed_color = new Rainbow([update_color_string, 'dbdbdb']);
+
+                // // Add "#"
+                // fill_color = '#' + mixed_color.colourAt(60);
+
               }
 
-              update_color = original_color
+              // console.log('CURRENT HISTORY')
+              // console.log(color_history)
 
-              console.log('SELECTED SCHOOL - REPLACE HISTORY WITH UPDATED COLOR')
-              console.log(update_color)
-              console.log('CURRENT HISTORY')
-              console.log(color_history)
-              // if updated, replace current color with updated color
-              color_history[0] = update_color
+              // // if updated, replace current color with updated color
+              // color_history[0] = update_color
+
+              // console.log('SELECTED SCHOOL - REPLACE HISTORY WITH UPDATED COLOR')
+              // console.log(color_history)
+
+              d3.select(this).attr("class", "active");
 
               return fill_color
             }
 
-            // all schools that are not the selected school get filled as normal
-            else {
-              // will be null if the school corporation does not exist
-              // exist or was created (e.g., West Clark Community Schools
-              // dissolved in 2020 and Borden-Henryville was formed
-              if (milla == null) { fill_color = "grey" }
+            // schools that are not the selected school get filled as normal
 
-              else if (milla[proficiency_category] === "" || milla[proficiency_category] === "***" ||
-                isNaN(milla[proficiency_category])) { fill_color = "grey" }
+            else {
+
+              if (data == null) { fill_color = "grey" }
+
+              else if (data[proficiency_category] === "" || data[proficiency_category] === "***" ||
+                isNaN(data[proficiency_category])) { fill_color = "grey" }
 
               else {
 
-                fill_color = color(milla[proficiency_category])
+                fill_color = color(data[proficiency_category])
               }
               return fill_color
             }
@@ -1512,17 +1540,19 @@
 
             d3.select(this).classed("selected", true);
 
-            const ber = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
+            const data = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
 
-            // NOTE: svg._groups[0][0].__zoom.k gives us the "k" transform value, aka the
+            // Hide the district level tooltip when zoomed.
+
+            // svg._groups[0][0].__zoom.k gives us the "k" transform value, aka the
             // current zoom amount. so tooltips are only shown if k == 1 (it is not zoomed in)
             // add the test for null to prevent an error on load or reload where the val is null
-            if ((ber != null) && ((svg._groups[0][0].__zoom == null)
+            if ((data != null) && ((svg._groups[0][0].__zoom == null)
               || (svg._groups[0][0].__zoom.k == 1))) {
               tooltip.html(
-                ber['Corporation Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(ber[proficiency_category]) + "<br>Total Tested: " + ber[n_size_category]
+                data['Corporation Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(data[proficiency_category]) + "<br>Total Tested: " + data[n_size_category]
               )
-                // tooltip is offset from mouse position
+                // tooltip offset from mouse position
                 .style('left', `${pos['x'] + 10}px`)
                 .style('top', `${(window.pageYOffset + pos['y'] - 30)}px`)
                 .style("opacity", 1);
@@ -1533,23 +1563,24 @@
             tooltip.style("opacity", 0)
           });
 
-        // Check the value of k to determine if user is zoomed (e.g., k > 1), if so
-        // we change the point colors and values for tooltip
+        // if category is changed while zoomed (e.g., k > 1), change point
+        // colors to reflect new values, and update tooltip values
+
         if (svg._groups[0][0].__zoom != null) {
           if (svg._groups[0][0].__zoom.k > 1) {
 
             // change color of the schools (circles)
             svg.selectAll("circle").style("fill", function (d) {
 
-              const nico = year_data_school.find(f => +f['School ID'] === +d.school_id)
+              const data = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
-              if (nico == null) { return "grey" }
+              if (data == null) { return "grey" }
 
-              if (nico[proficiency_category] === "" || nico[proficiency_category] === "***" || isNaN(nico[proficiency_category]) || nico[proficiency_category] == null) {
+              if (data[proficiency_category] === "" || data[proficiency_category] === "***" || isNaN(data[proficiency_category]) || data[proficiency_category] == null) {
                 return "#ffffff"
               }
               else {
-                return color(nico[proficiency_category])
+                return color(data[proficiency_category])
               }
             })
               .on('mouseover', function (event, d) {
@@ -1558,12 +1589,12 @@
 
                 d3.select(this).classed("selected", true);
 
-                const echo = year_data_school.find(f => +f['School ID'] === +d.school_id)
+                const data = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
-                if (echo != null) {
+                if (data != null) {
 
                   tooltip.html(
-                    echo['School Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(echo[proficiency_category]) + "<br>Total Tested: " + echo[n_size_category]
+                    data['School Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(data[proficiency_category]) + "<br>Total Tested: " + data[n_size_category]
                   )
                     .style('left', `${pos['x'] + 20}px`)
                     .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
@@ -1588,126 +1619,126 @@
         // while zoomed
         function clicked(event, d) {
 
-          // TODO: REMOVE ACTIVE NODE HERE??
-          console.log('ENTERING CLICK')
 
-          console.log('COLOR HISTORY')
-          console.log(color_history)
+          // console.log('ENTERING CLICK')
 
-          console.log('THIS')
-          console.log(d3.select(this))
+          // console.log('COLOR HISTORY')
+          // console.log(color_history)
 
+          // console.log('THIS')
+          // console.log(d3.select(this))
+          console.log(active.node())
+          console.log(this)
+          if (active.node() === this) return reset();
+          // // store previous school object
+          // previous_school = d3.select('.active')
+          // console.log('PREVIOUS SCHOOL')
+          // console.log(previous_school)
 
+          // // clear active tag from previous school
+          // // TODO: Which one works
+          active.attr("class", null)
+          // previous_school.attr("class", null)
+          // d3.select('.active').classed("active", false);
 
-          // store previous school object
-          previous_school = d3.select('.active')
-          console.log('PREVIOUS SCHOOL')
-          console.log(previous_school)
+          // // store the original fill color for the currently
+          // // selected district in an array
+          // // console.log('CURRENT COLOR?')
+          // // console.log(d3.select(this).style('fill'))
+          // // color_history.push(d3.select(this).style('fill'))
 
-          // clear active tag from previous school
-          d3.select('.active').classed("active", false);
+          // // console.log("CLICKED - [this]color added to history")
+          // // console.log(color_history)
 
-          // store the original fill color for the currently
-          // selected district in an array
-          console.log('CURRENT COLOR?')
-          console.log(d3.select(this).style('fill'))
-          color_history.push(d3.select(this).style('fill'))
+          // // "active.node() === this" while be true for a click on a zoomed
+          // // path where there has not been an update. If there has been an update
+          // // triggered when zoomed, then active node will not match this because
+          // // the active node will have an "active" class while "this" whill
+          // // not (not sure why and couldn't figure out how to remove the class),
+          // // so insteadn we need to check whether the current school name is equal to
+          // // the selected school
 
-          console.log("CLICKED - [this]color added to history")
-          console.log(color_history)
+          // // if we click on a zoomed node twice in a row, we store the current color
+          // // and then reset (). Note, current color changes if the user changes the
+          // // category while zoomed.
+          // if (previous_school._groups[0][0] != null) {
+          //   previous_school_name = previous_school._groups[0][0].__data__.properties.NAME
+          // }
+          // else { previous_school_name = "" }
 
-          // "active.node() === this" while be true for a click on a zoomed
-          // path where there has not been an update. If there has been an update
-          // triggered when zoomed, then active node will not match this because
-          // the active node will have an "active" class while "this" whill
-          // not (not sure why and couldn't figure out how to remove the class),
-          // so insteadn we need to check whether the current school name is equal to
-          // the selected school
+          // // previous_school will be equal to the last school clicked
+          // if (((previous_school_name === d.properties.NAME)
+          //   && (d3.zoomTransform(this).k > 1)) || (active.node() === this)) {
 
-          // if we click on a zoomed node twice in a row, we store the current color
-          // and then reset (). Note, current color changes if the user changes the
-          // category while zoomed.
-          if (previous_school._groups[0][0] != null) {
-            previous_school_name = previous_school._groups[0][0].__data__.properties.NAME
-          }
-          else { previous_school_name = "" }
+          //   if (update_color == null) {
+          //     current_color = color_history[0]
+          //   }
+          //   else {
+          //     current_color = update_color
+          //   }
 
-          // previous_school will be equal to the last school clicked
-          if (((previous_school_name === d.properties.NAME)
-            && (d3.zoomTransform(this).k > 1)) || (active.node() === this)) {
+          //   // fill current district with stored color
+          //   // and set updated color to null
+          //   d3.select(this).style("fill", current_color)
 
-            if (update_color == null) {
-              current_color = color_history[0]
-            }
-            else {
-              current_color = update_color
-            }
+          //   color_history.length = 0
+          //   update_color = null
 
-            // fill current district with stored color
-            // and set updated color to null
-            d3.select(this).style("fill", current_color)
+          //   // include current color so we get the correct fill on zoom out
+          //   return reset();
 
+          // }
+          // // if user clicks on a different district while zoomed
+          // else if ((active.node() != this) && (d3.zoomTransform(this).k > 1)) {
 
-            color_history.length = 0
-            update_color = null
+          //   // get the first (previous) color in the array and then delete it
+          //   // by index. NOTE: This ensures that we never have more than 2
+          //   // colors in our color history. They are deleted once they are used.
+          //   console.log('GETTING COLOR AT INDEX 1 and DELETING')
 
-            // include current color so we get the correct fill on zoom out
-            return reset(current_color);
+          //   console.log(color_history)
 
-          }
-          // if user clicks on a different district while zoomed
-          else if ((active.node() != this) && (d3.zoomTransform(this).k > 1)) {
+          //   color_history.splice(0, 1);
+          //   original_color = color_history[0]
+          //   console.log('USING COLOR')
+          //   console.log(original_color)
+          //   console.log(color_history)
+          //   // TODO: Update color not being applied correctly- new(this) is getting
+          //   // old (active) update_color instead of their own            
+          //   // if user changes category while zooming we want to use the
+          //   // updated color - if not then just go back to original color
+          //   // if (update_color != null) {
+          //   //   active.attr("fill", null)
+          //   //   active.attr("fill", update_color)
 
-            // get the first (previous) color in the array and then delete it
-            // by index. NOTE: This ensures that we never have more than 2
-            // colors in our color history. They are deleted once they are used.
-            console.log('GETTING COLOR AT INDEX 1 and DELETING')
+          //   //   console.log('ZOOM CLICK - FILL PREV (ACTIVE) DIST WITH UPDATED COLOR')
+          //   //   console.log(update_color)
+          //   // }
+          //   // else {
+          //   // d3.select(active).style("fill", original_color)
+          //   console.log('ZOOM CLICK - NO UPDATE, FILL PREV (ACTIVE) WITH ORIG COLOR')
+          //   console.log(original_color)
 
-            console.log(color_history)
+          //   console.log("PREVIOUS SCHOOL BEFORE")
+          //   console.log(previous_school)
+          //   // previous_school.style("fill", original_color)
+          //   previous_school.style("fill", 'red')
 
-            color_history.splice(0, 1);
-            original_color = color_history[0]
-            console.log('USING COLOR')
-            console.log(original_color)
-            console.log(color_history)
-            // TODO: Update color not being applied correctly- new(this) is getting
-            // old (active) update_color instead of their own            
-            // if user changes category while zooming we want to use the
-            // updated color - if not then just go back to original color
-            // if (update_color != null) {
-            //   active.attr("fill", null)
-            //   active.attr("fill", update_color)
-
-            //   console.log('ZOOM CLICK - FILL PREV (ACTIVE) DIST WITH UPDATED COLOR')
-            //   console.log(update_color)
-            // }
-            // else {
-            // d3.select(active).style("fill", original_color)
-            console.log('ZOOM CLICK - NO UPDATE, FILL PREV (ACTIVE) WITH ORIG COLOR')
-            console.log(original_color)
-
-            console.log("PREVIOUS SCHOOL BEFORE")
-            console.log(previous_school)
-            // previous_school.style("fill", original_color)
-            previous_school.style("fill", function (d) { return original_color })
-            // active.style("fill", original_color)
-            console.log("PREVIOUS SCHOOL AFTER")
-            console.log(previous_school)
-            // }
-            active = d3.select(null);
-            console.log('AFTER NULL')
-            console.log(d3.select(".active"))
-            // active.classed("active", false);
-            // clear fill style (grey) TODO: why is this a style?
-            // active.style("fill", original_color)
-          }
+          //   // active.style("fill", original_color)
+          //   console.log("PREVIOUS SCHOOL AFTER")
+          //   console.log(previous_school)
+          //   // }
+          //   active = d3.select(null);
+          //   console.log('AFTER NULL')
+          //   console.log(d3.select(".active"))
+          //   // active.classed("active", false);
+          //   // clear fill style (grey) TODO: why is this a style?
+          //   // active.style("fill", original_color)
+          // }
 
           // set current selection as the active (selected) node
 
           active = d3.select(this).classed("active", true);
-
-          console.log('SETTING NEW ACTIVE SCHOOL')
-          console.log(active)
 
           // get the LEAID of the active (selected) node
           activeDistrictLEAID = active._groups[0][0].__data__.properties.GEOID
@@ -1862,15 +1893,15 @@
             .style("stroke", "white")
             .style("fill", function (d) {
 
-              const nico = year_data_school.find(f => +f['School ID'] === +d.school_id)
+              const data = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
-              if (nico == null) { return "grey" }
+              if (data == null) { return "grey" }
 
-              if (nico[proficiency_category] === "" || nico[proficiency_category] === "***" || isNaN(nico[proficiency_category]) || nico[proficiency_category] == null) {
+              if (data[proficiency_category] === "" || data[proficiency_category] === "***" || isNaN(data[proficiency_category]) || data[proficiency_category] == null) {
                 return "#ffffff"
               }
               else {
-                return color(nico[proficiency_category])
+                return color(data[proficiency_category])
               }
             })
             .style("opacity", 0)
@@ -1882,12 +1913,12 @@
               // the mouse is currently over - or out of
               d3.select(this).classed("selected", true);
 
-              const echo = year_data_school.find(f => +f['School ID'] === +d.school_id)
+              const data = year_data_school.find(f => +f['School ID'] === +d.school_id)
 
-              if (echo != null) {
+              if (data != null) {
 
                 tooltip.html(
-                  echo['School Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(echo[proficiency_category]) + "<br>Total Tested: " + echo[n_size_category]
+                  data['School Name'] + "<br>" + proficiency_category.slice(0, -2) + ": " + calc_percent(data[proficiency_category]) + "<br>Total Tested: " + data[n_size_category]
                 )
                   .style('left', `${pos['x'] + 20}px`)
                   .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
@@ -1906,33 +1937,34 @@
           // figured out
           // TODO: initial background fill is not kept on initial zoom only
 
-          console.log('IN CLICK ACTIVE RIGHT BEFORE ADDING GRAY')
-          console.log(d3.select('.active'))
-          d3.select('.active').style("fill", function (d) {
 
-            const milla = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
-            // will be null if the school corporation does not exist
-            // exist or was created (e.g., West Clark Community Schools
-            // dissolved in 2020 and Borden-Henryville was formed
-            if (milla == null) { fill_color = "grey" }
+          // d3.select('.active').style("fill", function (d) {
+          // d3.select(this).style("fill", function (d) {
 
-            else if (milla[proficiency_category] == "" || milla[proficiency_category] == "***" ||
-              isNaN(milla[proficiency_category])) { fill_color = "grey" }
+          //   const data = year_data_corp.find(f => f['Corporation ID'] === d.properties.CORPID)
 
-            else {
+          //   if (data == null) { fill_color = "grey" }
 
-              // the color the district would be if not selected
-              original_color = color(milla[proficiency_category])
+          //   else if (data[proficiency_category] == "" || data[proficiency_category] == "***" ||
+          //     isNaN(data[proficiency_category])) { fill_color = "grey" }
 
-              original_color_string = original_color.slice(1)
+          //   else {
 
-              mixed_color = new Rainbow([original_color_string, 'dbdbdb']);
-              fill_color = '#' + mixed_color.colourAt(60);
-            }
-            console.log('FILLING NEW ACTIVE WITH FILL COLOR:')
-            console.log(fill_color)
-            return fill_color
-          })
+          //     fill_color = color(data[proficiency_category])
+
+          //     // //the color the district would be if not selected
+          //     // original_color = color(data[proficiency_category])
+
+          //     // original_color_string = original_color.slice(1)
+
+          //     // mixed_color = new Rainbow([original_color_string, 'dbdbdb']);
+          //     // fill_color = '#' + mixed_color.colourAt(60);
+          //   }
+          //   // console.log('FILLING NEW ACTIVE WITH FILL COLOR:')
+          //   // console.log(fill_color)
+          //   d3.select(this).attr("class", "active");
+          //   return fill_color
+          // })
         }
       }
 
