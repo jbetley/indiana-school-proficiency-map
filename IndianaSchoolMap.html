@@ -650,6 +650,7 @@
       second_tested = second_category + "|" + subject + " Total Tested";
 
       // minimum n-size
+      // TODO: Is this working?
       const n = 20
       const gapSet = data.filter(d => {
         if (+d[first_tested] < n) return false;
@@ -781,7 +782,7 @@
       .attr("ry", function (d) { return 5 })
       .style("stroke", "steelblue")
       .style("fill", "steelblue")
-      .style("pointer-events", "visible")
+      .style("pointer-events", "visible");
 
     var corpgaps = svg.append("g")
       .attr("class", "corp-gaps")
@@ -794,7 +795,7 @@
       .attr("ry", function (d) { return 5 })
       .style("stroke", "steelblue")
       .style("fill", "steelblue")
-      .style("pointer-events", "visible")
+      .style("pointer-events", "visible");
 
     var zoom = d3.zoom()
       .scaleExtent([1, 8])
@@ -889,9 +890,8 @@
         const sum_proficient = d3.sum(data_adjusted, d => d[total_proficient]);
         const state_average = sum_proficient / sum_tested
 
-        school_gap = calculateGap(year_data_school, subject, category)
-
-        corp_gap = calculateGap(year_data_corp, subject, category)
+        // school_gap = calculateGap(year_data_school, subject, category)
+        // corp_gap = calculateGap(year_data_corp, subject, category)
 
         // map title
         d3.select('.map-title-text').remove()
@@ -1004,97 +1004,116 @@
           });
 
         // achievement gaps - school
-        schoolgaps = d3.select(".school-gaps")
-          .append("text")
-          .attr("font-weight", "bold")
-          .attr("font-size", "10px")
-          .attr("class", "infobar-text")
-          .attr("text-anchor", "middle")
-          .attr("dominant-baseline", "middle")
-          .attr("dx", 110)
-          .attr("dy", 11)
-          .style("fill", "white")
-          .style("pointer-events", "visible")
-          .text("Largest Achievement Gaps: Schools");
 
-        schoolgaps.on("mouseover", function (event, d) {
-          let pos = d3.select(this).node().getBoundingClientRect();
+        if (category == "Black" || category == "Multiracial" || category == "Hispanic"
+          || category == "Asian" || category == "Paid Meals" || category == "Free or Reduced Price Meals"
+          || category == "Non-English Language Learners" || category == "English Language Learners"
+          || category == "Special Education" || category == "General Education") {
 
-          school_gap = calculateGap(year_data_school, subject, category)
+          // school_gap = calculateGap(year_data_school, subject, category)
+          // corp_gap = calculateGap(year_data_corp, subject, category)
 
-          if (typeof school_gap == 'undefined') { return }
+          schoolgaps = d3.select(".school-gaps")
+            .append("text")
+            .attr("font-weight", "bold")
+            .attr("font-size", "10px")
+            .attr("class", "infobar-text")
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("dx", 110)
+            .attr("dy", 11)
+            .style("fill", "white")
+            .style("pointer-events", "visible")
+            .text("Largest Achievement Gaps: Schools")
+            .style("display", "block")
 
-          let j = 0,
-            school_gap_txt = [];
+          schoolgaps.on("mouseover", function (event, d) {
+            let pos = d3.select(this).node().getBoundingClientRect();
 
-          for (k = school_gap.length - 1; k >= 0; k--) {
+            school_gap = calculateGap(year_data_school, subject, category)
 
-            // school achievement gap popup window
-            school_gap_txt[j] = j + 1 + ") <b>" + school_gap[k]["School Name"] + "</b>: <b>" +
-              calc_percent(school_gap[k]["Difference"]) + "</b><br/>" + school_gap[k]["Corporation Name"] +
-              "<br/>(" + school_gap[k]["First Name"] + ": " + calc_percent(school_gap[k]["First"]) +
-              " - " + school_gap[k]["Second Name"] + ": " + calc_percent(school_gap[k]["Second"]) + ")."
-            j++
+            if (typeof school_gap == 'undefined') { return }
 
-            tooltip.html(school_gap_txt.join('<br/><br/>'))
-              .style('left', `${pos['x'] - 1}px`)
-              .attr("id", "popup-box")
-              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
-              .style("opacity", 1)
-          }
-        })
-          .on('mouseout', function (d) {
-            d3.select(this).classed("selected", false);
-            d3.selectAll('.tooltip')
-              .style("opacity", 0)
-          });
+            let j = 0,
+              school_gap_txt = [];
 
-        // achievement gaps - corporations
-        corpgaps = d3.select('.corp-gaps')
-          .append("text")
-          .attr("font-weight", "bold")
-          .attr("font-size", "10px")
-          .attr("class", "infobar-text")
-          .attr("text-anchor", "middle")
-          .attr("dominant-baseline", "middle")
-          .attr("dx", 110)
-          .attr("dy", 11)
-          .style("fill", "white")
-          .style("pointer-events", "visible")
-          .text("Largest Achievement Gaps: Corporations");
+            for (k = school_gap.length - 1; k >= 0; k--) {
 
-        corpgaps.on("mouseover", function (event, d) {
-          let pos = d3.select(this).node().getBoundingClientRect();
+              // school achievement gap popup window
+              school_gap_txt[j] = j + 1 + ") <b>" + school_gap[k]["School Name"] + "</b>: <b>" +
+                calc_percent(school_gap[k]["Difference"]) + "</b><br/>" + school_gap[k]["Corporation Name"] +
+                "<br/>(" + school_gap[k]["First Name"] + ": " + calc_percent(school_gap[k]["First"]) +
+                " - " + school_gap[k]["Second Name"] + ": " + calc_percent(school_gap[k]["Second"]) + ")."
+              j++
 
-          corp_gap = calculateGap(year_data_corp, subject, category)
+              tooltip.html(school_gap_txt.join('<br/><br/>'))
+                .style('left', `${pos['x'] - 1}px`)
+                .attr("id", "popup-box")
+                .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+                .style("opacity", 1)
+            }
+          })
+            .on('mouseout', function (d) {
+              d3.select(this).classed("selected", false);
+              d3.selectAll('.tooltip')
+                .style("opacity", 0)
+            });
 
-          if (typeof corp_gap == 'undefined') { return }
+          // achievement gaps - corporations
+          corpgaps = d3.select('.corp-gaps')
+            .append("text")
+            .attr("font-weight", "bold")
+            .attr("font-size", "10px")
+            .attr("class", "infobar-text")
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("dx", 110)
+            .attr("dy", 11)
+            .style("fill", "white")
+            .style("pointer-events", "visible")
+            .text("Largest Achievement Gaps: Corporations")
+            .style("display", "block");
 
-          let j = 0,
-            corp_gap_txt = [];
+          corpgaps.on("mouseover", function (event, d) {
+            let pos = d3.select(this).node().getBoundingClientRect();
 
-          for (k = corp_gap.length - 1; k >= 0; k--) {
+            corp_gap = calculateGap(year_data_corp, subject, category)
 
-            // corporation achievement gap popup window
-            corp_gap_txt[j] = j + 1 + ") <b>" + corp_gap[k]["Corporation Name"] + "</b>: <b>" +
-              calc_percent(corp_gap[k]["Difference"]) + "</b><br/> (" + corp_gap[k]["First Name"] +
-              ": " + calc_percent(corp_gap[k]["First"]) + " - " + corp_gap[k]["Second Name"] + ": " +
-              calc_percent(corp_gap[k]["Second"]) + ")."
-            j++
+            if (typeof corp_gap == 'undefined') { return }
 
-            tooltip.html(corp_gap_txt.join('<br/><br/>'))
-              .style('left', `${pos['x'] - 1}px`)
-              .attr("id", "popup-box")
-              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
-              .style("opacity", 1);
-          }
-        })
-          .on('mouseout', function (d) {
-            d3.select(this).classed("selected", false);
-            d3.selectAll('.tooltip')
-              .style("opacity", 0)
-          });
+            let j = 0,
+              corp_gap_txt = [];
 
+            for (k = corp_gap.length - 1; k >= 0; k--) {
+
+              // corporation achievement gap popup window
+              corp_gap_txt[j] = j + 1 + ") <b>" + corp_gap[k]["Corporation Name"] + "</b>: <b>" +
+                calc_percent(corp_gap[k]["Difference"]) + "</b><br/> (" + corp_gap[k]["First Name"] +
+                ": " + calc_percent(corp_gap[k]["First"]) + " - " + corp_gap[k]["Second Name"] + ": " +
+                calc_percent(corp_gap[k]["Second"]) + ")."
+              j++
+
+              tooltip.html(corp_gap_txt.join('<br/><br/>'))
+                .style('left', `${pos['x'] - 1}px`)
+                .attr("id", "popup-box")
+                .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+                .style("opacity", 1);
+            }
+          })
+            .on('mouseout', function (d) {
+              d3.select(this).classed("selected", false);
+              d3.selectAll('.tooltip')
+                .style("opacity", 0)
+            });
+
+          d3.selectAll('.school-gaps').style("display", "block")
+          d3.selectAll('.corp-gaps').style("display", "block")
+        }
+
+        else {
+          d3.selectAll('.school-gaps').style("display", "none")
+          d3.selectAll('.corp-gaps').style("display", "none")
+        }
         // the map is translated 100px left and 50px down, so all other objects
         // must be shifted the same amount in order to line up correctly
         // (especially during zoom, where we need to multiply the shift by
