@@ -17,8 +17,6 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-    /* TODO: Remove unused */
-
     body {
       font-size: 1em;
       line-height: 1.6;
@@ -27,11 +25,6 @@
       color: steelblue;
       background-color: #F2F2F2;
     }
-
-    /* span {
-      font-family: 'Inter', sans-serif;
-      color: steelblue
-    } */
 
     div.tooltip {
       position: absolute;
@@ -138,15 +131,6 @@
       color: "steelblue";
       float: left;
     }
-
-    /* .input-group .btn {
-      position: relative;
-      z-index: 2;
-    }
-
-    .input-group .btn:focus {
-      z-index: 5;
-    } */
 
     .btn {
       line-height: 1;
@@ -272,66 +256,12 @@
 
     /* Containers */
 
-    /* .container {
-      position: relative;
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 20px;
-      box-sizing: border-box;
-    } */
-
     .column,
     .columns {
       width: 100%;
       float: left;
       margin-left: 0.5%;
     }
-
-    /* .one.column,
-    .one.columns {
-      width: 8%;
-    }
-
-    .two.columns {
-      width: 16.25%;
-    }
-
-    .three.columns {
-      width: 22%;
-    }
-
-    .four.columns {
-      width: 33%;
-    }
-
-    .five.columns {
-      width: 39.3333333333%;
-    }
-
-    .six.columns {
-      width: 49.75%;
-    }
-
-    .seven.columns {
-      width: 56.6666666667%;
-    }
-
-    .eight.columns {
-      width: 66.5%;
-    }
-
-    .nine.columns {
-      width: 74.0%;
-    }
-
-    .ten.columns {
-      width: 82.6666666667%;
-    }
-
-    .eleven.columns {
-      width: 91.5%;
-    } */
 
     .twelve.columns {
       width: 100%;
@@ -397,7 +327,7 @@
 
 <body>
   <div class="title-container">
-    <div class="title">ILEARN Proficiency by School and School Corporation</div>
+    <div class="title">Academic Proficiency by School and School Corporation for Indiana Schools</div>
   </div>
 
   <form>
@@ -412,6 +342,7 @@
           </select>
           <label for="year" class="dropdown-label">Year:</label>
           <select id="year" name="year" class="dropdown">
+            <option value="2024">2024</option>
             <option value="2023">2023</option>
             <option value="2022">2022</option>
             <option value="2021">2021</option>
@@ -422,6 +353,7 @@
             <option value="ELA">ELA</option>
             <option value="Math">Math</option>
             <option value="ELA & Math">ELA & Math</option>
+            <option value="IREAD">IREAD</option>
           </select>
         </div>
 
@@ -430,7 +362,7 @@
           <input type="radio" id="option-1n" name="navigation" value="by-grade" checked><label for="option-1n"
             class="btn btn-outline-primary">By Grade</label>
           <input type="radio" id="option-2n" name="navigation" value="by-ethnicity"><label for="option-2n"
-            class="btn btn-outline-primary">By Ethnicity</label>
+            class="btn btn-outline-primary">By Race/Ethnicity</label>
           <input type="radio" id="option-3n" name="navigation" value="by-subgroup"><label for="option-3n"
             class="btn btn-outline-primary">By Subgroup</label>
         </div>
@@ -443,8 +375,11 @@
       <div id="by-grade-content">
         <div class="btn-group">
           <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
-          <input type="radio" id="option-1a" name="category-by-grade" value="School Total" checked><label
-            for="option-1a" class="btn btn-outline-primary">School Total</label>
+          <div id="school-total">
+            <input type="radio" id="option-1a" name="category-by-grade" value="School Total" checked><label
+              for="option-1a" class="btn btn-outline-primary">School Total</label>
+          </div>
+          <div id="all-grades">
           <input type="radio" id="option-1b" name="category-by-grade" value="Grade 3"><label for="option-1b"
             class="btn btn-outline-primary">3</label>
           <input type="radio" id="option-1c" name="category-by-grade" value="Grade 4"><label for="option-1c"
@@ -457,6 +392,7 @@
             class="btn btn-outline-primary">7</label>
           <input type="radio" id="option-1g" name="category-by-grade" value="Grade 8"><label for="option-1g"
             class="btn btn-outline-primary">8</label>
+          </div>            
         </div>
       </div>
 
@@ -485,19 +421,15 @@
         <div class="btn-group">
           <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
           <input type="radio" id="option-3a" name="category-by-subgroup" value="English Language Learners"
-            checked><label for="option-3a" class="btn btn-outline-primary">English
-            Learners</label>
-          <input type="radio" id="option-3b" name="category-by-subgroup" value="Non-English Language Learners"><label
-            for="option-3b" class="btn btn-outline-primary">Non-English Learners</label>
+            checked><label for="option-3a" class="btn btn-outline-primary">English Learners</label>
+          <input type="radio" id="option-3b" name="category-by-subgroup" value="Non English Language Learners"><label
+            for="option-3b" class="btn btn-outline-primary">Non English Learners</label>
           <input type="radio" id="option-3c" name="category-by-subgroup" value="General Education"><label
-            for="option-3c" class="btn btn-outline-primary">General
-            Education</label>
+            for="option-3c" class="btn btn-outline-primary">General Education</label>
           <input type="radio" id="option-3d" name="category-by-subgroup" value="Special Education"><label
-            for="option-3d" class="btn btn-outline-primary">Special
-            Education</label>
+            for="option-3d" class="btn btn-outline-primary">Special Education</label>
           <input type="radio" id="option-3e" name="category-by-subgroup" value="Free or Reduced Price Meals"><label
-            for="option-3e" class="btn btn-outline-primary">Free
-            or Reduced Price Meals</label>
+            for="option-3e" class="btn btn-outline-primary">Free or Reduced Price Meals</label>
           <input type="radio" id="option-3f" name="category-by-subgroup" value="Paid Meals"><label for="option-3f"
             class="btn btn-outline-primary">Paid Meals</label>
         </div>
@@ -561,8 +493,7 @@
       svg.attr("stroke-width", 1 / transform.k);
     }
 
-    // resetsm use selections when the same node is
-    // "clicked" twice
+    // resets use selections when the same node is "clicked" twice
     function reset() {
 
       active.classed("active", false);
@@ -620,14 +551,14 @@
         secondCategory = category
       }
 
-      else if (category == "Non-English Language Learners") {
+      else if (category == "Non English Language Learners") {
         firstCategory = "English Language Learners"
         secondCategory = category
       }
 
       else if (category == "English Language Learners") {
         firstCategory = category
-        secondCategory = "Non-English Language Learners"
+        secondCategory = "Non English Language Learners"
       }
 
       else if (category == "Special Education") {
@@ -647,8 +578,7 @@
       secondTested = secondCategory + "|" + subject + " Total Tested";
 
       // change 'n' to set minimum n-size (of students Tested)
-
-      const n = 20
+      const n = 50
 
       const gapSet = data.filter(d => {
         if (+d[firstTested] < n) return false;
@@ -726,6 +656,7 @@
     var leg = svg.append("g")
       .attr("class", "legend-threshold")
       .attr("transform", "translate(20,80)");
+
     leg.append("text")
       .attr("font-weight", "bold")
       .attr("class", "caption")
@@ -804,10 +735,10 @@
     // svg.call(zoom);
 
     Promise.all([
-      d3.csv("corporation_data_k8.csv"),
-      d3.csv("academic_data_k8.csv"),
-      d3.json("geocodes_corporations_2023.json"),
-      d3.json("geocodes_schools_2023.json"),
+      d3.csv("corporation_data_k8_public.csv"),
+      d3.csv("school_data_k8_public.csv"),
+      d3.json("corporation_geojson.json"),
+      d3.json("school_geojson.json"),      
     ]).then(function ([scdata, schdata, INdistricts, INschools]) {
 
       const districts = topojson.feature(INdistricts, INdistricts.objects.districts);
@@ -832,13 +763,24 @@
       /* update map */
       var updateMap = function (scale, year, subject, category) {
 
-        if (scale == 'Relative') {
-          selectedDomain = [.05, .10, .15, .25, .35, .45, .55, .65];
-          labels = ['0-5%', '6-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '> 66%'];
+        // TODO: Force Percentage for IREAD Data [FORCE BUTTON CHANGE]
+        // TODO: Modify Navigation to be Dynamic
+
+
+        if (scale == 'Relative' && d3.select("#subject")._groups[0][0].value != "IREAD") {
+          selectedDomain = [.10, .15, .25, .35, .45, .55, .65, .75];
+          labels = ['0-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '66-75%', '> 76%'];
         }
         else {
           selectedDomain = [.20, .30, .40, .50, .60, .70, .80, .90];
           labels = ['0-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '> 91%'];
+        
+          // TODO: set IREAD checked property to Percentage (when? let it select Relative?)
+          if (d3.select("#subject")._groups[0][0].value == "IREAD") {
+            const radioBtn = document.getElementById("scale"); 
+            radioBtn.value = "Percentage"
+          }
+
         }
 
         color = d3.scaleThreshold()
@@ -863,8 +805,18 @@
 
         // categories for Top 10 tooltips
         const proficiencyCategory = category + "|" + subject + " Proficiency %";
-        const nSizeCategory = category + "|" + subject + " Total Tested";
-        const totalProficient = category + "|" + subject + " Total Proficient";
+        var nSizeCategory;
+        var totalProficient;
+
+        if (d3.select("#subject")._groups[0][0].value == "IREAD") {
+
+          nSizeCategory = category + "|" + subject + " Test N";
+          totalProficient = category + "|" + subject + " Pass N";
+        
+        } else {
+          nSizeCategory = category + "|" + subject + " Total Tested";
+          totalProficient = category + "|" + subject + " Total Proficient";          
+        }
 
         // calculate state average for each category
         // NOTE: This is much harder than it sounds for certain categories due
@@ -887,6 +839,7 @@
 
         const sumTested = d3.sum(adjustedData, d => d[nSizeCategory]);
         const sumProficient = d3.sum(adjustedData, d => d[totalProficient]);
+
         const stateAverage = sumProficient / sumTested
 
         // map title
@@ -905,10 +858,13 @@
           .text(proficiencyCategory + " (State Average: " + calc_percent(stateAverage) + ")");
 
         // top10 schools for selected category
+        d3.select('.top-schools .infobar-text').remove()
+
         schoolTop = d3.select(".top-schools")
           .append("text")
           .attr("font-weight", "bold")
           .attr("font-size", "10px")
+          .attr("font-family", "Inter, sans-serif")
           .attr("class", "infobar-text")
           .style("pointer-events", "visible")
           .attr("text-anchor", "middle")
@@ -924,6 +880,7 @@
           const nSizeSchool = schoolData.filter(d => +d[nSizeCategory] > 10);
           const schoolProficiency = nSizeSchool.filter(d => isNumeric(d[proficiencyCategory]));
 
+          // TODO: if proficiency is tied, sort by nsize
           schoolProficiency.sort(function (a, b) {
             if (+a[proficiencyCategory] === +b[proficiencyCategory]) { return 0 }
             else { return (+a[proficiencyCategory] < +b[proficiencyCategory]) ? -1 : 1 };
@@ -934,7 +891,10 @@
           let j = 0,
             schoolText = [];
 
+          console.log(schoolTopTen)
+
           for (k = schoolTopTen.length - 1; k >= 0; k--) {
+
             schoolText[j] = j + 1 + ") <b>" + schoolTopTen[k]['School Name'] + "</b>: <b>" +
               calc_percent(schoolTopTen[k][proficiencyCategory]) + "</b> (n-size: " +
               schoolTopTen[k][nSizeCategory] + ")<br/> (" + schoolTopTen[k]['Corporation Name'] + ")."
@@ -954,6 +914,8 @@
           });
 
         // top10 corporations for selected category
+        d3.select('.top-corps .infobar-text').remove()
+
         schoolTop = d3.select(".top-corps")
           .append("text")
           .attr("font-weight", "bold")
@@ -1000,11 +962,12 @@
           });
 
         // achievement gaps - school
-
         if (category == "Black" || category == "Multiracial" || category == "Hispanic"
           || category == "Asian" || category == "Paid Meals" || category == "Free or Reduced Price Meals"
           || category == "Non-English Language Learners" || category == "English Language Learners"
           || category == "Special Education" || category == "General Education") {
+
+          d3.select('.school-gaps .infobar-text').remove()
 
           schoolGaps = d3.select(".school-gaps")
             .append("text")
@@ -1053,6 +1016,8 @@
             });
 
           // achievement gaps - corporations
+          d3.select('.corp-gaps .infobar-text').remove()
+
           corpGaps = d3.select('.corp-gaps')
             .append("text")
             .attr("font-weight", "bold")
@@ -1107,11 +1072,11 @@
           d3.selectAll('.school-gaps').style("display", "none")
           d3.selectAll('.corp-gaps').style("display", "none")
         }
+
         // the map is translated 100px left and 50px down, so all other objects
         // must be shifted the same amount in order to line up correctly
         // (especially during zoom, where we need to multiply the shift by
         // the scale factor)
-
         paths = d3.select('.districts')
           .selectAll("path")
           .data(districts.features)
@@ -1153,8 +1118,6 @@
             // svg._groups[0][0].__zoom.k gives us the "k" transform value, aka the
             // current zoom amount. so tooltips are only shown if k == 1 (it is not zoomed in)
             // add the test for null to prevent an error on load or reload where the val is null
-            // console.log(d3.select(active))
-            // (active.node() === this)
             if ((data != null) && ((svg._groups[0][0].__zoom == null)
               || (svg._groups[0][0].__zoom.k == 1))) {
 
@@ -1279,10 +1242,9 @@
             .call(zoom.transform, d3.zoomIdentity.translate(translate[0] + xshift, translate[1] - yshift).scale(scale));
 
           var schoolsInPOLY = schools.features.filter(function (s) {
-
             if (d3.polygonContains(active.datum().geometry.coordinates[0], [s.geometry.coordinates[0], s.geometry.coordinates[1]])) {
 
-              // TODO: add HS categories
+              // TODO: add High School Academic Data
               const max = 9;
               const min = 2;
               var low;
@@ -1454,6 +1416,32 @@
         var selectedScale = d3.select("#scale")._groups[0][0].value
         var selectedYear = d3.select("#year")._groups[0][0].value
         var selectedSubject = d3.select("#subject")._groups[0][0].value
+
+        /* Dropdowns */
+        var topLevel = document.querySelector(".dropdowns");
+
+        // set "by-grade-content" to display initially or on reload (default),
+        // but if selected subject is IREAD we only display school-total
+        document.getElementById("by-grade-content").style.display = "block";
+
+        //  On click, get subnav content divs and set default display to none
+        var grade_divs = document.querySelectorAll('div.subnavigation > div#by-grade-content > div.btn-group > div');
+
+        if (selectedSubject == "IREAD") {
+
+            for (let div of grade_divs) {
+
+              if (div.id == "school-total") {
+                div.style.display = "block";
+              }
+              else { div.style.display = "none";}
+            } 
+        } else {
+            for (let div of grade_divs) {
+              div.style.display = "block";
+            }
+        }
+
         var selectedNav = d3.select("input[name='navigation']:checked").attr('value');
 
         subNavigation = "category-" + selectedNav
@@ -1462,7 +1450,7 @@
         updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
       })
 
-      updateMap('Relative', '2023', 'ELA', 'School Total')
+      updateMap('Relative', '2024', 'ELA', 'School Total')
 
     }).catch(function (error) {
       console.error(error);
