@@ -1,0 +1,326 @@
+/*
+Indiana School Map Modules Stylesheet
+revised: 10.17.24
+https://github.com/jbetley
+*/
+
+body {
+  font-size: 1em;
+  line-height: 1;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  color: steelblue;
+  background-color: #F2F2F2;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 2px;
+  font: 11px 'Inter', sans-serif;
+  font-weight: bold;
+  background: #e3e3e3;
+  color: steelblue;
+  border-radius: 8px;
+  border: thin solid steelblue;
+  pointer-events: none;
+}
+
+#popup-box {
+  position: absolute;
+  text-align: left;
+  text-wrap: nowrap;
+  line-height: 2;
+  padding: 5px;
+  font: 11px 'Inter', sans-serif;
+  background: #e3e3e3;
+  color: steelblue;
+  border-radius: 8px;
+  border: thin solid steelblue;
+  pointer-events: none;
+}
+
+.navigation-div {
+  float: left;
+}
+
+.subnavigation {
+  display: inline-block;
+  vertical-align: middle;
+  height: 26px;
+}
+
+.dropdowns {
+  outline: none;
+  /* display: inline-block; */
+  vertical-align: middle;
+  /* height: 26px; */
+  padding-bottom: 2px;
+  width: fit-content;
+  white-space: nowrap;
+  float: left;
+}
+
+select:focus {
+  outline: none;
+}
+
+/*
+Cannot style option box/border unless you roll your own. See:
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_custom_select
+*/
+
+.dropdown {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: white;
+  border: thin steelblue;
+  border-radius: 12px;
+  height: 26px;
+  font: inherit;
+  font-size: 11px;
+  padding: .2em 1em .2em 1em;
+  color: #6783a9;
+  border: 1px solid rgba(192, 193, 199, .5);
+  border-radius: .5rem;
+  text-transform: uppercase;
+
+  /* reset */
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.dropdown-label {
+  padding-left: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: "steelblue";
+}
+
+.category-label {
+  display: inline-block;
+  /* vertical-align: middle; */
+  padding-top: 2px;
+  padding-left: 7px;
+  padding-right: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: "steelblue";
+}
+
+.subcategory-label {
+  display: inline-block;
+  padding-top: 2px;
+  padding-left: 7px;
+  padding-right: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: "steelblue";
+  /* float: left; */
+}
+
+.btn {
+  line-height: 1.2;
+  height: 26px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  color: steelblue;
+  background-color: #ffffff;
+  font-size: 10px;
+  font-weight: 400;
+  /* align-items: center;
+  justify-content: center; */
+  border: 1px solid rgba(192, 193, 199, .5);
+  border-radius: .5rem;
+  padding: 6px;
+  /* width: 100%; */
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  /* text-align: center; */
+  box-sizing: border-box;
+}
+
+#school-total {
+  margin-right: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}
+
+.btn:hover {
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  background-color: #c0c1c7;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  /* align-items: center;
+  justify-content: center; */
+  border: 1px solid rgba(70, 130, 180, .5);
+  border-radius: .5rem;
+  padding: 6px;
+  /* width: 100%; */
+  /* text-align: center; */
+  box-sizing: border-box;
+}
+
+.btn.active {
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  background-color: #c0c1c7;
+  font-size: 11px;
+  font-weight: 600;
+  /* align-items: center;
+  justify-content: center; */
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid rgba(70, 130, 180, .5);
+  border-radius: .5rem;
+  padding: 6px;
+  /* width: 100%;
+  text-align: center; */
+  box-sizing: border-box;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #6783a9;
+  --bs-btn-border-color: #6783a9;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #6783a9;
+  --bs-btn-hover-border-color: #6783a9;
+  --bs-btn-focus-shadow-rgb: 13, 110, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #6783a9;
+  --bs-btn-active-border-color: #6783a9;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #6783a9;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #6783a9;
+  --bs-gradient: none;
+}
+
+.btn-group {
+  position: relative;
+  display: inline-flex;
+  /* vertical-align: middle; */
+  z-index: 99;
+  margin: 0;
+  padding: 0;
+  margin-top: 3px;
+  white-space: nowrap;
+  float: left;
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+input[type=radio]:checked+label {
+  color: #ffffff;
+  background: #c0c1c7;
+  border: 1px solid rgba(70, 130, 180, .5);
+  border-radius: .5rem;
+}
+
+.legend-threshold {
+  font-size: 10px;
+  font-family: 'Inter', sans-serif;
+}
+
+.title-container {
+  border-radius: 5px;
+  background-color: #6783a9;
+  color: #ffffff;
+  margin: 5px;
+  padding: 5px;
+  position: relative;
+  text-align: center;
+  box-shadow: 2px 2px 2px lightgrey;
+}
+
+.title {
+  padding-left: 15px;
+}
+
+.column,
+.columns {
+  width: 100%;
+  float: left;
+  margin-left: 0.5%;
+}
+
+.twelve.columns {
+  width: 100%;
+  margin-left: 0;
+}
+
+.bare-container--flex--center {
+  padding: 0 0 0 0;
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin: 10px;
+  box-shadow: 2px 2px 2px lightgrey;
+  display: flex;
+}
+
+.map-container {
+  overflow: visible;
+}
+
+.map {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  justify-content: center;
+  text-align: center;
+}
+
+.main-container {
+  flex-direction: column;
+}
+
+.pretty-container--close {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #ffffff;
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 0px;
+  width: 100%;
+  position: relative;
+  box-shadow: 2px 2px 2px lightgrey;
+}
+
+.active {
+  background-color: #dbdbdb;
+  opacity: .3;
+}
+
+#by-grade-content,
+#by-ethnicity-content,
+#by-subgroup-content {
+  display: none;
+}

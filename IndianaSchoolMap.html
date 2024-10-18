@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"
@@ -13,316 +12,11 @@
     integrity="sha512-4UKI/XKm3xrvJ6pZS5oTRvIQGIzZFoXR71rRBb1y2N+PbwAsKa5tPl2J6WvbEvwN3TxQCm8hMzsl/pO+82iRlg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-polygon@3"></script>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-    body {
-      font-size: 1em;
-      line-height: 1.6;
-      font-weight: 400;
-      font-family: 'Inter', sans-serif;
-      color: steelblue;
-      background-color: #F2F2F2;
-    }
-
-    div.tooltip {
-      position: absolute;
-      text-align: center;
-      padding: 2px;
-      font: 11px 'Inter', sans-serif;
-      font-weight: bold;
-      background: #e3e3e3;
-      color: steelblue;
-      border-radius: 8px;
-      border: thin solid steelblue;
-      pointer-events: none;
-    }
-
-    #popup-box {
-      position: absolute;
-      text-align: left;
-      text-wrap: nowrap;
-      line-height: 2;
-      padding: 5px;
-      font: 11px 'Inter', sans-serif;
-      background: #e3e3e3;
-      color: steelblue;
-      border-radius: 8px;
-      border: thin solid steelblue;
-      pointer-events: none;
-    }
-
-    .navigation {
-      float: left;
-    }
-
-    .subnavigation {
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .dropdowns {
-      outline: none;
-      display: inline-block;
-      vertical-align: middle;
-      padding-bottom: 2px;
-      width: fit-content;
-      white-space: nowrap;
-      float: left;
-    }
-
-    select:focus {
-      outline: none;
-    }
-
-    /*
-    Cannot style option box/border unless you roll your own. See:
-    https://www.w3schools.com/howto/tryit.asp?filename=tryhow_custom_select
-    */
-
-    .dropdown {
-      display: inline-block;
-      vertical-align: middle;
-      background-color: white;
-      border: thin steelblue;
-      border-radius: 12px;
-      font: inherit;
-      font-size: 11px;
-      padding: .2em 1em .2em 1em;
-      color: #6783a9;
-      border: 1px solid rgba(192, 193, 199, .5);
-      border-radius: .5rem;
-      text-transform: uppercase;
-
-      /* reset */
-      margin: 0;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-    }
-
-    .dropdown-label {
-      padding-left: 7px;
-      font-size: 12px;
-      font-weight: 400;
-      color: "steelblue";
-    }
-
-    .category-label {
-      display: inline-block;
-      vertical-align: middle;
-      padding-left: 7px;
-      padding-right: 7px;
-      font-size: 12px;
-      font-weight: 400;
-      color: "steelblue";
-    }
-
-    .subcategory-label {
-      display: inline-block;
-      vertical-align: middle;
-      padding-left: 7px;
-      padding-right: 7px;
-      font-size: 12px;
-      font-weight: 400;
-      color: "steelblue";
-      float: left;
-    }
-
-    .btn {
-      line-height: 1;
-      text-transform: uppercase;
-      font-family: 'Inter', sans-serif;
-      color: steelblue;
-      background-color: #ffffff;
-      font-size: 10px;
-      font-weight: 500;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(192, 193, 199, .5);
-      border-radius: .5rem;
-      padding: 6px;
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .btn {
-        transition: none;
-      }
-    }
-
-    .btn:hover {
-      line-height: 1;
-      text-transform: uppercase;
-      font-family: 'Inter', sans-serif;
-      color: white;
-      background-color: #c0c1c7;
-      font-size: 11px;
-      font-weight: 600;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(70, 130, 180, .5);
-      border-radius: .5rem;
-      padding: 6px;
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .btn.active {
-      line-height: 1;
-      text-transform: uppercase;
-      font-family: 'Inter', sans-serif;
-      color: white;
-      background-color: #c0c1c7;
-      font-size: 11px;
-      font-weight: 600;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(70, 130, 180, .5);
-      border-radius: .5rem;
-      padding: 6px;
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .btn-outline-primary {
-      --bs-btn-color: #6783a9;
-      --bs-btn-border-color: #6783a9;
-      --bs-btn-hover-color: #fff;
-      --bs-btn-hover-bg: #6783a9;
-      --bs-btn-hover-border-color: #6783a9;
-      --bs-btn-focus-shadow-rgb: 13, 110, 253;
-      --bs-btn-active-color: #fff;
-      --bs-btn-active-bg: #6783a9;
-      --bs-btn-active-border-color: #6783a9;
-      --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-      --bs-btn-disabled-color: #6783a9;
-      --bs-btn-disabled-bg: transparent;
-      --bs-btn-disabled-border-color: #6783a9;
-      --bs-gradient: none;
-    }
-
-    .btn-group {
-      position: relative;
-      display: inline-flex;
-      vertical-align: middle;
-      z-index: 99;
-      margin: 0;
-      padding: 0;
-      margin-top: 3px;
-      width: fit-content;
-      white-space: nowrap;
-      float: left;
-    }
-
-    input[type=radio] {
-      position: absolute;
-      visibility: hidden;
-      display: none;
-    }
-
-    input[type=radio]:checked+label {
-      color: #ffffff;
-      background: #c0c1c7;
-      border: 1px solid rgba(70, 130, 180, .5);
-      border-radius: .5rem;
-    }
-
-    .legend-threshold {
-      font-size: 10px;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .title-container {
-      border-radius: 5px;
-      background-color: #6783a9;
-      color: #ffffff;
-      margin: 5px;
-      padding: 5px;
-      position: relative;
-      box-shadow: 2px 2px 2px lightgrey;
-    }
-
-    .title {
-      padding-left: 15px;
-    }
-
-    /* Containers */
-
-    .column,
-    .columns {
-      width: 100%;
-      float: left;
-      margin-left: 0.5%;
-    }
-
-    .twelve.columns {
-      width: 100%;
-      margin-left: 0;
-    }
-
-    .bare-container--flex--center {
-      padding: 0 0 0 0;
-      border-radius: 5px;
-      background-color: #ffffff;
-      margin: 10px;
-      box-shadow: 2px 2px 2px lightgrey;
-      display: flex;
-    }
-
-    .map-container {
-      overflow: visible;
-    }
-
-    .map {
-      float: left;
-      width: 100%;
-      height: 100%;
-    }
-
-    .row {
-      margin: 0 0 0 0;
-      padding: 0 0 0 0;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .main-container {
-      flex-direction: column;
-    }
-
-    .pretty-container--close {
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      background-color: #ffffff;
-      margin-top: 10px;
-      padding-top: 15px;
-      padding-right: 15px;
-      padding-left: 15px;
-      padding-bottom: 0px;
-      width: 100%;
-      position: relative;
-      box-shadow: 2px 2px 2px lightgrey;
-    }
-
-    .active {
-      background-color: #dbdbdb;
-      opacity: .3;
-    }
-
-    #by-grade-content,
-    #by-ethnicity-content,
-    #by-subgroup-content {
-      display: none;
-    }
-  </style>
+  <script src="./modules/utilities.js"></script>
+  <link rel="stylesheet" href="./modules/stylesheet.css"></link>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+</style>
 </head>
 
 <body>
@@ -352,13 +46,13 @@
           <select id="subject" name="subject" class="dropdown">
             <option value="ELA">ELA</option>
             <option value="Math">Math</option>
-            <option value="ELA & Math">ELA & Math</option>
+            <option value="ELA and Math">ELA and Math</option>
             <option value="IREAD">IREAD</option>
           </select>
         </div>
 
-        <div class="navigation">
-          <label for="navigation" class="category-label">Category:</label>
+        <div class="navigation-div">
+          <div class="category-label">Category:</div>
           <input type="radio" id="option-1n" name="navigation" value="by-grade" checked><label for="option-1n"
             class="btn btn-outline-primary">By Grade</label>
           <input type="radio" id="option-2n" name="navigation" value="by-ethnicity"><label for="option-2n"
@@ -371,10 +65,9 @@
     </div>
 
     <div class="subnavigation">
-
       <div id="by-grade-content">
         <div class="btn-group">
-          <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
+          <div class="subcategory-label">Sub-Category:</div>
           <div id="school-total">
             <input type="radio" id="option-1a" name="category-by-grade" value="School Total" checked><label
               for="option-1a" class="btn btn-outline-primary">School Total</label>
@@ -435,7 +128,7 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
 
   </form>
 
@@ -449,1015 +142,898 @@
     </div>
   </div>
 
-  <script>
+<script>
+// Indiana School Map
+// revised: 10.17.24
+// https://github.com/jbetley
 
-    /* Subnavigation */
-    var subNavigation = document.querySelector(".navigation");
+const replacementText = [
+  { name: "Non English Language Learners", new: "Non EL" },
+  { name: "English Language Learners", new: "EL" },
+  { name: "Free or Reduced Price Meals", new: "FRL" },
+  { name: "General Education", new: "Gen Ed" },
+  { name: "Special Education", new: "Special Ed" }
+];
 
-    // set "by-grade-content" to display initially or on reload (default)
-    document.getElementById("by-grade-content").style.display = "block";
+// display grade-content on load (default css is display none)
+document.getElementById("by-grade-content").style.display = "block";
 
-    subNavigation.addEventListener("click", function (e) {
+// TODO: Modify Navigation to be Dynamic //
+var subNavigation = document.querySelector(".navigation-div");
 
-      //  On click, get subnav content divs and set default display to none
-      var divs = document.querySelectorAll('div.subnavigation > div');
+var previousSelection = d3.select("#subject")._groups[0][0].value
 
-      for (let div of divs) {
-        div.style.display = "none";
+// this prevents a drag from registering as a click
+subNavigation.addEventListener('mousemove', function(e) {
+     isBetweenDragAndClick = true;
+ });
+
+subNavigation.addEventListener("click", function (e) {
+
+  if(isBetweenDragAndClick) {
+      isBetweenDragAndClick = false;
+      return;
+  }
+
+  // this prevents click from registering on the div container holding
+  // the buttons
+  if (e.target.nodeName != "DIV") {
+    //  on click, display target content id and set rest to none
+    var divs = document.querySelectorAll('div.subnavigation > div');
+
+    for (let div of divs) {
+      div.style.display = "none";
+    }
+
+    if (e.target.value) {
+      target_div = e.target.value + "-content"
+      document.getElementById(target_div).style.display = "block";
+    }
+  }
+});
+
+function zoomed(event) {
+  const { transform } = event;
+  svg.attr("transform", transform);
+  svg.attr("stroke-width", 1 / transform.k);
+}
+
+// resets selection when the same node is clicked twice
+function reset() {
+  active.classed("active", false);
+
+  svg.selectAll(".points")
+    .transition()
+    .duration(500)
+    .remove();
+
+  svg.transition()
+    .duration(750)
+    .call(zoom.transform, d3.zoomIdentity);
+}
+
+function stopped(event, d) {
+  if (event.defaultPrevented) event.stopPropagation();
+}
+
+// Map //
+var width = 800,
+  height = 800,
+  colorHistory = [],
+  points,
+  colors,
+  legend,
+  updateColor,
+  active = d3.select(null);
+
+var tooltip = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+var svg = d3.select(".map")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height)
+  .append("g");
+
+var leg = svg.append("g")
+  .attr("class", "legend-threshold")
+  .attr("transform", "translate(20,80)");
+
+leg.append("text")
+  .attr("font-weight", "bold")
+  .attr("class", "caption")
+  .attr("x", 0)
+  .attr("y", -6)
+  .style("fill", "steelblue")
+  .text("Percentage Proficient");
+
+var mapTitle = svg.append("g")
+  .attr("class", "map-title")
+  .attr("transform", "translate(180,5)");
+
+mapTitle.append("rect")
+  .attr('width', 350)
+  .attr('height', 20)
+  .style("fill", "white")
+  .style("pointer-events", "visible")
+
+var schoolTop = svg.append("g")
+  .attr("class", "top-schools")
+  .attr("transform", "translate(565,40)");
+
+schoolTop.append("rect")
+  .attr('width', 220)
+  .attr('height', 20)
+  .attr("rx", function (d) { return 5 })
+  .attr("ry", function (d) { return 5 })
+  .style("stroke", "steelblue")
+  .style("fill", "steelblue")
+  .style("pointer-events", "visible")
+
+var corpTop = svg.append("g")
+  .attr("class", "top-corps")
+  .attr("transform", "translate(565,80)");
+
+corpTop.append("rect")
+  .attr('width', 220)
+  .attr('height', 20)
+  .attr("rx", function (d) { return 5 })
+  .attr("ry", function (d) { return 5 })
+  .style("stroke", "steelblue")
+  .style("fill", "steelblue")
+  .style("pointer-events", "visible")
+
+var schoolGaps = svg.append("g")
+  .attr("class", "school-gaps")
+  .attr("transform", "translate(565,120)");
+
+schoolGaps.append("rect")
+  .attr('width', 220)
+  .attr('height', 20)
+  .attr("rx", function (d) { return 5 })
+  .attr("ry", function (d) { return 5 })
+  .style("stroke", "steelblue")
+  .style("fill", "steelblue")
+  .style("pointer-events", "visible");
+
+var corpGaps = svg.append("g")
+  .attr("class", "corp-gaps")
+  .attr("transform", "translate(565,160)");
+
+corpGaps.append("rect")
+  .attr('width', 220)
+  .attr('height', 20)
+  .attr("rx", function (d) { return 5 })
+  .attr("ry", function (d) { return 5 })
+  .style("stroke", "steelblue")
+  .style("fill", "steelblue")
+  .style("pointer-events", "visible");
+
+var zoom = d3.zoom()
+  .scaleExtent([1, 8])
+  .on("zoom", zoomed);
+
+Promise.all([
+  d3.csv("corporation_data_k8_public.csv"),
+  d3.csv("school_data_k8_public.csv"),
+  d3.json("corporation_geojson.json"),
+  d3.json("school_geojson.json"),      
+]).then(function ([scdata, schdata, INdistricts, INschools]) {
+
+  const districts = topojson.feature(INdistricts, INdistricts.objects.districts);
+  const schools = topojson.feature(INschools, INschools.objects.publicschools);
+  const mesh = topojson.mesh(INdistricts, INdistricts.objects.districts);
+  const projection = d3.geoMercator().fitSize([width, height], mesh);
+
+  var path = d3.geoPath().projection(projection);
+
+  var paths = svg.append("g")
+    .attr("class", "districts")
+    .selectAll("path")
+    .data(districts.features)
+    .enter().append("path")
+    .attr('data-fips', function (d) {
+      return d.properties.NAME
+    })
+    .attr("d", path)
+    .attr("transform", "translate(-100,30)");
+
+  var updateMap = function (scale, year, subject, category) {
+
+    // scale defaults to Relative for all Categories except IREAD,
+    // which cannot select Relative
+    if (scale == 'Relative' && d3.select("#subject.dropdown").node().value != "IREAD") {
+      selectedDomain = [.10, .15, .25, .35, .45, .55, .65, .75];
+      labels = ['0-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '66-75%', '> 76%'];
+    }
+    else {
+      selectedDomain = [.20, .30, .40, .50, .60, .70, .80, .90];
+      labels = ['0-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '> 91%'];
+
+    if (d3.select("#subject.dropdown").node().value == "IREAD") {
+        const radioBtn = document.getElementById("scale"); 
+        radioBtn.value = "Percentage"
       }
+    }
 
-      // display target id div
-      if (e.target.value) {
-        target_div = e.target.value + "-content"
-        document.getElementById(target_div).style.display = "block";
-      }
+    color = d3.scaleThreshold()
+      .domain(selectedDomain)
+      .range(["#e5eff9", "#cee1f2", "#b0d1e7", "#87bddc", "#5da4d0", "#3a89c1", "#1d6bb0", "#0e559d", "#08306b"]);
+
+    legend = d3.legendColor()
+      .labels(function (d) { return labels[d.i]; })
+      .shapePadding(4)
+      .scale(color);
+    svg.select(".legend-threshold")
+      .call(legend);
+
+    var schoolData = schdata.filter(obj => {
+      return obj.Year === year
+    })
+
+    var corpData = scdata.filter(obj => {
+      return obj.Year === year
+    })
+
+    // Top 10 Schools and Corps
+    const proficiencyCategory = category + "|" + subject + " Proficiency %";
+    var nSizeCategory;
+    var totalProficient;
+
+    if (d3.select("#subject.dropdown").node().value == "IREAD") {
+
+      nSizeCategory = category + "|" + subject + " Test N";
+      totalProficient = category + "|" + subject + " Pass N";
+    
+    } else {
+      nSizeCategory = category + "|" + subject + " Total Tested";
+      totalProficient = category + "|" + subject + " Total Proficient";          
+    }
+
+    // calculate state average for each category
+    // NOTE: This is much harder than it sounds for certain categories due
+    // to the large number of redactions due to insufficient n-size - for
+    // example: we are unable to generate an average at all for American
+    // Indian using school data because no school has a sufficiently large
+    // American Indian population to generate a value. We can generate an
+    // average using aggregated corporation data, but it is also skewed
+    // because tested students show up in the denominator but not in
+    // the numerator (e.g., the numerator is "***") - so perhaps best case
+    // scenario is to disregard all rows with a total proficiency of "***".
+    // the final number still will not be completely accurate, but it is
+    // probably the best we can do.
+
+    const adjustedData = corpData.filter(function (el) {
+      return el[totalProficient] != "***" && el[totalProficient] != ""
     });
 
-    function calc_percent(d) {
-      if (d === "***") {
-        return "***"
-      } else if (d === "" || isNaN(d)) {
-        return "No Data"
-      } else {
-        return d3.format(",.2%")(d)
-      }
-    }
+    const sumTested = d3.sum(adjustedData, d => d[nSizeCategory]);
+    const sumProficient = d3.sum(adjustedData, d => d[totalProficient]);
 
-    function isNumeric(n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);
-    }
+    const stateAverage = sumProficient / sumTested
 
-    function zoomed(event) {
-      const { transform } = event;
-      svg.attr("transform", transform);
-      svg.attr("stroke-width", 1 / transform.k);
-    }
+    d3.select('.map-title-text').remove()
 
-    // resets use selections when the same node is "clicked" twice
-    function reset() {
-
-      active.classed("active", false);
-
-      svg.selectAll(".points")
-        .transition()
-        .duration(500)
-        .remove();
-
-      svg.transition()
-        .duration(750)
-        .call(zoom.transform, d3.zoomIdentity);
-    }
-
-    function stopped(event, d) {
-      if (event.defaultPrevented) event.stopPropagation();
-    }
-
-    // takes as input an array of points x, y and r values, determines
-    // if the circles overlap and if so, shifts their coordinates
-    // away from each other. can give inconsistent results if there
-    // are multiple points right next to each other
-    // if dx > 0 -> shift x0 left, else shift x0 right
-    // if dy > 0 -> shift y0 up, else shift y0 down
-    function shifty(s) {
-      for (let q = 0; q < s.length - 1; q++) {
-        for (let p = q + 1; p < s.length; p++) {
-          if (Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y) < 2 * s[q].r) {
-            dx = s[p].x - s[q].x;
-            dy = s[p].y - s[q].y;
-            shift = (s[q].r * 2) - Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y)
-            if (dx > 0) { s[q].x = s[q].x - shift / 1.5 } else { s[q].x = s[q].x + shift / 1.5 }
-            if (dy > 0) { s[q].y = s[q].y - shift / 1.5 } else { s[q].y = s[q].y + shift / 1.5 }
-          }
-        }
-      }
-      return s
-    }
-
-    // calculate achievment gap for certain selected categories
-    function calculateGap(data, subject, category) {
-      if (category == "Black" || category == "Multiracial" ||
-        category == "Hispanic" || category == "Asian") {
-        firstCategory = "White"
-        secondCategory = category
-      }
-
-      else if (category == "Paid Meals") {
-        firstCategory = category
-        secondCategory = "Free or Reduced Price Meals"
-      }
-
-      else if (category == "Free or Reduced Price Meals") {
-        firstCategory = "Paid Meals"
-        secondCategory = category
-      }
-
-      else if (category == "Non English Language Learners") {
-        firstCategory = "English Language Learners"
-        secondCategory = category
-      }
-
-      else if (category == "English Language Learners") {
-        firstCategory = category
-        secondCategory = "Non English Language Learners"
-      }
-
-      else if (category == "Special Education") {
-        firstCategory = "General Education"
-        secondCategory = category
-      }
-
-      else if (category == "General Education") {
-        firstCategory = category
-        secondCategory = "Special Education"
-      }
-      else {
-        return
-      }
-
-      firstTested = firstCategory + "|" + subject + " Total Tested";
-      secondTested = secondCategory + "|" + subject + " Total Tested";
-
-      // change 'n' to set minimum n-size (of students Tested)
-      const n = 50
-
-      const gapSet = data.filter(d => {
-        if (+d[firstTested] < n) return false;
-        if (+d[secondTested] < n) return false;
-        return d;
-
-      });
-
-      gapList = []
-
-      firstProficiency = firstCategory + "|" + subject + " Proficiency %";
-      secondProficiency = secondCategory + "|" + subject + " Proficiency %";
-
-      const gapDifference = gapSet.map(item => {
-        firstItem = parseFloat(item[firstProficiency]);
-        secondItem = parseFloat(item[secondProficiency]);
-
-        if (secondItem > firstItem) {
-          firstValue = secondItem
-          secondValue = firstItem
-          higherCategory = secondCategory
-          lowerCategory = firstCategory
-        }
-        else {
-          firstValue = firstItem
-          secondValue = secondItem
-          higherCategory = firstCategory
-          lowerCategory = secondCategory
-        }
-
-        gapObj = new Object();
-
-        if ("School Name" in item) {
-          gapObj['School Name'] = item['School Name']
-        }
-        gapObj['Corporation Name'] = item['Corporation Name']
-
-        gapObj["First Name"] = higherCategory
-        gapObj["First"] = firstValue
-        gapObj["Second Name"] = lowerCategory
-        gapObj["Second"] = secondValue
-        gapObj["Difference"] = Math.abs(firstValue - secondValue);
-        gapList.push(gapObj)
-      });
-
-      gapList.sort(function (a, b) {
-        if (+a["Difference"] === +b["Difference"]) { return 0 } else { return (+a["Difference"] < +b["Difference"]) ? -1 : 1 };
-      });
-
-      badGaps = gapList.slice(gapList.length - 10);
-
-      return badGaps
-    }
-
-    /* Create element variables */
-    var width = 800,
-      height = 800,
-      colorHistory = [],
-      points,
-      colors,
-      legend,
-      updateColor,
-      active = d3.select(null);
-
-    var tooltip = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
-
-    var svg = d3.select(".map")
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .append("g");
-
-    var leg = svg.append("g")
-      .attr("class", "legend-threshold")
-      .attr("transform", "translate(20,80)");
-
-    leg.append("text")
+    mapTitle = d3.select(".map-title")
+      .append("text")
       .attr("font-weight", "bold")
-      .attr("class", "caption")
-      .attr("x", 0)
-      .attr("y", -6)
+      .attr("font-size", "14px")
+      .attr("class", "map-title-text")
+      .style("pointer-events", "visible")
       .style("fill", "steelblue")
-      .text("Percentage Proficient");
+      .attr("dx", function (d) { return 6 })
+      .attr("dy", function (d) { return 13 })
+      .style("opacity", 1)
+      .text(proficiencyCategory + " (State Average: " + calc_percent(stateAverage) + ")");
 
-    var mapTitle = svg.append("g")
-      .attr("class", "map-title")
-      .attr("transform", "translate(180,5)");
+    d3.select('.top-schools .infobar-text').remove()
 
-    mapTitle.append("rect")
-      .attr('width', 350)
-      .attr('height', 20)
+    schoolTop = d3.select(".top-schools")
+      .append("text")
+      .attr("font-weight", "bold")
+      .attr("font-size", "10px")
+      .attr("font-family", "Inter, sans-serif")
+      .attr("class", "infobar-text")
+      .style("pointer-events", "visible")
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("dx", 110)
+      .attr("dy", 11)
+      .style("fill", "white")
+      .text("Highest Proficiency: Schools");
+
+    schoolTop.on("mouseover", function (event, d) {
+      let pos = d3.select(this).node().getBoundingClientRect();
+
+      const nSizeSchool = schoolData.filter(d => +d[nSizeCategory] > 10);
+      const schoolProficiency = nSizeSchool.filter(d => isNumeric(d[proficiencyCategory]));
+
+      // Sort by proficiency and then nSize
+      schoolProficiency.sort(function (a, b) {
+        return +a[proficiencyCategory] - +b[proficiencyCategory] ||
+          +a[nSizeCategory] - +b[nSizeCategory];
+      });
+
+      schoolTopTen = schoolProficiency.slice(schoolProficiency.length - 10);
+
+      let j = 0,
+        schoolText = [];
+
+      for (k = schoolTopTen.length - 1; k >= 0; k--) {
+
+        schoolText[j] = j + 1 + ") <b>" + schoolTopTen[k]['School Name'] + "</b>: <b>" +
+          calc_percent(schoolTopTen[k][proficiencyCategory]) + "</b> (n-size: " +
+          schoolTopTen[k][nSizeCategory] + ")<br/> (" + schoolTopTen[k]['Corporation Name'] + ")."
+        j++
+
+        tooltip.html(schoolText.join('<br/><br/>'))
+          .style('left', `${pos['x'] - 1}px`)
+          .attr("id", "popup-box")
+          .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+          .style("opacity", 1);
+      }
+    })
+      .on('mouseout', function (d) {
+        d3.select(this).classed("selected", false);
+        d3.selectAll('.tooltip')
+          .style("opacity", 0)
+      });
+
+    d3.select('.top-corps .infobar-text').remove()
+
+    schoolTop = d3.select(".top-corps")
+      .append("text")
+      .attr("font-weight", "bold")
+      .attr("font-size", "10px")
+      .attr("class", "infobar-text")
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("dx", 110)
+      .attr("dy", 11)
       .style("fill", "white")
       .style("pointer-events", "visible")
+      .text("Highest Proficiency: Corporations");
 
-    var schoolTop = svg.append("g")
-      .attr("class", "top-schools")
-      .attr("transform", "translate(565,40)");
+    corpTop.on("mouseover", function (event, d) {
 
-    schoolTop.append("rect")
-      .attr('width', 220)
-      .attr('height', 20)
-      .attr("rx", function (d) { return 5 })
-      .attr("ry", function (d) { return 5 })
-      .style("stroke", "steelblue")
-      .style("fill", "steelblue")
-      .style("pointer-events", "visible")
+      let pos = d3.select(this).node().getBoundingClientRect();
 
-    var corpTop = svg.append("g")
-      .attr("class", "top-corps")
-      .attr("transform", "translate(565,80)");
+      const corpProficiency = corpData.filter(d => isNumeric(d[proficiencyCategory]));
 
-    corpTop.append("rect")
-      .attr('width', 220)
-      .attr('height', 20)
-      .attr("rx", function (d) { return 5 })
-      .attr("ry", function (d) { return 5 })
-      .style("stroke", "steelblue")
-      .style("fill", "steelblue")
-      .style("pointer-events", "visible")
+      corpProficiency.sort(function (a, b) {
+        return +a[proficiencyCategory] - +b[proficiencyCategory] ||
+          +a[nSizeCategory] - +b[nSizeCategory];
+      });
 
-    var schoolGaps = svg.append("g")
-      .attr("class", "school-gaps")
-      .attr("transform", "translate(565,120)");
+      corpTopTen = corpProficiency.slice(corpProficiency.length - 10);
 
-    schoolGaps.append("rect")
-      .attr('width', 220)
-      .attr('height', 20)
-      .attr("rx", function (d) { return 5 })
-      .attr("ry", function (d) { return 5 })
-      .style("stroke", "steelblue")
-      .style("fill", "steelblue")
-      .style("pointer-events", "visible");
+      let j = 0,
+        corpText = [];
 
-    var corpGaps = svg.append("g")
-      .attr("class", "corp-gaps")
-      .attr("transform", "translate(565,160)");
+      for (k = corpTopTen.length - 1; k >= 0; k--) {
 
-    corpGaps.append("rect")
-      .attr('width', 220)
-      .attr('height', 20)
-      .attr("rx", function (d) { return 5 })
-      .attr("ry", function (d) { return 5 })
-      .style("stroke", "steelblue")
-      .style("fill", "steelblue")
-      .style("pointer-events", "visible");
+        corpText[j] = j + 1 + ") <b>" + corpTopTen[k]['Corporation Name'] + "</b>: <b>" +
+          calc_percent(corpTopTen[k][proficiencyCategory]) + "</b> (n-size: " +
+          corpTopTen[k][nSizeCategory] + ")."
 
-    var zoom = d3.zoom()
-      .scaleExtent([1, 8])
-      .on("zoom", zoomed);
+        j++
 
-    // uncomment to enable free zoom
-    // svg.call(zoom);
+        tooltip.html(corpText.join('<br/><br/>'))
+          .style('left', `${pos['x'] - 1}px`)
+          .attr("id", "popup-box")
+          .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+          .style("opacity", 1);
+      }
+    })
+      .on('mouseout', function (d) {
+        d3.select(this).classed("selected", false);
+        d3.selectAll('.tooltip')
+          .style("opacity", 0)
+      });
 
-    Promise.all([
-      d3.csv("corporation_data_k8_public.csv"),
-      d3.csv("school_data_k8_public.csv"),
-      d3.json("corporation_geojson.json"),
-      d3.json("school_geojson.json"),      
-    ]).then(function ([scdata, schdata, INdistricts, INschools]) {
+    // Achievement Gaps (currently limited to the following catagories)
+    if (category == "Black" || category == "Multiracial" || category == "Hispanic"
+      || category == "Asian" || category == "Paid Meals" || category == "Free or Reduced Price Meals"
+      || category == "Non English Language Learners" || category == "English Language Learners"
+      || category == "Special Education" || category == "General Education") {
 
-      const districts = topojson.feature(INdistricts, INdistricts.objects.districts);
-      const schools = topojson.feature(INschools, INschools.objects.publicschools);
-      const mesh = topojson.mesh(INdistricts, INdistricts.objects.districts);
-      const projection = d3.geoMercator().fitSize([width, height], mesh);
+      d3.select('.school-gaps .infobar-text').remove()
 
-      /* create map and district objects */
-      var path = d3.geoPath().projection(projection);
+      schoolGaps = d3.select(".school-gaps")
+        .append("text")
+        .attr("font-weight", "bold")
+        .attr("font-size", "10px")
+        .attr("class", "infobar-text")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("dx", 110)
+        .attr("dy", 11)
+        .style("fill", "white")
+        .style("pointer-events", "visible")
+        .text("Largest Achievement Gaps: Schools")
+        .style("display", "block")
 
-      var paths = svg.append("g")
-        .attr("class", "districts")
-        .selectAll("path")
-        .data(districts.features)
-        .enter().append("path")
-        .attr('data-fips', function (d) {
-          return d.properties.NAME
-        })
-        .attr("d", path)
-        .attr("transform", "translate(-100,30)");
+      schoolGaps.on("mouseover", function (event, d) {
+        let pos = d3.select(this).node().getBoundingClientRect();
 
-      /* update map */
-      var updateMap = function (scale, year, subject, category) {
+        schoolGapLong = calculateGap(schoolData, subject, category)
 
-        // TODO: Force Percentage for IREAD Data [FORCE BUTTON CHANGE]
-        // TODO: Modify Navigation to be Dynamic
+        if (typeof schoolGapLong == 'undefined') { return }
 
+        let j = 0,
+          schoolGapText = [];
 
-        if (scale == 'Relative' && d3.select("#subject")._groups[0][0].value != "IREAD") {
-          selectedDomain = [.10, .15, .25, .35, .45, .55, .65, .75];
-          labels = ['0-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '66-75%', '> 76%'];
+        schoolGap = shortenNames(schoolGapLong, replacementText)
+
+        for (k = schoolGap.length - 1; k >= 0; k--) {
+
+          // school achievement gap popup window
+          schoolGapText[j] = j + 1 + ") <b>" + schoolGap[k]["School Name"] + "</b>: <b>" +
+            calc_percent(schoolGap[k]["Difference"]) + "</b><br/>" + schoolGap[k]["Corporation Name"] +
+            "<br/>(" + schoolGap[k]["First Name"] + ": " + calc_percent(schoolGap[k]["First"]) +
+            " - " + schoolGap[k]["Second Name"] + ": " + calc_percent(schoolGap[k]["Second"]) + ")."
+          j++
+
+          tooltip.html(schoolGapText.join('<br/><br/>'))
+            .style('left', `${pos['x'] - 1}px`)
+            .attr("id", "popup-box")
+            .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+            .style("opacity", 1)
         }
-        else {
-          selectedDomain = [.20, .30, .40, .50, .60, .70, .80, .90];
-          labels = ['0-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '> 91%'];
-        
-          // TODO: set IREAD checked property to Percentage (when? let it select Relative?)
-          if (d3.select("#subject")._groups[0][0].value == "IREAD") {
-            const radioBtn = document.getElementById("scale"); 
-            radioBtn.value = "Percentage"
-          }
-
-        }
-
-        color = d3.scaleThreshold()
-          .domain(selectedDomain)
-          .range(["#e5eff9", "#cee1f2", "#b0d1e7", "#87bddc", "#5da4d0", "#3a89c1", "#1d6bb0", "#0e559d", "#08306b"]);
-
-        legend = d3.legendColor()
-          .labels(function (d) { return labels[d.i]; })
-          .shapePadding(4)
-          .scale(color);
-        svg.select(".legend-threshold")
-          .call(legend);
-
-        // Filter data by selected year
-        var schoolData = schdata.filter(obj => {
-          return obj.Year === year
-        })
-
-        var corpData = scdata.filter(obj => {
-          return obj.Year === year
-        })
-
-        // categories for Top 10 tooltips
-        const proficiencyCategory = category + "|" + subject + " Proficiency %";
-        var nSizeCategory;
-        var totalProficient;
-
-        if (d3.select("#subject")._groups[0][0].value == "IREAD") {
-
-          nSizeCategory = category + "|" + subject + " Test N";
-          totalProficient = category + "|" + subject + " Pass N";
-        
-        } else {
-          nSizeCategory = category + "|" + subject + " Total Tested";
-          totalProficient = category + "|" + subject + " Total Proficient";          
-        }
-
-        // calculate state average for each category
-        // NOTE: This is much harder than it sounds for certain categories due
-        // to the large number of redactions due to insufficient n-size - for
-        // example: we are unable to generate an average at all for American
-        // Indian using school data because no school has a sufficiently large
-        // American Indian population to generate a value. We can generate an
-        // average using aggregated corporation data, but it is also skewed
-        // because tested students show up in the denominator but not in
-        // the numerator (e.g., the numerator is "***") - so perhaps best case
-        // scenario is to disregard all rows with a total proficiency of "***".
-        // the final number still will not be completely accurate, but it is
-        // probably the best we can do.
-
-        // only keep objects where the total # of tested students for a category
-        // is not either "***" or ""
-        const adjustedData = corpData.filter(function (el) {
-          return el[totalProficient] != "***" && el[totalProficient] != ""
+      })
+        .on('mouseout', function (d) {
+          d3.select(this).classed("selected", false);
+          d3.selectAll('.tooltip')
+            .style("opacity", 0)
         });
 
-        const sumTested = d3.sum(adjustedData, d => d[nSizeCategory]);
-        const sumProficient = d3.sum(adjustedData, d => d[totalProficient]);
+      // achievement gaps - corporations
+      d3.select('.corp-gaps .infobar-text').remove()
 
-        const stateAverage = sumProficient / sumTested
+      corpGaps = d3.select('.corp-gaps')
+        .append("text")
+        .attr("font-weight", "bold")
+        .attr("font-size", "10px")
+        .attr("class", "infobar-text")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("dx", 110)
+        .attr("dy", 11)
+        .style("fill", "white")
+        .style("pointer-events", "visible")
+        .text("Largest Achievement Gaps: Corporations")
+        .style("display", "block");
 
-        // map title
-        d3.select('.map-title-text').remove()
+      corpGaps.on("mouseover", function (event, d) {
+        let pos = d3.select(this).node().getBoundingClientRect();
 
-        mapTitle = d3.select(".map-title")
-          .append("text")
-          .attr("font-weight", "bold")
-          .attr("font-size", "14px")
-          .attr("class", "map-title-text")
-          .style("pointer-events", "visible")
-          .style("fill", "steelblue")
-          .attr("dx", function (d) { return 6 })
-          .attr("dy", function (d) { return 13 })
-          .style("opacity", 1)
-          .text(proficiencyCategory + " (State Average: " + calc_percent(stateAverage) + ")");
+        corpGapLong = calculateGap(corpData, subject, category)
 
-        // top10 schools for selected category
-        d3.select('.top-schools .infobar-text').remove()
+        if (typeof corpGapLong == 'undefined') { return }
 
-        schoolTop = d3.select(".top-schools")
-          .append("text")
-          .attr("font-weight", "bold")
-          .attr("font-size", "10px")
-          .attr("font-family", "Inter, sans-serif")
-          .attr("class", "infobar-text")
-          .style("pointer-events", "visible")
-          .attr("text-anchor", "middle")
-          .attr("dominant-baseline", "middle")
-          .attr("dx", 110)
-          .attr("dy", 11)
-          .style("fill", "white")
-          .text("Highest Proficiency: Schools");
+        corpGap = shortenNames(corpGapLong, replacementText)
 
-        schoolTop.on("mouseover", function (event, d) {
-          let pos = d3.select(this).node().getBoundingClientRect();
+        let j = 0,
+          corpGapText = [];
 
-          const nSizeSchool = schoolData.filter(d => +d[nSizeCategory] > 10);
-          const schoolProficiency = nSizeSchool.filter(d => isNumeric(d[proficiencyCategory]));
+        for (k = corpGap.length - 1; k >= 0; k--) {
 
-          // TODO: if proficiency is tied, sort by nsize
-          schoolProficiency.sort(function (a, b) {
-            if (+a[proficiencyCategory] === +b[proficiencyCategory]) { return 0 }
-            else { return (+a[proficiencyCategory] < +b[proficiencyCategory]) ? -1 : 1 };
-          });
+          // corporation achievement gap popup window
+          corpGapText[j] = j + 1 + ") <b>" + corpGap[k]["Corporation Name"] + "</b>: <b>" +
+            calc_percent(corpGap[k]["Difference"]) + "</b><br/> (" + corpGap[k]["First Name"] +
+            ": " + calc_percent(corpGap[k]["First"]) + " - " + corpGap[k]["Second Name"] + ": " +
+            calc_percent(corpGap[k]["Second"]) + ")."
+          j++
 
-          schoolTopTen = schoolProficiency.slice(schoolProficiency.length - 10);
-
-          let j = 0,
-            schoolText = [];
-
-          console.log(schoolTopTen)
-
-          for (k = schoolTopTen.length - 1; k >= 0; k--) {
-
-            schoolText[j] = j + 1 + ") <b>" + schoolTopTen[k]['School Name'] + "</b>: <b>" +
-              calc_percent(schoolTopTen[k][proficiencyCategory]) + "</b> (n-size: " +
-              schoolTopTen[k][nSizeCategory] + ")<br/> (" + schoolTopTen[k]['Corporation Name'] + ")."
-            j++
-
-            tooltip.html(schoolText.join('<br/><br/>'))
-              .style('left', `${pos['x'] - 1}px`)
-              .attr("id", "popup-box")
-              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
-              .style("opacity", 1);
-          }
-        })
-          .on('mouseout', function (d) {
-            d3.select(this).classed("selected", false);
-            d3.selectAll('.tooltip')
-              .style("opacity", 0)
-          });
-
-        // top10 corporations for selected category
-        d3.select('.top-corps .infobar-text').remove()
-
-        schoolTop = d3.select(".top-corps")
-          .append("text")
-          .attr("font-weight", "bold")
-          .attr("font-size", "10px")
-          .attr("class", "infobar-text")
-          .attr("text-anchor", "middle")
-          .attr("dominant-baseline", "middle")
-          .attr("dx", 110)
-          .attr("dy", 11)
-          .style("fill", "white")
-          .style("pointer-events", "visible")
-          .text("Highest Proficiency: Corporations");
-
-        corpTop.on("mouseover", function (event, d) {
-          let pos = d3.select(this).node().getBoundingClientRect();
-
-          const corpProficiency = corpData.filter(d => isNumeric(d[proficiencyCategory]));
-
-          corpProficiency.sort(function (a, b) {
-            if (+a[proficiencyCategory] === +b[proficiencyCategory]) { return 0 } else { return (+a[proficiencyCategory] < +b[proficiencyCategory]) ? -1 : 1 };
-          });
-
-          corpTopTen = corpProficiency.slice(corpProficiency.length - 10);
-
-          let j = 0,
-            corpText = [];
-
-          for (k = corpTopTen.length - 1; k >= 0; k--) {
-            corpText[j] = j + 1 + ") <b>" + corpTopTen[k]['Corporation Name'] + "</b>: <b>" +
-              calc_percent(corpTopTen[k][proficiencyCategory]) + "</b>."
-            j++
-
-            tooltip.html(corpText.join('<br/><br/>'))
-              .style('left', `${pos['x'] - 1}px`)
-              .attr("id", "popup-box")
-              .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
-              .style("opacity", 1);
-          }
-        })
-          .on('mouseout', function (d) {
-            d3.select(this).classed("selected", false);
-            d3.selectAll('.tooltip')
-              .style("opacity", 0)
-          });
-
-        // achievement gaps - school
-        if (category == "Black" || category == "Multiracial" || category == "Hispanic"
-          || category == "Asian" || category == "Paid Meals" || category == "Free or Reduced Price Meals"
-          || category == "Non-English Language Learners" || category == "English Language Learners"
-          || category == "Special Education" || category == "General Education") {
-
-          d3.select('.school-gaps .infobar-text').remove()
-
-          schoolGaps = d3.select(".school-gaps")
-            .append("text")
-            .attr("font-weight", "bold")
-            .attr("font-size", "10px")
-            .attr("class", "infobar-text")
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("dx", 110)
-            .attr("dy", 11)
-            .style("fill", "white")
-            .style("pointer-events", "visible")
-            .text("Largest Achievement Gaps: Schools")
-            .style("display", "block")
-
-          schoolGaps.on("mouseover", function (event, d) {
-            let pos = d3.select(this).node().getBoundingClientRect();
-
-            schoolGap = calculateGap(schoolData, subject, category)
-
-            if (typeof schoolGap == 'undefined') { return }
-
-            let j = 0,
-              schoolGapText = [];
-
-            for (k = schoolGap.length - 1; k >= 0; k--) {
-
-              // school achievement gap popup window
-              schoolGapText[j] = j + 1 + ") <b>" + schoolGap[k]["School Name"] + "</b>: <b>" +
-                calc_percent(schoolGap[k]["Difference"]) + "</b><br/>" + schoolGap[k]["Corporation Name"] +
-                "<br/>(" + schoolGap[k]["First Name"] + ": " + calc_percent(schoolGap[k]["First"]) +
-                " - " + schoolGap[k]["Second Name"] + ": " + calc_percent(schoolGap[k]["Second"]) + ")."
-              j++
-
-              tooltip.html(schoolGapText.join('<br/><br/>'))
-                .style('left', `${pos['x'] - 1}px`)
-                .attr("id", "popup-box")
-                .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
-                .style("opacity", 1)
-            }
-          })
-            .on('mouseout', function (d) {
-              d3.select(this).classed("selected", false);
-              d3.selectAll('.tooltip')
-                .style("opacity", 0)
-            });
-
-          // achievement gaps - corporations
-          d3.select('.corp-gaps .infobar-text').remove()
-
-          corpGaps = d3.select('.corp-gaps')
-            .append("text")
-            .attr("font-weight", "bold")
-            .attr("font-size", "10px")
-            .attr("class", "infobar-text")
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .attr("dx", 110)
-            .attr("dy", 11)
-            .style("fill", "white")
-            .style("pointer-events", "visible")
-            .text("Largest Achievement Gaps: Corporations")
-            .style("display", "block");
-
-          corpGaps.on("mouseover", function (event, d) {
-            let pos = d3.select(this).node().getBoundingClientRect();
-
-            corpGap = calculateGap(corpData, subject, category)
-
-            if (typeof corpGap == 'undefined') { return }
-
-            let j = 0,
-              corpGapText = [];
-
-            for (k = corpGap.length - 1; k >= 0; k--) {
-
-              // corporation achievement gap popup window
-              corpGapText[j] = j + 1 + ") <b>" + corpGap[k]["Corporation Name"] + "</b>: <b>" +
-                calc_percent(corpGap[k]["Difference"]) + "</b><br/> (" + corpGap[k]["First Name"] +
-                ": " + calc_percent(corpGap[k]["First"]) + " - " + corpGap[k]["Second Name"] + ": " +
-                calc_percent(corpGap[k]["Second"]) + ")."
-              j++
-
-              tooltip.html(corpGapText.join('<br/><br/>'))
-                .style('left', `${pos['x'] - 1}px`)
-                .attr("id", "popup-box")
-                .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
-                .style("opacity", 1);
-            }
-          })
-            .on('mouseout', function (d) {
-              d3.select(this).classed("selected", false);
-              d3.selectAll('.tooltip')
-                .style("opacity", 0)
-            });
-
-          d3.selectAll('.school-gaps').style("display", "block")
-          d3.selectAll('.corp-gaps').style("display", "block")
+          tooltip.html(corpGapText.join('<br/><br/>'))
+            .style('left', `${pos['x'] - 1}px`)
+            .attr("id", "popup-box")
+            .style('top', `${(window.pageYOffset + pos['y'] + 39)}px`)
+            .style("opacity", 1);
         }
+      })
+        .on('mouseout', function (d) {
+          d3.select(this).classed("selected", false);
+          d3.selectAll('.tooltip')
+            .style("opacity", 0)
+        });
+
+      d3.selectAll('.school-gaps').style("display", "block")
+      d3.selectAll('.corp-gaps').style("display", "block")
+    }
+
+    else {
+      d3.selectAll('.school-gaps').style("display", "none")
+      d3.selectAll('.corp-gaps').style("display", "none")
+    }
+
+    // the map is translated 100px left and 50px down, so all other objects
+    // must be shifted the same amount in order to line up correctly
+    // (especially during zoom, where we need to multiply the shift by
+    // the scale factor)
+    paths = d3.select('.districts')
+      .selectAll("path")
+      .data(districts.features)
+      .attr('data-fips', function (d) { return d.properties.NAME })
+      .attr("d", path)
+      .attr("transform", "translate(-100,30)")
+      .attr("fill", function (d, i) {
+
+        const data = corpData.find(f => f['Corporation ID'] === d.properties.CORPID)
+
+        // value will be null if the school corporation does not exist
+        // exist or was created (e.g., West Clark Community Schools
+        // dissolved in 2020 and Borden-Henryville was formed
+        if (data == null) { fillColor = "grey" }
+
+        else if (data[proficiencyCategory] == "" || data[proficiencyCategory] == "***" ||
+          isNaN(data[proficiencyCategory])) { fillColor = "grey" }
 
         else {
-          d3.selectAll('.school-gaps').style("display", "none")
-          d3.selectAll('.corp-gaps').style("display", "none")
+
+          fillColor = color(data[proficiencyCategory])
+
+        }
+        return fillColor
+      })
+      .attr("stroke", "white")
+      .on("click", clicked)
+      .on('mouseover', function (event, d) {
+
+        let pos = d3.select(this).node().getBoundingClientRect();
+
+        d3.select(this).classed("selected", true);
+
+        const data = corpData.find(f => f['Corporation ID'] === d.properties.CORPID)
+
+        // hide the district level tooltip when zoomed, but only for the "active"
+        // district - show other districts when zoomed
+
+        // svg._groups[0][0].__zoom.k gives us the "k" transform value, aka the
+        // current zoom amount. so tooltips are only shown if k == 1 (it is not zoomed in)
+        // add the test for null to prevent an error on load or reload where the val is null
+        if ((data != null) && ((svg._groups[0][0].__zoom == null)
+          || (svg._groups[0][0].__zoom.k == 1))) {
+
+// TODO: ADJUST POSITION WHEN NEAR TOP OF MAP
+          tooltip.html(
+            data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
+          )
+            .style('left', `${pos['x'] + 10}px`)
+            .style('top', `${(window.pageYOffset + pos['y'] - 30)}px`)
+            .style("opacity", 1);
         }
 
-        // the map is translated 100px left and 50px down, so all other objects
-        // must be shifted the same amount in order to line up correctly
-        // (especially during zoom, where we need to multiply the shift by
-        // the scale factor)
-        paths = d3.select('.districts')
-          .selectAll("path")
-          .data(districts.features)
-          .attr('data-fips', function (d) { return d.properties.NAME })
-          .attr("d", path)
-          .attr("transform", "translate(-100,30)")
-          .attr("fill", function (d, i) {
+        // show tooltip for all other districts than active one when zoomed
+        else if ((svg._groups[0][0].__zoom.k > 1) && (active.node() != this)) {
+          tooltip.html(
+            data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
+          )
+            .style("left", (event.offsetX - 0) + "px")
+            .style("top", (event.offsetY + 20) + "px")
+            .style("opacity", 1);
+        }
+      })
+      .on('mouseout', function (event, d) {
+        d3.select(this).classed("selected", false);
+        tooltip.style("opacity", 0)
+      });
 
-            const data = corpData.find(f => f['Corporation ID'] === d.properties.CORPID)
+    // if category is changed while zoomed (e.g., k > 1), change point
+    // colors to reflect new values, and update tooltip values
+    if (svg._groups[0][0].__zoom != null) {
+      if (svg._groups[0][0].__zoom.k > 1) {
 
-            // value will be null if the school corporation does not exist
-            // exist or was created (e.g., West Clark Community Schools
-            // dissolved in 2020 and Borden-Henryville was formed
-            if (data == null) { fillColor = "grey" }
+        // change color of the schools (circles)
+        svg.selectAll("circle").style("fill", function (d) {
 
-            else if (data[proficiencyCategory] == "" || data[proficiencyCategory] == "***" ||
-              isNaN(data[proficiencyCategory])) { fillColor = "grey" }
+          const data = schoolData.find(f => +f['School ID'] === +d.SchoolID)
 
-            else {
+          if (data == null) { return "grey" }
 
-              fillColor = color(data[proficiencyCategory])
-
-            }
-            return fillColor
-          })
-          .attr("stroke", "white")
-          .on("click", clicked)
+          if (data[proficiencyCategory] === "" || data[proficiencyCategory] === "***" 
+            || isNaN(data[proficiencyCategory]) || data[proficiencyCategory] == null) {
+            return "#ffffff"
+          }
+          else {
+            return color(data[proficiencyCategory])
+          }
+        })
           .on('mouseover', function (event, d) {
 
             let pos = d3.select(this).node().getBoundingClientRect();
 
             d3.select(this).classed("selected", true);
 
-            const data = corpData.find(f => f['Corporation ID'] === d.properties.CORPID)
+            const data = schoolData.find(f => +f['School ID'] === +d.SchoolID)
 
-            // hide the district level tooltip when zoomed, but only for the "active"
-            // district - show other districts when zoomed
-
-            // svg._groups[0][0].__zoom.k gives us the "k" transform value, aka the
-            // current zoom amount. so tooltips are only shown if k == 1 (it is not zoomed in)
-            // add the test for null to prevent an error on load or reload where the val is null
-            if ((data != null) && ((svg._groups[0][0].__zoom == null)
-              || (svg._groups[0][0].__zoom.k == 1))) {
+            if (data != null) {
 
               tooltip.html(
-                data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
+                data['School Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
               )
-                .style('left', `${pos['x'] + 10}px`)
-                .style('top', `${(window.pageYOffset + pos['y'] - 30)}px`)
-                .style("opacity", 1);
-            }
-            // show tooltip for all other districts than active one when zoomed
-            else if ((svg._groups[0][0].__zoom.k > 1) && (active.node() != this)) {
-              tooltip.html(
-                data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
-              )
-                .style("left", (event.offsetX - 0) + "px")
-                .style("top", (event.offsetY + 20) + "px")
+                .style('left', `${pos['x'] + 20}px`)
+                .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
                 .style("opacity", 1);
             }
           })
-          .on('mouseout', function (event, d) {
+          .on('mouseout', function (d) {
             d3.select(this).classed("selected", false);
             tooltip.style("opacity", 0)
           });
 
-        // if category is changed while zoomed (e.g., k > 1), change point
-        // colors to reflect new values, and update tooltip values
+        points.transition().duration(800).style("opacity", .7);
+      }
+    };
 
-        if (svg._groups[0][0].__zoom != null) {
-          if (svg._groups[0][0].__zoom.k > 1) {
+    // ensure that points are on top of fill
+    svg.selectAll(".points").raise()
 
-            // change color of the schools (circles)
-            svg.selectAll("circle").style("fill", function (d) {
+    function clicked(event, d) {
 
-              const data = schoolData.find(f => +f['School ID'] === +d.SchoolID)
+      // at this point, active.node() is equal to the selected node
+      // immediately before the click. So if active.node() is equal
+      // to "this", it means the same node was clicked twice. Otherwise
+      // a different node was clicked.
+      if (active.node() === this) return reset();
 
-              if (data == null) { return "grey" }
+      // clear active status from previous school and add to current school
+      d3.select('.active').classed("active", false);
+      active = d3.select(this).classed("active", true);
 
-              if (data[proficiencyCategory] === "" || data[proficiencyCategory] === "***" || isNaN(data[proficiencyCategory]) || data[proficiencyCategory] == null) {
-                return "#ffffff"
-              }
-              else {
-                return color(data[proficiencyCategory])
-              }
-            })
-              .on('mouseover', function (event, d) {
+      // TODO: Testing color blend. Previous effect worked because it was
+      // layering another path on top of the first with a low opacity (not
+      // sure if this was intended - because it eventually got slow as hell)
+      // probably easier and faster to use css to 'blend' colors
 
-                let pos = d3.select(this).node().getBoundingClientRect();
+      // cur_color = d3.select(".active").attr("fill")
+      // console.log(d3.selectAll(".districts").select(".active"))
+      // d3.select('.active')
+      //   .append("g")
+      //   .enter().append("path")
+      //   .style("fill", cur_color)
+      //   .style("opacity", .8)
 
-                d3.select(this).classed("selected", true);
+      // get the LEAID of the active (selected) node
 
-                const data = schoolData.find(f => +f['School ID'] === +d.SchoolID)
+      activeDistrictLEAID = active.data()[0].properties.GEOID
 
-                if (data != null) {
+      var bounds = path.bounds(d),
+        dx = bounds[1][0] - bounds[0][0],
+        dy = bounds[1][1] - bounds[0][1],
+        x = (bounds[0][0] + bounds[1][0]) / 2,
+        y = (bounds[0][1] + bounds[1][1]) / 2,
+        scale = Math.max(1, Math.min(10.5, 1 / Math.max(dx / width, dy / height))), // Size of zoomed district
+        translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-                  tooltip.html(
-                    data['School Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
-                  )
-                    .style('left', `${pos['x'] + 20}px`)
-                    .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
-                    .style("opacity", 1);
-                }
-              })
-              .on('mouseout', function (d) {
-                d3.select(this).classed("selected", false);
-                tooltip.style("opacity", 0)
-              });
+      // map is shifted (-100,30). in order to account for this, we need
+      // to translate the zoom, but first we need to multiple it by the
+      // scale. Adding fifty seems to center the districts a bit
+      // better. if scale changes, need to to re-examine the appropriate
+      // x and y shift values
+      let xshift = (scale * 100) + 50
+      let yshift = (scale * 30) + 50
 
-            points.transition().duration(800).style("opacity", .7);
+      svg.transition()
+        .duration(750)
+        .call(zoom.transform, d3.zoomIdentity.translate(translate[0] + xshift, translate[1] - yshift).scale(scale));
+
+      var schoolsInPOLY = schools.features.filter(function (s) {
+        if (d3.polygonContains(active.datum().geometry.coordinates[0], [s.geometry.coordinates[0], s.geometry.coordinates[1]])) {
+
+          // TODO: add High School Academic Data
+          const max = 9;
+          const min = 2;
+          var low;
+
+          // filter points by characteristic (hides schools we do not want
+          // to display. we also check to make sure that all points are
+          // contained within the same LEIAD as the active district - this
+          // makes sure we do not display schools that are located in another
+          // district that the geographically located wholly inside the
+          // selected district
+          if (s.properties.GSLO == 'PK' || s.properties.GSLO == 'KG') { low = 0 } else { low = parseInt(s.properties.GSLO) }
+
+          if ((
+            low < max && s.properties.GSHI > min) &&
+            ((s.properties.LEAID == activeDistrictLEAID) || (s.properties.CHARTER_TEXT == "1-Yes"))
+            && (s.properties.SCHOOL_LEV != "CLOSED" && s.properties.SCHOOL_LEV != "Cooperative"
+              && s.properties.SCHOOL_LEV != "Other" && s.properties.SCHOOL_LEV != "Special Education"
+              && s.properties.SCHOOL_LEV != "Adult High School"
+            )) {
+
+            return s.properties.LEAID
           }
-        };
+        }
+      })
 
-        // ensure that points are on top of fill
-        svg.selectAll(".points").raise()
+      var schoolsInDist = { type: "FeatureCollection", "features": schoolsInPOLY };
 
-        function clicked(event, d) {
+      // Remove existing points each click (otherwise points
+      // keep propagating until reset event)
+      svg.selectAll(".points")
+        .transition()
+        .duration(200)
+        .remove();
 
-          // at this point, active.node() is equal to the selected node
-          // immediately before the click. So if active.node() is equal
-          // to "this", it means the same node was clicked twice. Otherwise
-          // a different node was clicked.
-          if (active.node() === this) return reset();
+      // calculate radius of individual points based on the number of
+      // schools and the area per school of each district (this is
+      // somewhat arbitrary, but is needed to prevent weird outliers)
+      districtSize = dx * dy
 
-          // clear active status from previous school and add to current school
-          d3.select('.active').classed("active", false);
-          active = d3.select(this).classed("active", true);
+      numberOfSchools = schoolsInDist.features.length
+      areaPerSchool = districtSize / numberOfSchools
 
-          // TODO: Testing color blend. Previous effect worked because it was
-          // layering another path on top of the first with a low opacity (not
-          // sure if this was intended - because it eventually got slow as hell)
-          // probably easier and faster to use css to 'blend' colors
-
-          // cur_color = d3.select(".active").attr("fill")
-          // console.log(d3.selectAll(".districts").select(".active"))
-          // d3.select('.active')
-          //   .append("g")
-          //   .enter().append("path")
-          //   .style("fill", cur_color)
-          //   .style("opacity", .8)
-
-          // get the LEAID of the active (selected) node
-          activeDistrictLEAID = active._groups[0][0].__data__.properties.GEOID
-
-          var bounds = path.bounds(d),
-            dx = bounds[1][0] - bounds[0][0],
-            dy = bounds[1][1] - bounds[0][1],
-            x = (bounds[0][0] + bounds[1][0]) / 2,
-            y = (bounds[0][1] + bounds[1][1]) / 2,
-            scale = Math.max(1, Math.min(10.5, 1 / Math.max(dx / width, dy / height))), // Size of zoomed district
-            translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-          // map is shifted (-100,30). in order to account for this, we need
-          // to translate the zoom, but first we need to multiple it by the
-          // scale. Adding fifty seems to center the districts a bit
-          // better. if scale changes, need to to re-examine the appropriate
-          // x and y shift values
-          let xshift = (scale * 100) + 50
-          let yshift = (scale * 30) + 50
-
-          svg.transition()
-            .duration(750)
-            .call(zoom.transform, d3.zoomIdentity.translate(translate[0] + xshift, translate[1] - yshift).scale(scale));
-
-          var schoolsInPOLY = schools.features.filter(function (s) {
-            if (d3.polygonContains(active.datum().geometry.coordinates[0], [s.geometry.coordinates[0], s.geometry.coordinates[1]])) {
-
-              // TODO: add High School Academic Data
-              const max = 9;
-              const min = 2;
-              var low;
-
-              // filter points by characteristic (hides schools we do not want
-              // to display. we also check to make sure that all points are
-              // contained within the same LEIAD as the active district - this
-              // makes sure we do not display schools that are located in another
-              // district that the geographically located wholly inside the
-              // selected district
-              if (s.properties.GSLO == 'PK' || s.properties.GSLO == 'KG') { low = 0 } else { low = parseInt(s.properties.GSLO) }
-
-              if ((
-                low < max && s.properties.GSHI > min) &&
-                ((s.properties.LEAID == activeDistrictLEAID) || (s.properties.CHARTER_TEXT == "1-Yes"))
-                && (s.properties.SCHOOL_LEV != "CLOSED" && s.properties.SCHOOL_LEV != "Cooperative"
-                  && s.properties.SCHOOL_LEV != "Other" && s.properties.SCHOOL_LEV != "Special Education"
-                  && s.properties.SCHOOL_LEV != "Adult High School"
-                )) {
-
-                return s.properties.LEAID
-              }
-            }
-          })
-
-          var schoolsInDist = { type: "FeatureCollection", "features": schoolsInPOLY };
-
-          // Remove existing points each click (otherwise points
-          // keep propagating until reset event)
-          svg.selectAll(".points")
-            .transition()
-            .duration(200)
-            .remove();
-
-          // calculate radius of individual points based on the number of
-          // schools and the area per school of each district (this is
-          // somewhat arbitrary, but is needed to prevent weird outliers)
-          districtSize = dx * dy
-
-          numberOfSchools = schoolsInDist.features.length
-          areaPerSchool = districtSize / numberOfSchools
-
-          if (numberOfSchools <= 5) {
-            if (areaPerSchool <= 25) {
-              rad = .75
-            }
-            else if (areaPerSchool > 25 & areaPerSchool <= 50) {
-              rad = 1
-            }
-            else if (areaPerSchool > 50 & areaPerSchool <= 100) {
-              rad = 1.5
-            }
-            else {
-              rad = 2
-            }
-          }
-          else if (numberOfSchools > 5 & numberOfSchools <= 12) {
-            if (areaPerSchool <= 40) {
-              rad = .75
-            }
-            else if (areaPerSchool > 40 & areaPerSchool <= 80) {
-              rad = 1
-            }
-            else if (areaPerSchool > 80 & areaPerSchool <= 200) {
-              rad = 1.5
-            }
-            else {
-              rad = 2
-            }
-          }
-          else if (numberOfSchools > 12 & numberOfSchools <= 16) {
-            if (areaPerSchool <= 25) {
-              rad = .75
-            }
-            else if (areaPerSchool > 25 & areaPerSchool <= 100) {
-              rad = 1
-            }
-            else if (areaPerSchool > 100 & areaPerSchool <= 500) {
-              rad = 1.5
-            }
-            else {
-              rad = 2
-            }
-          }
-          else if (numberOfSchools > 16) {
-            if (areaPerSchool <= 40) {
-              rad = .75
-            }
-            else if (areaPerSchool > 40 & areaPerSchool <= 100) {
-              rad = 1
-            }
-            else {
-              rad = 1.5
-            }
-          }
-
-          // get points located within the geographic coordinates
-          group = schoolsInDist.features.map(o => ({
-            x: projection(o.geometry.coordinates)[0],
-            y: projection(o.geometry.coordinates)[1],
-            r: rad,
-            schoolId: o.properties.SCHOOL_ID
-          }))
-
-          // points can be on top of each other, so we use the shifty()
-          // function to spread out circles whenever points overlap
-          // NOTE: a second call to shifty pushes points out farther, but
-          // starts to distort locations. more than 2 calls and points
-          // get pushed outside of district boundaries
-          shifty(group);
-
-          points = svg.append("g")
-            .attr('class', 'points')
-            .selectAll("circle")
-            .data(group)
-            .enter()
-            .append("circle")
-            .attr("cx", function (d) { return d.x })
-            .attr("cy", function (d) { return d.y })
-            .attr("r", function (d) { return d.r })
-            .attr("transform", "translate(-100,30)") // accounting for map shift
-            .style("stroke", "white")
-            .attr("fill", function (d) {
-
-              const data = schoolData.find(f => +f['School ID'] === +d.schoolId)
-
-              if (data == null) { return "grey" }
-
-              if (data[proficiencyCategory] === "" || data[proficiencyCategory] === "***" || isNaN(data[proficiencyCategory]) || data[proficiencyCategory] == null) {
-                return "#ffffff"
-              }
-              else {
-                return color(data[proficiencyCategory])
-              }
-            })
-            .style("opacity", 0)
-            .on('mouseover', function (event, d) {
-
-              let pos = d3.select(this).node().getBoundingClientRect();
-
-              // the selected class is only used to detect which path
-              // the mouse is currently over - or out of
-              d3.select(this).classed("selected", true);
-
-              const data = schoolData.find(f => +f['School ID'] === +d.schoolId)
-
-              if (data != null) {
-
-                tooltip.html(
-                  data['School Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
-                )
-                  .style('left', `${pos['x'] + 20}px`)
-                  .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
-                  .style("opacity", 1);
-              }
-            })
-            .on('mouseout', function (d) {
-              d3.select(this).classed("selected", false);
-              tooltip.style("opacity", 0)
-            });
-
-          points.transition().duration(1000).style("opacity", .7);
+      if (numberOfSchools <= 5) {
+        if (areaPerSchool <= 25) {
+          rad = .75
+        }
+        else if (areaPerSchool > 25 & areaPerSchool <= 50) {
+          rad = 1
+        }
+        else if (areaPerSchool > 50 & areaPerSchool <= 100) {
+          rad = 1.5
+        }
+        else {
+          rad = 2
+        }
+      }
+      else if (numberOfSchools > 5 & numberOfSchools <= 12) {
+        if (areaPerSchool <= 40) {
+          rad = .75
+        }
+        else if (areaPerSchool > 40 & areaPerSchool <= 80) {
+          rad = 1
+        }
+        else if (areaPerSchool > 80 & areaPerSchool <= 200) {
+          rad = 1.5
+        }
+        else {
+          rad = 2
+        }
+      }
+      else if (numberOfSchools > 12 & numberOfSchools <= 16) {
+        if (areaPerSchool <= 25) {
+          rad = .75
+        }
+        else if (areaPerSchool > 25 & areaPerSchool <= 100) {
+          rad = 1
+        }
+        else if (areaPerSchool > 100 & areaPerSchool <= 500) {
+          rad = 1.5
+        }
+        else {
+          rad = 2
+        }
+      }
+      else if (numberOfSchools > 16) {
+        if (areaPerSchool <= 40) {
+          rad = .75
+        }
+        else if (areaPerSchool > 40 & areaPerSchool <= 100) {
+          rad = 1
+        }
+        else {
+          rad = 1.5
         }
       }
 
-      // update map on change on any select or input element
-      d3.selectAll("input, select").on("change", function () {
+      // get points located within the geographic coordinates
+      group = schoolsInDist.features.map(o => ({
+        x: projection(o.geometry.coordinates)[0],
+        y: projection(o.geometry.coordinates)[1],
+        r: rad,
+        schoolId: o.properties.SCHOOL_ID
+      }))
 
-        var selectedScale = d3.select("#scale")._groups[0][0].value
-        var selectedYear = d3.select("#year")._groups[0][0].value
-        var selectedSubject = d3.select("#subject")._groups[0][0].value
+      // points can be on top of each other, so we use the shifty()
+      // function to spread out circles whenever points overlap
+      // NOTE: a second call to shifty pushes points out farther, but
+      // starts to distort locations. more than 2 calls and points
+      // get pushed outside of district boundaries
+      shifty(group);
 
-        /* Dropdowns */
-        var topLevel = document.querySelector(".dropdowns");
+      points = svg.append("g")
+        .attr('class', 'points')
+        .selectAll("circle")
+        .data(group)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return d.x })
+        .attr("cy", function (d) { return d.y })
+        .attr("r", function (d) { return d.r })
+        .attr("transform", "translate(-100,30)") // account for map shift
+        .style("stroke", "white")
+        .attr("fill", function (d) {
 
-        // set "by-grade-content" to display initially or on reload (default),
-        // but if selected subject is IREAD we only display school-total
-        document.getElementById("by-grade-content").style.display = "block";
+          const data = schoolData.find(f => +f['School ID'] === +d.schoolId)
 
-        //  On click, get subnav content divs and set default display to none
-        var grade_divs = document.querySelectorAll('div.subnavigation > div#by-grade-content > div.btn-group > div');
+          if (data == null) { return "grey" }
 
-        if (selectedSubject == "IREAD") {
+          if (data[proficiencyCategory] === "" || data[proficiencyCategory] === "***" 
+          || isNaN(data[proficiencyCategory]) || data[proficiencyCategory] == null) {
+            return "#ffffff"
+          }
+          else {
+            return color(data[proficiencyCategory])
+          }
+        })
+        .style("opacity", 0)
+        .on('mouseover', function (event, d) {
 
-            for (let div of grade_divs) {
+          let pos = d3.select(this).node().getBoundingClientRect();
 
-              if (div.id == "school-total") {
-                div.style.display = "block";
-              }
-              else { div.style.display = "none";}
-            } 
-        } else {
-            for (let div of grade_divs) {
-              div.style.display = "block";
-            }
-        }
+          // the selected class is only used to detect which path
+          // the mouse is currently over - or out of
+          d3.select(this).classed("selected", true);
 
-        var selectedNav = d3.select("input[name='navigation']:checked").attr('value');
+          const data = schoolData.find(f => +f['School ID'] === +d.schoolId)
 
-        subNavigation = "category-" + selectedNav
-        var selectedCategory = d3.select("input[name=" + subNavigation + "]:checked").attr('value');
+          if (data != null) {
 
-        updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
-      })
+            tooltip.html(
+              data['School Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
+            )
+              .style('left', `${pos['x'] + 20}px`)
+              .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
+              .style("opacity", 1);
+          }
+        })
+        .on('mouseout', function (d) {
+          d3.select(this).classed("selected", false);
+          tooltip.style("opacity", 0)
+        });
 
-      updateMap('Relative', '2024', 'ELA', 'School Total')
+      points.transition().duration(1000).style("opacity", .7);
+    }
+  }
 
-    }).catch(function (error) {
-      console.error(error);
-    })
+  // update map on change on any select or input element
+  d3.selectAll("input, select").on("change", function () {
 
-  </script>
+    var selectedScale = d3.select("#scale").node().value
+    var selectedYear = d3.select("#year").node().value
+    var selectedSubject = d3.select("#subject").node().value
 
+    // only display school-total for by-grade for IREAD (option-1n is the 
+    // "by-grade-content" button)
+    if (document.getElementById('option-1n').checked) {
+
+      if (selectedSubject == "IREAD") {
+        document.getElementById("school-total").style.display = "block";
+        document.getElementById("all-grades").style.display = "none";
+      } else {
+        document.getElementById("school-total").style.display = "block";
+        document.getElementById("all-grades").style.display = "block";
+      }
+    }
+    else {
+      document.getElementById("by-grade-content").style.display = "none";
+    }
+
+    var selectedNav = d3.select("input[name='navigation']:checked").attr('value');
+
+    subNavigation = "category-" + selectedNav
+    var selectedCategory = d3.select("input[name=" + subNavigation + "]:checked").attr('value');
+
+    // if user switches from IREAD to any other category, scale
+    // switches back to Relative
+    if (previousSelection == "IREAD" && selectedSubject != "IREAD") {
+      selectedScale = "Relative"
+      document.getElementById("scale").value = "Relative"; 
+    }
+    previousSelection = selectedSubject
+
+    updateMap(selectedScale, selectedYear, selectedSubject, selectedCategory)
+  })
+
+  updateMap('Relative', '2024', 'ELA', 'School Total')
+
+}).catch(function (error) {
+  console.error(error);
+})
+
+</script>
 </body>
-
 </html>
