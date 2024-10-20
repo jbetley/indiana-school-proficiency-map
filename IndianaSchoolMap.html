@@ -696,22 +696,60 @@ Promise.all([
         if ((data != null) && ((svg._groups[0][0].__zoom == null)
           || (svg._groups[0][0].__zoom.k == 1))) {
 
-// TODO: ADJUST POSITION WHEN NEAR TOP OF MAP
+          // adjust position of district tooltip based on width
+          // of the rect
+          if (pos["width"] > 15) {
+            addWidth = pos["width"] / 2
+          }
+          else {
+            addWidth = 0
+          }
+
+          xPos = pos["x"] + addWidth + 20
+          yPos = pos["y"]
+
           tooltip.html(
-            data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
+            data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) +
+            ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " +
+            data[nSizeCategory]
           )
-            .style('left', `${pos['x'] + 10}px`)
-            .style('top', `${(window.pageYOffset + pos['y'] - 30)}px`)
+            .style('left', `${xPos}px`)
+            .style('top', `${(window.pageYOffset + yPos)}px`)
             .style("opacity", 1);
         }
 
-        // show tooltip for all other districts than active one when zoomed
+        // when zoomed, hide zoomed district tooltip, but show all others
         else if ((svg._groups[0][0].__zoom.k > 1) && (active.node() != this)) {
+
+          xPos = event.offsetX
+          // prevent tooltip from appearing outside of map boundaries
+          // base on how close mouse is to top of the screen,
+          // taking into consideration how much of the header
+          // is currently displayed (due to scroll)
+
+          // current height of header including padding
+          let headerHeight = d3.select("body").node().getBoundingClientRect().height + 16;
+
+          // amount of scroll determines how much of the header is visible
+          const visibleHeader = headerHeight - window.scrollY
+
+          // subtract the visible header from the mouse position
+          const shiftTip = event.clientY - visibleHeader
+
+          if (shiftTip < 85) {
+              yPos = event.offsetY + 120
+          }
+          else {
+              yPos = event.offsetY + 20
+          }
+
           tooltip.html(
-            data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
+            data['Corporation Name'] + "<br>" + proficiencyCategory.slice(0, -2) +
+            ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " +
+            data[nSizeCategory]
           )
-            .style("left", (event.offsetX - 0) + "px")
-            .style("top", (event.offsetY + 20) + "px")
+            .style("left", (xPos) + "px")
+            .style("top", (yPos) + "px")
             .style("opacity", 1);
         }
       })
@@ -728,7 +766,7 @@ Promise.all([
         // change color of the schools (circles)
         svg.selectAll("circle").style("fill", function (d) {
 
-          const data = schoolData.find(f => +f['School ID'] === +d.SchoolID)
+          const data = schoolData.find(f => +f['School ID'] === +d.schoolId)
 
           if (data == null) { return "grey" }
 
@@ -746,7 +784,7 @@ Promise.all([
 
             d3.select(this).classed("selected", true);
 
-            const data = schoolData.find(f => +f['School ID'] === +d.SchoolID)
+            const data = schoolData.find(f => +f['School ID'] === +d.schoolId)
 
             if (data != null) {
 
@@ -754,7 +792,7 @@ Promise.all([
                 data['School Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
               )
                 .style('left', `${pos['x'] + 20}px`)
-                .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
+                .style('top', `${(window.pageYOffset + pos['y'] - 20)}px`)
                 .style("opacity", 1);
             }
           })
@@ -782,11 +820,11 @@ Promise.all([
       d3.select('.active').classed("active", false);
       active = d3.select(this).classed("active", true);
 
+      // NOTE: Not sure what I was doing here //
       // TODO: Testing color blend. Previous effect worked because it was
       // layering another path on top of the first with a low opacity (not
       // sure if this was intended - because it eventually got slow as hell)
       // probably easier and faster to use css to 'blend' colors
-
       // cur_color = d3.select(".active").attr("fill")
       // console.log(d3.selectAll(".districts").select(".active"))
       // d3.select('.active')
@@ -943,7 +981,7 @@ Promise.all([
         .attr("cx", function (d) { return d.x })
         .attr("cy", function (d) { return d.y })
         .attr("r", function (d) { return d.r })
-        .attr("transform", "translate(-100,30)") // account for map shift
+        .attr("transform", "translate(-100,30)") // map shift
         .style("stroke", "white")
         .attr("fill", function (d) {
 
@@ -976,7 +1014,7 @@ Promise.all([
               data['School Name'] + "<br>" + proficiencyCategory.slice(0, -2) + ": " + calc_percent(data[proficiencyCategory]) + "<br>Total Tested: " + data[nSizeCategory]
             )
               .style('left', `${pos['x'] + 20}px`)
-              .style('top', `${(window.pageYOffset + pos['y'] - 70)}px`)
+              .style('top', `${(window.pageYOffset + pos['y'] - 30)}px`)
               .style("opacity", 1);
           }
         })
