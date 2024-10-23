@@ -28,11 +28,11 @@ function shortenNames(objects, replacements) {
       }
     }
   return objects
-  }
+}
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
-  }
+}
 
 // find avg value for an array of elements based on key
 function findAverage(arr, key) {
@@ -43,8 +43,9 @@ function findAverage(arr, key) {
     for (let i = 0; i < arr.length; i++) {
         sum += +arr[i][key];
     }
+
     return sum / arr.length;
-    }
+}
 
 // takes as input an array of points x, y and r values, determines
 // if the circles overlap and if so, shifts their coordinates
@@ -55,13 +56,13 @@ function findAverage(arr, key) {
 function shifty(s) {
     for (let q = 0; q < s.length - 1; q++) {
         for (let p = q + 1; p < s.length; p++) {
-        if (Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y) < 2 * s[q].r) {
-            dx = s[p].x - s[q].x;
-            dy = s[p].y - s[q].y;
-            shift = (s[q].r * 2) - Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y)
-            if (dx > 0) { s[q].x = s[q].x - shift / 1.5 } else { s[q].x = s[q].x + shift / 1.5 }
-            if (dy > 0) { s[q].y = s[q].y - shift / 1.5 } else { s[q].y = s[q].y + shift / 1.5 }
-        }
+            if (Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y) < 2 * s[q].r) {
+                dx = s[p].x - s[q].x;
+                dy = s[p].y - s[q].y;
+                shift = (s[q].r * 2) - Math.hypot(s[q].x - s[p].x, s[q].y - s[p].y)
+                if (dx > 0) { s[q].x = s[q].x - shift / 1.5 } else { s[q].x = s[q].x + shift / 1.5 }
+                if (dy > 0) { s[q].y = s[q].y - shift / 1.5 } else { s[q].y = s[q].y + shift / 1.5 }
+            }
         }
     }
     return s
@@ -182,4 +183,4 @@ function calculateGap(data, subject, category) {
     badGaps = adjustedgapList.slice(adjustedgapList.length - 10);
 
     return badGaps;
-    }
+}

@@ -662,6 +662,8 @@ Promise.all([
 
         const data = corpData.find(f => f['Corporation ID'] === d.properties.CORPID)
 
+        console.log(data)
+        
         // value will be null if the school corporation does not exist
         // exist or was created (e.g., West Clark Community Schools
         // dissolved in 2020 and Borden-Henryville was formed
@@ -727,15 +729,12 @@ Promise.all([
           // taking into consideration how much of the header
           // is currently displayed (due to scroll)
 
-          // current height of header including padding
+          // if mouse "enters" a rect < 85 pixels from the top of the screen (including
+          // the amount of header currently displayed due to scroll), shift the tip 100px
+          // down. prevents it from appearing outside of map
           let headerHeight = d3.select("body").node().getBoundingClientRect().height + 16;
-
-          // amount of scroll determines how much of the header is visible
           const visibleHeader = headerHeight - window.scrollY
-
-          // subtract the visible header from the mouse position
           const shiftTip = event.clientY - visibleHeader
-
           if (shiftTip < 85) {
               yPos = event.offsetY + 120
           }
