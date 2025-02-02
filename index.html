@@ -91,7 +91,7 @@
 
       <div id="by-ethnicity-content">
         <div class="btn-group">
-          <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
+          <div class="subcategory-label">Sub-Category:</div>
           <input type="radio" id="option-2a" name="category-by-ethnicity" value="American Indian" checked><label
             for="option-2a" class="btn btn-outline-primary">American Indian</label>
           <input type="radio" id="option-2b" name="category-by-ethnicity" value="Asian"><label for="option-2b"
@@ -112,7 +112,8 @@
 
       <div id="by-subgroup-content">
         <div class="btn-group">
-          <label for="subnavigation" class="subcategory-label">Sub-Category:</label>
+          <div class="subcategory-label">Sub-Category:</div>
+          <!-- <div class="subcategory-label" id="subgroup-label"><label for="subgroup-label">Sub-Category:</label></div> -->
           <input type="radio" id="option-3a" name="category-by-subgroup" value="English Language Learners"
             checked><label for="option-3a" class="btn btn-outline-primary">English Learners</label>
           <input type="radio" id="option-3b" name="category-by-subgroup" value="Non English Language Learners"><label
@@ -129,9 +130,7 @@
       </div>
     </div>
   </div>
-
   </form>
-
   <div class="main-container">
     <div class="bare-container--flex--center twelve columns">
       <div class="pretty-container--close--top twelve columns">
@@ -143,9 +142,14 @@
   </div>
 
 <script>
-// Indiana School Map
-// revised: 10.17.24
+
+// Indiana School Proficienct Map
+// revised: 02.02.25
 // https://github.com/jbetley
+
+// TODO: add High School Academic Data
+// TODO: right now Special/General Education are greyed out for all years of IREAD, those
+// data does exist for 2024- so eventually may want to add it back
 
 const replacementText = [
   { name: "Non English Language Learners", new: "Non EL" },
@@ -158,7 +162,7 @@ const replacementText = [
 // display grade-content on load (default css is display none)
 document.getElementById("by-grade-content").style.display = "block";
 
-// TODO: Modify Navigation to be Dynamic //
+// TODO: Modify Navigation to be Dynamic (what did I mean by this?)//
 var subNavigation = document.querySelector(".navigation-div");
 
 var previousSelection = d3.select("#subject")._groups[0][0].value
@@ -315,10 +319,10 @@ var zoom = d3.zoom()
   .on("zoom", zoomed);
 
 Promise.all([
-  d3.csv("corporation_data_k8_public.csv"),
-  d3.csv("school_data_k8_public.csv"),
-  d3.json("corporation_geojson.json"),
-  d3.json("school_geojson.json"),      
+  d3.csv("data/corporation_data_k8_public.csv"),
+  d3.csv("data/school_data_k8_public.csv"),
+  d3.json("data/corporation_geojson.json"),
+  d3.json("data/school_geojson.json"),      
 ]).then(function ([scdata, schdata, INdistricts, INschools]) {
 
   const districts = topojson.feature(INdistricts, INdistricts.objects.districts);
@@ -342,7 +346,7 @@ Promise.all([
   var updateMap = function (scale, year, subject, category) {
 
     // scale defaults to Relative for all Categories except IREAD,
-    // which cannot select Relative
+    // which cannot select Relative (we hide it as well)
     if (scale == 'Relative' && d3.select("#subject.dropdown").node().value != "IREAD") {
       selectedDomain = [.10, .15, .25, .35, .45, .55, .65, .75];
       labels = ['0-10%', '11-15%', '16-25%', '26-35%', '36-45%', '46-55%', '55-65%', '66-75%', '> 76%'];
@@ -351,10 +355,25 @@ Promise.all([
       selectedDomain = [.20, .30, .40, .50, .60, .70, .80, .90];
       labels = ['0-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '> 91%'];
 
+    let scaleDropdown = document.getElementById("scale");
+    let hideRelative = scaleDropdown.querySelector('option[value="Relative"]');
+    
+    // let subCatDropdown = document.getElementById("by-subgroup-content");
+    // let hideSpecial = subCatDropdown.querySelector('option[value="Special Education"]');
+    // let hideGeneral = subCatDropdown.querySelector('option[value="General Education"]');
+
     if (d3.select("#subject.dropdown").node().value == "IREAD") {
-        const radioBtn = document.getElementById("scale"); 
-        radioBtn.value = "Percentage"
-      }
+        scaleDropdown.value = "Percentage"
+        hideRelative.style.display = "none";
+        document.getElementById("option-3c").style.display = "none"; // school-total option
+        document.getElementById("option-3d").style.display = "none"; // school-total option
+    }
+    else {
+        hideRelative.style.display = "block";
+        document.getElementById("option-3c").style.display = "block"; // school-total option
+        document.getElementById("option-3d").style.display = "block"; // school-total option
+    }
+
     }
 
     color = d3.scaleThreshold()
@@ -388,7 +407,7 @@ Promise.all([
     
     } else {
       nSizeCategory = category + "|" + subject + " Total Tested";
-      totalProficient = category + "|" + subject + " Total Proficient";          
+      totalProficient = category + "|" + subject + " Total Proficient";
     }
 
     // calculate state average for each category
@@ -662,8 +681,6 @@ Promise.all([
 
         const data = corpData.find(f => f['Corporation ID'] === d.properties.CORPID)
 
-        console.log(data)
-        
         // value will be null if the school corporation does not exist
         // exist or was created (e.g., West Clark Community Schools
         // dissolved in 2020 and Borden-Henryville was formed
@@ -859,7 +876,6 @@ Promise.all([
       var schoolsInPOLY = schools.features.filter(function (s) {
         if (d3.polygonContains(active.datum().geometry.coordinates[0], [s.geometry.coordinates[0], s.geometry.coordinates[1]])) {
 
-          // TODO: add High School Academic Data
           const max = 9;
           const min = 2;
           var low;
@@ -1033,20 +1049,36 @@ Promise.all([
     var selectedYear = d3.select("#year").node().value
     var selectedSubject = d3.select("#subject").node().value
 
-    // only display school-total for by-grade for IREAD (option-1n is the 
-    // "by-grade-content" button)
-    if (document.getElementById('option-1n').checked) {
-
+    // control display of buttons under certain circumstances
+    if (document.getElementById("option-1n").checked) {
+      
       if (selectedSubject == "IREAD") {
         document.getElementById("school-total").style.display = "block";
+        document.getElementById("option-1a").checked = true;  // School Total option
         document.getElementById("all-grades").style.display = "none";
       } else {
         document.getElementById("school-total").style.display = "block";
         document.getElementById("all-grades").style.display = "block";
       }
-    }
-    else {
+
+    } else {
       document.getElementById("by-grade-content").style.display = "none";
+    }
+
+    if (document.getElementById("option-3n").checked) {
+
+      if (selectedSubject == "IREAD") {
+        document.getElementById("option-3c").style.display = "none";  // General Education option
+        document.querySelector(`label[for="option-3c"]`).style.display = "none";
+        document.getElementById("option-3d").style.display = "none"; // Special Education option
+        document.querySelector(`label[for="option-3d"]`).style.display = "none";
+    } else {
+        document.getElementById("option-3c").style.display = "block";
+        document.querySelector(`label[for="option-3c"]`).style.display = "block";
+        document.getElementById("option-3d").style.display = "block";
+        document.querySelector(`label[for="option-3d"]`).style.display = "block";
+      }
+
     }
 
     var selectedNav = d3.select("input[name='navigation']:checked").attr('value');
